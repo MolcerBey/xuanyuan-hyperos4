@@ -7,6 +7,7 @@ on:
       - base.json
       - inspect_ota.py
       - download_base.py
+      - diagnose_ota.py
       - test_inspection.py
       - .github/workflows/prepare.yml
 permissions:
@@ -28,6 +29,9 @@ jobs:
         run: python3 inspect_ota.py
       - name: Download and hash full source archive
         run: python3 download_base.py
+      - name: Diagnose a quarantined download without bypassing verification
+        if: failure()
+        run: python3 diagnose_ota.py
       - name: Upload verification reports (not a ROM)
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

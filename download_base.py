@@ -10,6 +10,7 @@ from inspect_ota import inspect
 
 def main():
     config = json.loads(pathlib.Path("base.json").read_text())
+    pathlib.Path("reports").mkdir(exist_ok=True)
     work = pathlib.Path("work")
     work.mkdir(exist_ok=True)
     if shutil.disk_usage(work).free < config["size"] + 2 * 1024**3:
@@ -28,6 +29,9 @@ def main():
             sha256.update(chunk)
             if length % (256 * 1024**2) == 0:
                 print(f"Downloaded {length / 1024**3:.2f} GiB", flush=True)
+    measurements = {"bytes": length, "expected_bytes": config["size"], "md5": md5.hexdigest(), "expected_md5": config["md5"], "sha256": sha256.hexdigest(), "source_url": config["url"]}
+    pathlib.Path("reports/download-measurements.json").write_text(json.dumps(measurements, indent=2) + "\n")
+    print(json.dumps(measurements, indent=2), flush=True)
     if length != config["size"] or md5.hexdigest() != config["md5"]:
         raise RuntimeError("OTA checksum/length mismatch; partial file will not be used")
     report = inspect(target, config)
