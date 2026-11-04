@@ -1,0 +1,11 @@
+{
+  "reference_hyperos3": {
+    "source": "https://bigota.d.miui.com/OS3.0.314.0.WOACNXM/xuanyuan-ota_full-OS3.0.314.0.WOACNXM-user-16.0-9f74d1725b.zip",
+    "certificate_sha256": "d45f076fe23a1a5b7f486e3ff41547a2023dbfe1fe73353b1e48ebdfed72cc6f"
+  },
+  "candidate_hyperos4": {
+    "source": "https://bigota.d.miui.com/OS4.0.0.18.XOACNXM/xuanyuan-ota_full-OS4.0.0.18.XOACNXM-user-17.0-bfc6faa7f2.zip",
+    "certificate_sha256": "d45f076fe23a1a5b7f486e3ff41547a2023dbfe1fe73353b1e48ebdfed72cc6f"
+  },
+  "certificate_matches": true
+}
