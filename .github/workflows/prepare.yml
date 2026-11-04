@@ -1,0 +1,38 @@
+name: Verify HyperOS 4 base
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - base.json
+      - inspect_ota.py
+      - download_base.py
+      - test_inspection.py
+      - .github/workflows/prepare.yml
+permissions:
+  contents: read
+concurrency:
+  group: xuanyuan-base-verification
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Test OTA identity checks
+        run: python3 -m unittest -v test_inspection
+      - name: Inspect OTA metadata and partition layout
+        run: python3 inspect_ota.py
+      - name: Download and hash full source archive
+        run: python3 download_base.py
+      - name: Upload verification reports (not a ROM)
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: xuanyuan-source-verification
+          path: reports/
+          retention-days: 7
+          if-no-files-found: warn

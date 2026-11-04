@@ -1,0 +1,6 @@
+.tools/
+work/
+out/
+*.zip
+*.img
+__pycache__/

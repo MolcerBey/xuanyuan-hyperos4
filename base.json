@@ -1,0 +1,11 @@
+{
+  "device": "xuanyuan",
+  "version": "OS4.0.0.18.XOACNXM",
+  "android": "17",
+  "sdk": "37",
+  "incremental": "17OS4.0.261014.195958428.QCPECN.S",
+  "url": "https://bkt-sgp-miui-ota-update-alisgp.oss-ap-southeast-1.aliyuncs.com/OS4.0.0.18.XOACNXM/xuanyuan-ota_full-OS4.0.0.18.XOACNXM-user-17.0-bfc6faa7f2.zip",
+  "size": 10321978949,
+  "md5": "bfc6faa7f2b6d205e3fa76f1f0438b6d",
+  "status": "candidate-not-yet-verified"
+}
