@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
     paths:
+      - base.json
+      - download_base.py
+      - verify_signature.py
       - extract_partition.py
       - inventory_product.py
       - .github/workflows/inspect-product.yml

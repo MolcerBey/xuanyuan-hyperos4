@@ -4,8 +4,11 @@
   "android": "17",
   "sdk": "37",
   "incremental": "17OS4.0.261014.195958428.QCPECN.S",
-  "url": "https://bkt-sgp-miui-ota-update-alisgp.oss-ap-southeast-1.aliyuncs.com/OS4.0.0.18.XOACNXM/xuanyuan-ota_full-OS4.0.0.18.XOACNXM-user-17.0-bfc6faa7f2.zip",
+  "url": "https://bigota.d.miui.com/OS4.0.0.18.XOACNXM/xuanyuan-ota_full-OS4.0.0.18.XOACNXM-user-17.0-bfc6faa7f2.zip",
   "size": 10321978949,
-  "md5": "bfc6faa7f2b6d205e3fa76f1f0438b6d",
-  "status": "candidate-not-yet-verified"
+  "md5": "bfc6faa7f25124b3352b7fb6e80d8e02",
+  "sha256": "bd19c93fa7c1cb90ed194c5cc2ebfe786f55f1382b172e344522ca805c63f1ea",
+  "otacert_sha256_der": "d45f076fe23a1a5b7f486e3ff41547a2023dbfe1fe73353b1e48ebdfed72cc6f",
+  "status": "whole-file-signature-verified-source",
+  "verification_run": "https://github.com/MolcerBey/xuanyuan-hyperos4/actions/runs/41927267094"
 }

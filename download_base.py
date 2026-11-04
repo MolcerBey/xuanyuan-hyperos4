@@ -6,6 +6,7 @@ import shutil
 import urllib.request
 
 from inspect_ota import inspect
+from verify_signature import verify_signature
 
 
 def main():
@@ -32,11 +33,12 @@ def main():
     measurements = {"bytes": length, "expected_bytes": config["size"], "md5": md5.hexdigest(), "expected_md5": config["md5"], "sha256": sha256.hexdigest(), "source_url": config["url"]}
     pathlib.Path("reports/download-measurements.json").write_text(json.dumps(measurements, indent=2) + "\n")
     print(json.dumps(measurements, indent=2), flush=True)
-    if length != config["size"] or md5.hexdigest() != config["md5"]:
+    if length != config["size"] or md5.hexdigest() != config["md5"] or sha256.hexdigest() != config["sha256"]:
         raise RuntimeError("OTA checksum/length mismatch; partial file will not be used")
     report = inspect(target, config)
     if not all(report["checks"].values()):
         raise RuntimeError("OTA identity mismatch")
+    report.update(verify_signature(target, config["otacert_sha256_der"]))
     target.replace(work / "base.zip")
     report.update({"full_archive_hash_verified": True, "md5": md5.hexdigest(), "sha256": sha256.hexdigest(), "source_url": config["url"]})
     pathlib.Path("reports").mkdir(exist_ok=True)

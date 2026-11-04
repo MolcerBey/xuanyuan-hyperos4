@@ -1,15 +1,6 @@
 name: Verify HyperOS 4 base
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - base.json
-      - inspect_ota.py
-      - download_base.py
-      - diagnose_ota.py
-      - test_inspection.py
-      - .github/workflows/prepare.yml
 permissions:
   contents: read
 concurrency:

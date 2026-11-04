@@ -1,0 +1,13 @@
+{
+  "name": "Molcer OS",
+  "device": "xuanyuan",
+  "base": "OS4.0.0.18.XOACNXM",
+  "requested_root": "KernelSU Next",
+  "requested_default_browser": "com.android.chrome",
+  "region": "TR",
+  "language_target": "tr-TR",
+  "camera_runtime_tests": false,
+  "debloat_policy": "Remove reviewed optional apps; retain camera, telephony, IMS, carrier configuration, security and update dependencies",
+  "telephony_runtime_verified": false,
+  "status": "preparation-not-a-flashable-ROM"
+}
