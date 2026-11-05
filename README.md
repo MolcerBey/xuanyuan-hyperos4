@@ -12,4 +12,6 @@ Downloads have transfer-speed and duration limits and use the manufacturer's alt
 
 Camera runtime tests were waived by the owner. Camera, Turkish carrier/VoLTE/VoWiFi operation, Play certification and full Turkish coverage are not verified. No phone flashing, wiping or rebooting is performed by this project.
 
+The target is now confirmed as GLOBAL hardware on Turk Telekom. See [RADIO-STATUS.md](RADIO-STATUS.md) for the authenticated Android17 global donor, carrier comparison, and radio integration limits. China modem firmware is not approved for this global-device installation.
+
 See [Actions](https://github.com/MolcerBey/xuanyuan-hyperos4/actions) for actual results. Reports and offline candidates must not be mistaken for a finished ROM.

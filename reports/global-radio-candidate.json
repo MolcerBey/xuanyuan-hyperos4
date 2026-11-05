@@ -1,0 +1,25 @@
+{
+  "device": "xuanyuan",
+  "hardware_variant": "global",
+  "operator_target": "Turk Telekom",
+  "source_version": "OS4.0.0.6.XOAMIXM",
+  "android": "17",
+  "source_url": "https://bigota.d.miui.com/OS4.0.0.6.XOAMIXM/xuanyuan_global-ota_full-OS4.0.0.6.XOAMIXM-user-17.0-1425c25810.zip",
+  "source_archive_sha256": "46ad76b094e037d3fd51d20ccdf3353c6b1a58a9630dcbe9f05b0ee18e3f5251",
+  "whole_file_signature_verified": true,
+  "signer_certificate_sha256": "d45f076fe23a1a5b7f486e3ff41547a2023dbfe1fe73353b1e48ebdfed72cc6f",
+  "modem_sha256": "900280a03b7285f9b3495829d5564bd34aed0f128ba275fb59f193e66b627b07",
+  "modem_size": 169881600,
+  "modemfirmware_sha256": "7fc1fdbed91049c0beca5aa66d7977f431c2bb458efc89e8f8ecd8bbe57cdb51",
+  "modemfirmware_size": 141316096,
+  "china_base_modem_sha256": "e0f16e9db87ad6b1f7a41c72da99b7b94585db83c48318de041fcdb7f31a4225",
+  "ready_to_flash": false,
+  "runtime_compatibility_verified": false,
+  "phone_modified": false,
+  "nv_or_calibration_data_included": false,
+  "pending": [
+    "identify working device baseband",
+    "validate modem/vendor pairing on target build",
+    "call, SMS, data and IMS verification"
+  ]
+}

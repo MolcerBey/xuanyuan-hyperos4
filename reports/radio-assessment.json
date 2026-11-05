@@ -1,0 +1,233 @@
+{
+  "target_hardware": "global xuanyuan",
+  "target_operator": "Turk Telekom 286-03",
+  "owner_reports_current_eu_network_working": true,
+  "china_global_carrier_asset_hashes_equal": {
+    "assets/default/default_v2.9.1.xml": true,
+    "assets/default/default_v2.9.2.xml": true,
+    "assets/default/default_v2.9.3.xml": true,
+    "assets/default/default_v2.9.4.xml": true,
+    "assets/default/default_v2.9.5.xml": true,
+    "assets/default/default_v2.9.6.xml": true,
+    "assets/default/default_v2.9.7.xml": true,
+    "assets/default/default_v2.9.8.xml": true,
+    "assets/default/default_v2.9.9.xml": true,
+    "assets/device/xuanyuan/res/xml/vendor_device.xml": true
+  },
+  "turk_telekom_configuration": [
+    {
+      "apk": "system_ext/priv-app/CarrierStudioCarrierConfig/CarrierStudioCarrierConfig.apk",
+      "asset": "assets/default/default_v2.9.1.xml",
+      "sha256": "9ac19becf6417beea5679f031d35041fe38a30177191e6394015df9f6985905c",
+      "turk_telekom_entries": [
+        {
+          "tag": "carrier_config",
+          "attributes": {
+            "mcc": "286",
+            "mnc": "03"
+          },
+          "xml_excerpt": "<carrier_config mcc=\"286\" mnc=\"03\">\n    <boolean name=\"hide_enhanced_4g_lte_bool\" value=\"true\" />\n    <boolean name=\"carrier_volte_available_bool\" value=\"true\" />\n    <boolean name=\"carrier_wfc_ims_available_bool\" value=\"true\" />\n    <boolean name=\"carrier_vt_available_bool\" value=\"true\" />\n</carrier_config>\n\n"
+        }
+      ]
+    },
+    {
+      "apk": "system_ext/priv-app/CarrierStudioCarrierConfig/CarrierStudioCarrierConfig.apk",
+      "asset": "assets/default/default_v2.9.2.xml",
+      "sha256": "4e02017b91b66d45c9df7a44302b07b209a58b7eeb334215d98b348f3c10fe21",
+      "turk_telekom_entries": [
+        {
+          "tag": "carrier_config",
+          "attributes": {
+            "mcc": "286",
+            "mnc": "03"
+          },
+          "xml_excerpt": "<carrier_config mcc=\"286\" mnc=\"03\">\n    <boolean name=\"carrier_volte_available_bool\" value=\"true\" />\n    <boolean name=\"carrier_wfc_ims_available_bool\" value=\"true\" />\n    <boolean name=\"carrier_vt_available_bool\" value=\"true\" />\n</carrier_config>\n\n"
+        }
+      ]
+    },
+    {
+      "apk": "system_ext/priv-app/CarrierStudioCarrierConfig/CarrierStudioCarrierConfig.apk",
+      "asset": "assets/default/default_v2.9.3.xml",
+      "sha256": "344861ef0e112d8707cef3756bd84f249e282109854dfda760ba6b00ee289ddf",
+      "turk_telekom_entries": [
+        {
+          "tag": "carrier_config",
+          "attributes": {
+            "mcc": "286",
+            "mnc": "03"
+          },
+          "xml_excerpt": "<carrier_config mcc=\"286\" mnc=\"03\">\n    <boolean name=\"carrier_volte_available_bool\" value=\"true\" />\n    <boolean name=\"carrier_wfc_ims_available_bool\" value=\"true\" />\n    <boolean name=\"carrier_vt_available_bool\" value=\"true\" />\n</carrier_config>\n\n"
+        }
+      ]
+    },
+    {
+      "apk": "system_ext/priv-app/CarrierStudioCarrierConfig/CarrierStudioCarrierConfig.apk",
+      "asset": "assets/default/default_v2.9.4.xml",
+      "sha256": "dc294d94ae62e1166af86d52c73211ed16078f8f2ef0daf3c3b5b423fb078646",
+      "turk_telekom_entries": [
+        {
+          "tag": "carrier_config",
+          "attributes": {
+            "mcc": "286",
+            "mnc": "03"
+          },
+          "xml_excerpt": "<carrier_config mcc=\"286\" mnc=\"03\">\n    <boolean name=\"carrier_volte_available_bool\" value=\"true\" />\n    <boolean name=\"carrier_wfc_ims_available_bool\" value=\"true\" />\n    <boolean name=\"carrier_vt_available_bool\" value=\"true\" />\n</carrier_config>\n\n"
+        }
+      ]
+    },
+    {
+      "apk": "system_ext/priv-app/CarrierStudioCarrierConfig/CarrierStudioCarrierConfig.apk",
+      "asset": "assets/default/default_v2.9.5.xml",
+      "sha256": "a59e274c2ae4137f56c35d984e557ff9fbb1df781827c7ab7de8ed22dfa8729d",
+      "turk_telekom_entries": [
+        {
+          "tag": "carrier_config",
+          "attributes": {
+            "mcc": "286",
+            "mnc": "03"
+          },
+          "xml_excerpt": "<carrier_config mcc=\"286\" mnc=\"03\">\n    <boolean name=\"carrier_volte_available_bool\" value=\"true\" />\n    <boolean name=\"carrier_wfc_ims_available_bool\" value=\"true\" />\n    <boolean name=\"carrier_vt_available_bool\" value=\"true\" />\n</carrier_config>\n\n"
+        }
+      ]
+    },
+    {
+      "apk": "system_ext/priv-app/CarrierStudioCarrierConfig/CarrierStudioCarrierConfig.apk",
+      "asset": "assets/default/default_v2.9.6.xml",
+      "sha256": "d66f6d688abd1316203983cd7fddd11c4b2678e6dfaefb7179d6df8e20575107",
+      "turk_telekom_entries": [
+        {
+          "tag": "carrier_config",
+          "attributes": {
+            "mcc": "286",
+            "mnc": "03"
+          },
+          "xml_excerpt": "<carrier_config mcc=\"286\" mnc=\"03\">\n    <boolean name=\"carrier_volte_available_bool\" value=\"true\" />\n    <boolean name=\"carrier_wfc_ims_available_bool\" value=\"true\" />\n    <boolean name=\"carrier_vt_available_bool\" value=\"true\" />\n</carrier_config>\n\n"
+        }
+      ]
+    },
+    {
+      "apk": "system_ext/priv-app/CarrierStudioCarrierConfig/CarrierStudioCarrierConfig.apk",
+      "asset": "assets/default/default_v2.9.7.xml",
+      "sha256": "baac3324c9027de7c8a52c4787aaa6ea8ac02a66ad31a666cdd53e076a7cb685",
+      "turk_telekom_entries": [
+        {
+          "tag": "carrier_config",
+          "attributes": {
+            "mcc": "286",
+            "mnc": "03"
+          },
+          "xml_excerpt": "<carrier_config mcc=\"286\" mnc=\"03\">\n    <boolean name=\"carrier_volte_available_bool\" value=\"true\" />\n    <boolean name=\"carrier_wfc_ims_available_bool\" value=\"true\" />\n    <boolean name=\"carrier_vt_available_bool\" value=\"true\" />\n</carrier_config>\n\n"
+        }
+      ]
+    },
+    {
+      "apk": "system_ext/priv-app/CarrierStudioCarrierConfig/CarrierStudioCarrierConfig.apk",
+      "asset": "assets/default/default_v2.9.8.xml",
+      "sha256": "83965ce09994d4fa2ea13450d12473d8a7a31e21fb31ecce931be64aae9bbf8b",
+      "turk_telekom_entries": [
+        {
+          "tag": "carrier_config",
+          "attributes": {
+            "mcc": "286",
+            "mnc": "03"
+          },
+          "xml_excerpt": "<carrier_config mcc=\"286\" mnc=\"03\">\n    <boolean name=\"carrier_volte_available_bool\" value=\"true\" />\n    <boolean name=\"carrier_wfc_ims_available_bool\" value=\"true\" />\n    <boolean name=\"carrier_vt_available_bool\" value=\"true\" />\n</carrier_config>\n\n"
+        }
+      ]
+    },
+    {
+      "apk": "system_ext/priv-app/CarrierStudioCarrierConfig/CarrierStudioCarrierConfig.apk",
+      "asset": "assets/default/default_v2.9.9.xml",
+      "sha256": "3cbcf56d5e9e2825a5a22f80c480ee2ef0ab19921eba08b3a52a8ed765e3a2cc",
+      "turk_telekom_entries": [
+        {
+          "tag": "carrier_config",
+          "attributes": {
+            "mcc": "286",
+            "mnc": "03"
+          },
+          "xml_excerpt": "<carrier_config mcc=\"286\" mnc=\"03\">\n    <boolean name=\"carrier_volte_available_bool\" value=\"true\" />\n    <boolean name=\"carrier_wfc_ims_available_bool\" value=\"true\" />\n    <boolean name=\"carrier_vt_available_bool\" value=\"true\" />\n</carrier_config>\n\n"
+        }
+      ]
+    },
+    {
+      "apk": "system_ext/priv-app/CarrierStudioCarrierConfig/CarrierStudioCarrierConfig.apk",
+      "asset": "assets/device/xuanyuan/res/xml/vendor_device.xml",
+      "sha256": "0a4537b5363138033e5fb1ddf576ba33cd009b79e1383e0c3a39466118b12ba9",
+      "turk_telekom_entries": [
+        {
+          "tag": "carrier_config",
+          "attributes": {
+            "mcc": "286",
+            "mnc": "03"
+          },
+          "xml_excerpt": "<carrier_config mcc=\"286\" mnc=\"03\">\n        <boolean name=\"config_vonr_on_by_defalut_bool\" value=\"true\" />\n        <boolean name=\"carrier_disable_sa_mode_bool\" value=\"false\" />\n        <boolean name=\"config_show_vonr_icon_in_statusbar\" value=\"true\" />\n    </carrier_config>\n    "
+        }
+      ]
+    }
+  ],
+  "radio_property_differences": [
+    {
+      "property": "odm/etc/build.prop:ro.vendor.radio.ntn_chip_type",
+      "china": "1",
+      "global": null
+    },
+    {
+      "property": "product/etc/build.prop:ro.miui.has_gmscore",
+      "china": "1",
+      "global": null
+    },
+    {
+      "property": "vendor/build.prop:ro.vendor.radio.build_region",
+      "china": "cn",
+      "global": "global"
+    }
+  ],
+  "modemfirmware_inspection_pending": false,
+  "phone_connected": false,
+  "runtime_compatibility_verified": false,
+  "source_inspection_run": "https://github.com/MolcerBey/xuanyuan-hyperos4/actions/runs/42028731281",
+  "conclusion": "Carrier XML already enables Turk Telekom VoLTE/WFC; effective runtime selection is unverified. Global-hardware radio firmware selection and vendor pairing require validation; no provisioning bypass or NV changes applied.",
+  "modemfirmware_inspection_run": "https://github.com/MolcerBey/xuanyuan-hyperos4/actions/runs/42030383737",
+  "mbn_evidence": {
+    "china": {
+      "mbn_count": 529,
+      "turk_telekom": [
+        {
+          "path": "modemfirmware/image/modem_pr/mcfg/configs/mcfg_sw/generic/EU/TurkTelekom/Commercial/TR/mcfg_sw.mbn",
+          "size": 52432,
+          "sha256": "823ad8435f85f110ce7d203b95db7042bf7e2269d09d747dfb96ee9d59b98f06"
+        }
+      ],
+      "indexes": [
+        {
+          "path": "modemfirmware/image/modem_pr/mcfg/configs/mcfg_sw/oem_sw.txt",
+          "sha256": "2aff6263bc5678c333a4761065ea569c538c4057cbc465268b8ece4c7aa19339",
+          "references_turk_telekom": true
+        }
+      ],
+      "errors": [],
+      "omitted": {}
+    },
+    "global": {
+      "mbn_count": 531,
+      "turk_telekom": [
+        {
+          "path": "modemfirmware/image/modem_pr/mcfg/configs/mcfg_sw/generic/EU/TurkTelekom/Commercial/TR/mcfg_sw.mbn",
+          "size": 52432,
+          "sha256": "3e9633c05cd956644236ff0e7d9fd2b76b2398ded730bd2168cd0347eb1e3a0d"
+        }
+      ],
+      "indexes": [
+        {
+          "path": "modemfirmware/image/modem_pr/mcfg/configs/mcfg_sw/oem_sw.txt",
+          "sha256": "18836a120631c597412ea27edacebe400ddf13d4bcbeb7420fdab598290afee5",
+          "references_turk_telekom": true
+        }
+      ],
+      "errors": [],
+      "omitted": {}
+    }
+  },
+  "turk_telekom_mbn_identical_between_sources": false
+}
