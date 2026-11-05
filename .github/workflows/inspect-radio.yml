@@ -6,6 +6,9 @@ on:
     paths:
       - inspect_radio.py
       - test_radio.py
+      - inspect_radio_partitions.py
+      - download_global_donor.py
+      - global-donor.json
       - .github/workflows/inspect-radio.yml
 permissions:
   contents: read
@@ -16,6 +19,10 @@ jobs:
   inspect:
     runs-on: ubuntu-24.04
     timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        source: [china, global]
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -23,22 +30,13 @@ jobs:
       - name: Test inspection boundaries
         run: python3 -m unittest -v test_radio test_extraction
       - name: Authenticate pinned Xiaomi source
+        if: matrix.source == 'china'
         run: python3 download_base.py
-      - name: Extract verified radio and framework images
-        run: python3 extract_partition.py --partitions modem vendor odm product system system_ext
+      - name: Authenticate global donor with pinned Xiaomi certificate
+        if: matrix.source == 'global'
+        run: python3 download_global_donor.py
       - name: Inspect read-only mounted source images
-        run: |
-          for part in modem vendor odm product system system_ext; do
-            mkdir -p "work/mounted_$part"
-            fs="$(sudo blkid -p -s TYPE -o value "work/images/$part.img")"
-            case "$fs" in
-              erofs|vfat) sudo mount -t "$fs" -o loop,ro "work/images/$part.img" "work/mounted_$part" ;;
-              ext4) sudo mount -t ext4 -o loop,ro,noload "work/images/$part.img" "work/mounted_$part" ;;
-              *) echo "Unsupported source filesystem: $part $fs"; exit 1 ;;
-            esac
-          done
-          sudo python3 inspect_radio.py
-          sudo python3 inspect_telephony.py
+        run: sudo python3 inspect_radio_partitions.py
       - name: Unmount inspection images
         if: always()
         run: |
@@ -49,10 +47,10 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: molcer-radio-static-reports
+          name: molcer-radio-static-reports-${{ matrix.source }}
           path: |
             reports/radio-static.json
-            reports/telephony-static.json
             reports/verified-base.json
+            reports/verified-global-donor.json
             reports/extracted-images.json
           retention-days: 7

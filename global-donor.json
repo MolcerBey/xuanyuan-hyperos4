@@ -1,0 +1,14 @@
+{
+  "device": "xuanyuan",
+  "version": "OS4.0.0.6.XOAMIXM",
+  "android": "17",
+  "sdk": "37",
+  "incremental": "17OS4.0.260917.105700879.QCPEGL.S",
+  "url": "https://bigota.d.miui.com/OS4.0.0.6.XOAMIXM/xuanyuan_global-ota_full-OS4.0.0.6.XOAMIXM-user-17.0-1425c25810.zip",
+  "size": 9515347173,
+  "otacert_sha256_der": "d45f076fe23a1a5b7f486e3ff41547a2023dbfe1fe73353b1e48ebdfed72cc6f",
+  "expected_modem_sha256": "900280a03b7285f9b3495829d5564bd34aed0f128ba275fb59f193e66b627b07",
+  "expected_modem_size": 169881600,
+  "status": "metadata-verified-pending-whole-file-authentication",
+  "runtime_compatibility_verified": false
+}

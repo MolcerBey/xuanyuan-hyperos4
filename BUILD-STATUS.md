@@ -32,6 +32,8 @@ Integration is selective: the Play Store and its privileged permission entry are
 
 ## Validation and remaining work
 
+The owner confirmed GLOBAL hardware and a currently working Turk Telekom connection on Xiaomi.eu. This changes the radio integration assumptions: the China base's modem must not be automatically included in a global-device flash plan. [Xiaomi.eu maintainer documentation](https://miuipolska.pl/xiaomi-15-ultra-xiaomi-eu/) records loss of coverage with the China modem on global Xiaomi 15 Ultra hardware, but its linked Android15 modem is not evidence of compatibility with this Android17 beta. `radio-policy.json` records the requirement to preserve the known-working global modem pending identification and compatibility checks. This is a packaging constraint, not a modem modification already applied to the phone. Device-unique NV/calibration partitions remain untouched. Current source modem/MBN and IMS inspection runs separately in `inspect-radio.yml`.
+
 The source archive must pass its pinned SHA256 and Xiaomi whole-file CMS signature checks before extraction. Full-OTA operation hashes and resulting partition hashes are checked. Nineteen unit checks cover identity, extraction, kernel KMI detection, retained filesystem data and overlay policy selection.
 
 Static inspection found Turkish MCC 286 APNs, including Turkcell, Vodafone, Türk Telekom and Netgsm. Calls, data, SMS, VoLTE and VoWiFi remain untested. Camera runtime tests were waived by the owner; preserved camera files do not prove flawless operation.

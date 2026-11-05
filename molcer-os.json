@@ -1,6 +1,9 @@
 {
   "name": "Molcer OS",
   "device": "xuanyuan",
+  "hardware_variant": "global",
+  "target_operator": "Turk Telekom",
+  "radio_policy": "radio-policy.json",
   "base": "OS4.0.0.18.XOACNXM",
   "requested_root": "KernelSU Next",
   "requested_google_play": true,
