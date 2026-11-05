@@ -32,9 +32,9 @@ def inspect_zip(path, root):
                     with gzip.open(target, "rb") as source, unpacked.open("wb") as out:
                         shutil.copyfileobj(source, out)
                     target = unpacked
-                badging = subprocess.run(["aapt", "dump", "badging", str(target)], text=True, capture_output=True, timeout=90)
+                badging = subprocess.run(["aapt2", "dump", "badging", str(target)], text=True, capture_output=True, timeout=90)
                 signatures = subprocess.run(["apksigner", "verify", "--print-certs", str(target)], text=True, capture_output=True, timeout=90)
-                result["apks"].append({"path": item.filename, "badging_exit": badging.returncode, "signature_exit": signatures.returncode, "signature": signatures.stdout, "details": [line for line in badging.stdout.splitlines() if line.startswith(("package:", "sdkVersion:", "targetSdkVersion:", "uses-library", "uses-static-library", "native-code:", "locales:"))]})
+                result["apks"].append({"path": item.filename, "badging_exit": badging.returncode, "signature_exit": signatures.returncode, "signature": signatures.stdout, "signature_errors": signatures.stderr, "badging_errors": badging.stderr, "details": [line for line in badging.stdout.splitlines() if line.startswith(("package:", "sdkVersion:", "targetSdkVersion:", "uses-library", "uses-static-library", "native-code:", "locales:"))]})
             elif item.filename.endswith(("update-binary", "g.prop", "build.prop")) and item.file_size < 1024**2:
                 result["installer_notes"][item.filename] = archive.read(item).decode(errors="replace")
     return result

@@ -18,8 +18,11 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
-      - name: Install APK inspection tools
-        run: sudo apt-get update -qq && sudo apt-get install -y aapt apksigner
+      - name: Select Android 17 APK inspection tools
+        run: |
+          test -x "$ANDROID_HOME/build-tools/37.0.0/aapt2"
+          test -x "$ANDROID_HOME/build-tools/37.0.0/apksigner"
+          echo "$ANDROID_HOME/build-tools/37.0.0" >> "$GITHUB_PATH"
       - name: Verify and inspect published GApps packages
         run: python3 inspect_gapps.py
       - name: Upload GApps compatibility report
