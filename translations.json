@@ -1,0 +1,22 @@
+{
+  "source": "haqanguven/HYPEROS-V1-V2-V3-V4-All-Langs",
+  "commit": "2157178a81b8e2d376b769ac28670e0f455dc76c",
+  "credit": "MIUITR Forum / haqanguven — https://forum.miuitr.info/",
+  "targets": [
+    {
+      "path": "main/MiuiHome.apk/res/values-tr/strings.xml",
+      "blob_sha1": "a61b25a19a7b7381da0a5755c55e1cbbc72c22f5",
+      "size": 76585
+    },
+    {
+      "path": "main/MiuiSystemUI.apk/res/values-tr/strings.xml",
+      "blob_sha1": "4d2904b6218f05d3e6d3e0b9960c093207479ab9",
+      "size": 231829
+    },
+    {
+      "path": "main/Settings.apk/res/values-tr/strings.xml",
+      "blob_sha1": "4587910ebfa36438f5079a5b6d223a75f0307885",
+      "size": 1233722
+    }
+  ]
+}

@@ -7,6 +7,8 @@ on:
       - build_product.py
       - tree_audit.py
       - debloat.json
+      - build_translations.py
+      - translations.json
       - .github/workflows/build-preview.yml
 permissions:
   contents: write
@@ -28,18 +30,19 @@ jobs:
           test -x "$ANDROID_HOME/build-tools/37.0.0/aapt2"
           test -x "$ANDROID_HOME/build-tools/37.0.0/apksigner"
       - name: Test identity, extraction and preservation gates
-        run: python3 -m unittest -v test_inspection test_extraction test_root test_tree_audit
+        run: python3 -m unittest -v test_inspection test_extraction test_root test_tree_audit test_translations
       - name: Authenticate source
         run: python3 download_base.py
       - name: Reconstruct verified images
-        run: python3 extract_partition.py --partitions product system system_ext boot init_boot
+        run: python3 extract_partition.py --partitions product system system_ext vendor boot init_boot
       - name: Inspect APKs with Android 17 tools
         run: |
-          for part in product system system_ext; do
+          for part in product system system_ext vendor; do
             mkdir -p "work/mounted_$part"
             sudo mount -t erofs -o loop,ro "work/images/$part.img" "work/mounted_$part"
             sudo python3 inventory_product.py "$part" "$ANDROID_HOME/build-tools/37.0.0/aapt2"
           done
+          sudo python3 inspect_telephony.py
       - name: Prepare KernelSU Next with stock kernel
         run: python3 prepare_root.py
       - name: Build and remount-audit product image
@@ -53,6 +56,8 @@ jobs:
           cp out/product-preview/NOT-INSTALLABLE.txt out/review-assets/
           cp reports/product-preview.json out/review-assets/
           cp reports/root-candidate.json out/review-assets/
+          cp reports/translations.json out/review-assets/
+          cp reports/telephony-static.json out/review-assets/
           cp out/root-candidate/init_boot.img out/review-assets/NOT-INSTALLABLE-init_boot.img
           cd out/review-assets
           sha256sum *.part-* *.img > SHA256SUMS.txt
@@ -65,7 +70,7 @@ jobs:
       - name: Unmount inspection images
         if: always()
         run: |
-          for part in product system system_ext; do
+          for part in product system system_ext vendor; do
             if mountpoint -q "work/mounted_$part"; then sudo umount "work/mounted_$part"; fi
           done
       - name: Upload build reports

@@ -12,6 +12,7 @@ import zipfile
 
 from prepare_root import fetch
 from tree_audit import snapshot, compare_retained
+from build_translations import build as build_translations
 
 ROOT = pathlib.Path("work/mounted_product")
 STAGE = pathlib.Path("work/staged_product")
@@ -84,6 +85,20 @@ def main():
         subprocess.run([str(TOOLS / "apksigner"), "verify", "--min-sdk-version", "37", str(temporary)], check=True)
         if package(temporary) != identity:
             raise ValueError("Replacement APK package identity mismatch")
+    translated_files, overlays = build_translations()
+    additions.update(translated_files)
+    modified = {"etc/build.prop"}
+    overlay_configuration = ROOT / "overlay/config/config.xml"
+    overlay_configuration_bytes = None
+    if overlays and overlay_configuration.exists():
+        xml = ET.fromstring(overlay_configuration.read_bytes())
+        if xml.tag != "config":
+            raise ValueError("Unexpected OEM overlay configuration")
+        # Immutable overlays must precede mutable overlays; keep all OEM entries.
+        for identity in reversed(overlays):
+            xml.insert(0, ET.Element("overlay", package=identity, mutable="false", enabled="true"))
+        overlay_configuration_bytes = ET.tostring(xml, encoding="utf-8", xml_declaration=True)
+        modified.add("overlay/config/config.xml")
     if shutil.disk_usage("work").free < 17 * 1024**3:
         raise ValueError("Need 17 GiB free for product staging and verified output")
     before = snapshot(ROOT)
@@ -127,8 +142,13 @@ def main():
     if count != 1:
         raise ValueError("Unexpected stock display ID declaration")
     props.write_text(text + "\nro.molcer.os.name=Molcer OS\nro.molcer.os.version=0.1-preview\n")
+    if overlay_configuration_bytes is not None:
+        target = STAGE / "overlay/config/config.xml"
+        if target.is_symlink():
+            raise ValueError("Unexpected overlay configuration symlink")
+        target.write_bytes(overlay_configuration_bytes)
     staged = snapshot(STAGE)
-    retained = compare_retained(before, staged, list(removed), {"etc/build.prop"}, new_paths)
+    retained = compare_retained(before, staged, list(removed), modified, new_paths)
     OUT.mkdir(parents=True, exist_ok=True)
     image = OUT / "product.img"
     subprocess.run(["mkfs.erofs", "-zlz4hc,9", str(image), str(STAGE)], check=True)

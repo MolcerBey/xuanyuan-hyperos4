@@ -8,7 +8,7 @@ import shutil
 import tempfile
 
 partition = sys.argv[1] if len(sys.argv) > 1 else "product"
-if partition not in {"product", "system", "system_ext"}:
+if partition not in {"product", "system", "system_ext", "vendor"}:
     raise ValueError("Unsupported inventory partition")
 root = pathlib.Path("work/mounted_" + partition)
 tool = sys.argv[2] if len(sys.argv) > 2 else "aapt2"
