@@ -1,0 +1,178 @@
+{
+  "run": "https://github.com/MolcerBey/xuanyuan-hyperos4/actions/runs/42017796778",
+  "source_files_verified": true,
+  "excluded": [
+    "system/product/app/PrebuiltExchange3Google/PrebuiltExchange3Google.apk"
+  ],
+  "runtime_verified": false,
+  "archives": [
+    {
+      "archive": "MindTheGapps-17.0.0-arm64-20261022_132445.zip",
+      "sha256": "a6844eeb2613541558237e467b20feb01f8b45b2ebab0109834140ea59b6ca4d",
+      "apks": [
+        {
+          "path": "system/product/apex/com.google.android.gmssystem.prodvic.apex",
+          "package": "package: name='com.google.android.gmssystem' versionCode='13' versionName='' platformBuildVersionName='Baklava' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='Baklava'",
+          "signature_verified": true,
+          "badging_verified": true
+        },
+        {
+          "path": "system/product/app/GoogleCalendarSyncAdapter/GoogleCalendarSyncAdapter.apk",
+          "package": "package: name='com.google.android.syncadapters.calendar' versionCode='2017706991' versionName='2025.10.0-735189449-release' platformBuildVersionName='Baklava' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='Baklava'",
+          "signature_verified": true,
+          "badging_verified": true
+        },
+        {
+          "path": "system/product/app/GoogleContactsSyncAdapter/GoogleContactsSyncAdapter.apk",
+          "package": "package: name='com.google.android.syncadapters.contacts' versionCode='31' versionName='12-7567768' platformBuildVersionName='12' platformBuildVersionCode='31' compileSdkVersion='31' compileSdkVersionCodename='12'",
+          "signature_verified": true,
+          "badging_verified": true
+        },
+        {
+          "path": "system/product/app/PrebuiltExchange3Google/PrebuiltExchange3Google.apk",
+          "package": "package: name='com.google.android.gm.exchange' versionCode='508255' versionName='6.4.123892212.release' platformBuildVersionName='6.0-2166767' platformBuildVersionCode='23'",
+          "signature_verified": false,
+          "badging_verified": true
+        },
+        {
+          "path": "system/product/app/SpeechServicesByGoogle/SpeechServicesByGoogle.apk",
+          "package": "package: name='com.google.android.tts' versionCode='210610884' versionName='googletts.google-speech-apk_20251222.02_p0.847924619' platformBuildVersionName='Baklava' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='Baklava'",
+          "signature_verified": true,
+          "badging_verified": true
+        },
+        {
+          "path": "system/product/app/talkback/talkback.apk",
+          "package": "package: name='com.google.android.marvin.talkback' versionCode='60215178' versionName='17.0.1.926549743' platformBuildVersionName='Baklava' platformBuildVersionCode='37' compileSdkVersion='37' compileSdkVersionCodename='Baklava'",
+          "signature_verified": true,
+          "badging_verified": true
+        },
+        {
+          "path": "system/product/overlay/GmsOverlay.apk",
+          "package": "package: name='com.mtg.gmsoverlay' versionCode='1' versionName='1.0'",
+          "signature_verified": true,
+          "badging_verified": true
+        },
+        {
+          "path": "system/product/overlay/GmsSettingsOverlay.apk",
+          "package": "package: name='com.mtg.gmssettingsoverlay' versionCode='1' versionName='1.0'",
+          "signature_verified": true,
+          "badging_verified": true
+        },
+        {
+          "path": "system/product/overlay/GmsSettingsProviderOverlay.apk",
+          "package": "package: name='com.mtg.gmssettingsprovideroverlay' versionCode='1' versionName='1.0'",
+          "signature_verified": true,
+          "badging_verified": true
+        },
+        {
+          "path": "system/product/overlay/GmsSetupWizardOverlay.apk",
+          "package": "package: name='com.mtg.gmssetupwizardoverlay' versionCode='1' versionName='1.0'",
+          "signature_verified": true,
+          "badging_verified": true
+        },
+        {
+          "path": "system/product/priv-app/AndroidAutoStub/AndroidAutoStub.apk",
+          "package": "package: name='com.google.android.projection.gearhead' versionCode='12566220' versionName='1.2.566220-stub' platformBuildVersionName='DEV' platformBuildVersionCode='37' compileSdkVersion='37' compileSdkVersionCodename='DEV'",
+          "signature_verified": true,
+          "badging_verified": true
+        },
+        {
+          "path": "system/product/priv-app/FamilyLinkParentalControls/FamilyLinkParentalControls.apk",
+          "package": "package: name='com.google.android.gms.supervision' versionCode='106630' versionName='1.0.881395152.phone' platformBuildVersionName='Baklava' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='Baklava'",
+          "signature_verified": true,
+          "badging_verified": true
+        },
+        {
+          "path": "system/product/priv-app/GooglePartnerSetup/GooglePartnerSetup.apk",
+          "package": "package: name='com.google.android.partnersetup' versionCode='14645' versionName='100.874117303' platformBuildVersionName='Baklava' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='Baklava'",
+          "signature_verified": true,
+          "badging_verified": true
+        },
+        {
+          "path": "system/product/priv-app/GoogleRestore/GoogleRestore.apk",
+          "package": "package: name='com.google.android.apps.restore' versionCode='1054408' versionName='1.0.918300902' platformBuildVersionName='DEV' platformBuildVersionCode='37' compileSdkVersion='37' compileSdkVersionCodename='DEV'",
+          "signature_verified": true,
+          "badging_verified": true
+        },
+        {
+          "path": "system/product/priv-app/Phonesky/Phonesky.apk",
+          "package": "package: name='com.android.vending' versionCode='85180920' versionName='51.8.09-29 [0] [PR] 927580062' platformBuildVersionName='DEV' platformBuildVersionCode='37' compileSdkVersion='37' compileSdkVersionCodename='DEV'",
+          "signature_verified": true,
+          "badging_verified": true
+        },
+        {
+          "path": "system/product/priv-app/Velvet/Velvet.apk",
+          "package": "package: name='com.google.android.googlequicksearchbox' versionCode='301758178' versionName='17.30.31.ve.arm64' platformBuildVersionName='DEV' platformBuildVersionCode='37' compileSdkVersion='37' compileSdkVersionCodename='DEV'",
+          "signature_verified": true,
+          "badging_verified": true
+        },
+        {
+          "path": "system/product/priv-app/VelvetTitan/VelvetTitan.apk",
+          "package": "package: name='com.google.android.googlequicksearchbox' versionCode='301714343' versionName='17.11.56.sa.arm64' platformBuildVersionName='Baklava' platformBuildVersionCode='37' compileSdkVersion='37' compileSdkVersionCodename='Baklava'",
+          "signature_verified": true,
+          "badging_verified": true
+        },
+        {
+          "path": "system/product/priv-app/Wellbeing/Wellbeing.apk",
+          "package": "package: name='com.google.android.apps.wellbeing' versionCode='839927' versionName='1.43.912539612 (839927)' platformBuildVersionName='DEV' platformBuildVersionCode='37' compileSdkVersion='37' compileSdkVersionCodename='DEV'",
+          "signature_verified": true,
+          "badging_verified": true
+        },
+        {
+          "path": "system/system_ext/priv-app/GoogleFeedback/GoogleFeedback.apk",
+          "package": "package: name='com.google.android.feedback' versionCode='37' versionName='17-15555506' platformBuildVersionName='17' platformBuildVersionCode='37' compileSdkVersion='37' compileSdkVersionCodename='17'",
+          "signature_verified": true,
+          "badging_verified": true
+        },
+        {
+          "path": "system/system_ext/priv-app/GoogleServicesFramework/GoogleServicesFramework.apk",
+          "package": "package: name='com.google.android.gsf' versionCode='37' versionName='17-15555506' platformBuildVersionName='17' platformBuildVersionCode='37' compileSdkVersion='37' compileSdkVersionCodename='17'",
+          "signature_verified": true,
+          "badging_verified": true
+        },
+        {
+          "path": "system/system_ext/priv-app/SetupWizard/SetupWizard.apk",
+          "package": "package: name='com.google.android.setupwizard' versionCode='41223' versionName='236.890345816' platformBuildVersionName='Baklava' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='Baklava'",
+          "signature_verified": true,
+          "badging_verified": true
+        }
+      ]
+    },
+    {
+      "archive": "google_chrome.zip",
+      "sha256": "6926ce4b5a3979e8669b75f07e050ea40d22d885f0cd0d53d693885415cb9e7a",
+      "apks": [
+        {
+          "path": "___app___Chrome-Stub/Chrome-Stub.apk",
+          "package": "package: name='com.android.chrome' versionCode='699813532' versionName='134.0.6998.135' platformBuildVersionName='Baklava' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='Baklava'",
+          "signature_verified": true,
+          "badging_verified": true
+        },
+        {
+          "path": "___app___Chrome/Chrome.apk.gz",
+          "package": "package: name='com.android.chrome' versionCode='699813532' versionName='134.0.6998.135' platformBuildVersionName='Baklava' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='Baklava'",
+          "signature_verified": true,
+          "badging_verified": true
+        }
+      ]
+    },
+    {
+      "archive": "trichrome_library.zip",
+      "sha256": "99799c117457b677b3b65a0bc7e999893bcf1e9aadc6098eb91a2b66d5a966f7",
+      "apks": [
+        {
+          "path": "___app___TrichromeLibrary-Stub/TrichromeLibrary-Stub.apk",
+          "package": "package: name='com.google.android.trichromelibrary' versionCode='699813532' versionName='134.0.6998.135' platformBuildVersionName='Baklava' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='Baklava'",
+          "signature_verified": true,
+          "badging_verified": true
+        },
+        {
+          "path": "___app___TrichromeLibrary/TrichromeLibrary.apk.gz",
+          "package": "package: name='com.google.android.trichromelibrary' versionCode='699813532' versionName='134.0.6998.135' platformBuildVersionName='Baklava' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='Baklava'",
+          "signature_verified": true,
+          "badging_verified": true
+        }
+      ]
+    }
+  ]
+}

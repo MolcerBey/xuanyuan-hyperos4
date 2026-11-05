@@ -1,0 +1,26 @@
+{
+  "device": "xuanyuan",
+  "base": "OS4.0.0.18.XOACNXM",
+  "remove": {
+    "app/AnalyticsCore": "com.miui.analytics",
+    "app/MSA": "com.miui.systemAdSolution",
+    "app/MIUIReporter": "com.miui.uireporter",
+    "app/MiBugReportOS4": "com.miui.bugreport",
+    "data-app/MIUIDuokanReader": "com.duokan.reader",
+    "data-app/MIUIGameCenter": "com.xiaomi.gamecenter",
+    "data-app/MIUIMusicT": "com.miui.player",
+    "data-app/MIUIVideo": "com.miui.video",
+    "data-app/MIUIYoupin": "com.xiaomi.youpin",
+    "data-app/MiShop": "com.xiaomi.shop",
+    "data-app/wps-lite": "cn.wps.moffice_eng.xiaomi.lite"
+  },
+  "replace": {
+    "priv-app/MIUIBrowser": "com.android.browser",
+    "priv-app/GooglePlayServicesUpdater": "com.android.vending"
+  },
+  "preserve": [
+    "camera and all gallery/editor dependencies", "telephony and IMS",
+    "carrier configuration and modem firmware", "SELinux and privileged-permission enforcement",
+    "thermal policies", "security services", "keyboards", "Google runtime and framework"
+  ]
+}

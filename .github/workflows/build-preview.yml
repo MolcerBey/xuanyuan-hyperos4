@@ -1,0 +1,77 @@
+name: Build audited Molcer OS product preview
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - build_product.py
+      - tree_audit.py
+      - debloat.json
+      - .github/workflows/build-preview.yml
+permissions:
+  contents: write
+concurrency:
+  group: molcer-product-preview
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Prepare build tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y erofs-utils lz4
+          test -x "$ANDROID_HOME/build-tools/37.0.0/aapt2"
+          test -x "$ANDROID_HOME/build-tools/37.0.0/apksigner"
+      - name: Test identity, extraction and preservation gates
+        run: python3 -m unittest -v test_inspection test_extraction test_root test_tree_audit
+      - name: Authenticate source
+        run: python3 download_base.py
+      - name: Reconstruct verified images
+        run: python3 extract_partition.py --partitions product system system_ext boot init_boot
+      - name: Inspect APKs with Android 17 tools
+        run: |
+          for part in product system system_ext; do
+            mkdir -p "work/mounted_$part"
+            sudo mount -t erofs -o loop,ro "work/images/$part.img" "work/mounted_$part"
+            sudo python3 inventory_product.py "$part" "$ANDROID_HOME/build-tools/37.0.0/aapt2"
+          done
+      - name: Prepare KernelSU Next with stock kernel
+        run: python3 prepare_root.py
+      - name: Build and remount-audit product image
+        run: |
+          rm -f work/base.zip
+          sudo env ANDROID_HOME="$ANDROID_HOME" python3 build_product.py
+      - name: Prepare reviewable draft assets
+        run: |
+          mkdir -p out/review-assets
+          split -b 1900M -d out/product-preview/product.img out/review-assets/NOT-INSTALLABLE-product.img.part-
+          cp out/product-preview/NOT-INSTALLABLE.txt out/review-assets/
+          cp reports/product-preview.json out/review-assets/
+          cp reports/root-candidate.json out/review-assets/
+          cp out/root-candidate/init_boot.img out/review-assets/NOT-INSTALLABLE-init_boot.img
+          cd out/review-assets
+          sha256sum *.part-* *.img > SHA256SUMS.txt
+      - name: Save private draft release for owner review
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="molcer-preview-${GITHUB_SHA:0:12}"
+          gh release create "$tag" --draft --target "$GITHUB_SHA" --title "Molcer OS product preview — not installable" --notes-file out/review-assets/NOT-INSTALLABLE.txt out/review-assets/*
+      - name: Unmount inspection images
+        if: always()
+        run: |
+          for part in product system system_ext; do
+            if mountpoint -q "work/mounted_$part"; then sudo umount "work/mounted_$part"; fi
+          done
+      - name: Upload build reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: molcer-os-product-preview-reports
+          path: reports/
+          retention-days: 7

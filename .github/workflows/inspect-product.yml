@@ -1,17 +1,6 @@
 name: Inspect product partition
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - base.json
-      - download_base.py
-      - verify_signature.py
-      - extract_partition.py
-      - inventory_product.py
-      - prepare_root.py
-      - root-assets.json
-      - .github/workflows/inspect-product.yml
 permissions:
   contents: read
 concurrency:
@@ -39,7 +28,7 @@ jobs:
           for part in product system system_ext; do
             mkdir -p "work/mounted_$part"
             sudo mount -t erofs -o loop,ro "work/images/$part.img" "work/mounted_$part"
-            sudo python3 inventory_product.py "$part"
+            sudo python3 inventory_product.py "$part" "$ANDROID_HOME/build-tools/37.0.0/aapt2"
             sudo umount "work/mounted_$part"
           done
       - name: Upload inspection reports
