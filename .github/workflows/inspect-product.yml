@@ -28,17 +28,18 @@ jobs:
       - name: Install filesystem inspection tools
         run: sudo apt-get update -qq && sudo apt-get install -y erofs-utils aapt lz4
       - name: Verify extraction code
-        run: python3 -m unittest -v test_inspection test_extraction
+        run: python3 -m unittest -v test_inspection test_extraction test_root
       - name: Verify source
         run: python3 download_base.py
       - name: Extract and verify product image
+        id: extract
         run: python3 extract_partition.py --partitions product system system_ext boot init_boot
       - name: Read product package inventory
         run: |
           for part in product system system_ext; do
             mkdir -p "work/mounted_$part"
             sudo mount -t erofs -o loop,ro "work/images/$part.img" "work/mounted_$part"
-            python3 inventory_product.py "$part"
+            sudo python3 inventory_product.py "$part"
             sudo umount "work/mounted_$part"
           done
       - name: Upload inspection reports
@@ -49,6 +50,7 @@ jobs:
           path: reports/
           retention-days: 7
       - name: Prepare offline KernelSU Next candidate
+        if: ${{ !cancelled() && steps.extract.outcome == 'success' }}
         run: python3 prepare_root.py
       - name: Upload root preparation result
         if: always()

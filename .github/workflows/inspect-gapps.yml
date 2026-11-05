@@ -1,0 +1,31 @@
+name: Inspect Android 17 GApps and Chrome
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - gapps-assets.json
+      - chrome-assets.json
+      - inspect_gapps.py
+      - .github/workflows/inspect-gapps.yml
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Install APK inspection tools
+        run: sudo apt-get update -qq && sudo apt-get install -y aapt apksigner
+      - name: Verify and inspect published GApps packages
+        run: python3 inspect_gapps.py
+      - name: Upload GApps compatibility report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: molcer-os-gapps-inspection
+          path: reports/gapps-inventory.json
+          retention-days: 7

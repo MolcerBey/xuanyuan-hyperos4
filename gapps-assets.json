@@ -1,0 +1,15 @@
+{
+  "android": 17,
+  "sdk": 37,
+  "architecture": "arm64",
+  "provider": "MindTheGapps",
+  "release": "MindTheGapps-17.0.0-arm64-20261022_132445",
+  "source": "https://github.com/MindTheGapps/17.0.0-arm64/releases/tag/MindTheGapps-17.0.0-arm64-20261022_132445",
+  "core": {
+    "name": "MindTheGapps-17.0.0-arm64-20261022_132445.zip",
+    "url": "https://github.com/MindTheGapps/17.0.0-arm64/releases/download/MindTheGapps-17.0.0-arm64-20261022_132445/MindTheGapps-17.0.0-arm64-20261022_132445.zip",
+    "size": 544284463,
+    "sha256": "a6844eeb2613541558237e467b20feb01f8b45b2ebab0109834140ea59b6ca4d"
+  },
+  "status": "selected-for-inspection-not-yet-integrated"
+}

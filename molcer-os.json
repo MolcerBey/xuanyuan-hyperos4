@@ -4,6 +4,7 @@
   "base": "OS4.0.0.18.XOACNXM",
   "requested_root": "KernelSU Next",
   "requested_google_play": true,
+  "gapps_source": "current published Android 17 ARM64 package; no phone APK extraction",
   "requested_default_browser": "com.android.chrome",
   "region": "TR",
   "language_target": "tr-TR",

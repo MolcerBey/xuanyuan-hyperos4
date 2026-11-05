@@ -1,0 +1,154 @@
+{
+  "source": "https://gitlab.com/nikgapps/nikgapps-package-catalog/-/raw/main/catalog.json",
+  "catalog_sha256": "c4f797a6847e1eac35faaade7f5ef4948e7a79470389b8dd378791a99ff8a239",
+  "packages": [
+    {
+      "id": "google_chrome",
+      "channel": "stable",
+      "version": "699813532-7d46476d6d6a",
+      "metadata": {
+        "versionName": "134.0.6998.135",
+        "versionCode": 699813532,
+        "packageName": "com.android.chrome",
+        "android": {
+          "minApi": 26,
+          "targetApi": 35,
+          "maxApi": null
+        },
+        "supportedAndroidVersions": [
+          "16",
+          "17"
+        ],
+        "sources": [
+          "legacy"
+        ],
+        "defaultPartition": "product",
+        "apk": {
+          "path": "app/Chrome-Stub/Chrome-Stub.apk",
+          "replaceable": true
+        },
+        "artifact": {
+          "url": "https://gitlab.com/api/v4/projects/85036487/packages/generic/nikgapps-google_chrome/699813532-7d46476d6d6a/google_chrome.zip",
+          "sha256": "6926ce4b5a3979e8669b75f07e050ea40d22d885f0cd0d53d693885415cb9e7a",
+          "size": 20023032
+        },
+        "contentSha256": "7d46476d6d6a85f6e1e206a7b8d9e13859fc478272945856c2c418f7e9a0c76d",
+        "files": [
+          {
+            "path": "app/Chrome/Chrome.apk.gz",
+            "archivePath": "___app___Chrome/Chrome.apk.gz",
+            "installPath": "product/app/Chrome/Chrome.apk.gz",
+            "sha256": "30d94fee908ecda5d346f7f8ad7a5055a3b237ec2d65f92ccfc610dd33534b4f",
+            "size": 20003553,
+            "type": "supportingFile"
+          },
+          {
+            "path": "app/Chrome-Stub/Chrome-Stub.apk",
+            "archivePath": "___app___Chrome-Stub/Chrome-Stub.apk",
+            "installPath": "product/app/Chrome-Stub/Chrome-Stub.apk",
+            "sha256": "298bb76d8ce902cbf9fa865f1affac6feb0eb1be2e3479002d127127b3e3bd95",
+            "size": 16797,
+            "type": "primaryApk"
+          }
+        ],
+        "install": {
+          "format": "nikgapps-package-v1",
+          "title": "Chrome-Stub",
+          "packageTitle": "GoogleChrome",
+          "payloadSize": 19552,
+          "removeFiles": [
+            "Bolt",
+            "Browser",
+            "Browser2",
+            "BrowserIntl",
+            "BrowserProviderProxy",
+            "Chromium",
+            "DuckDuckGo",
+            "Fluxion",
+            "Gello",
+            "Jelly",
+            "PA_Browser",
+            "PABrowser",
+            "YuBrowser",
+            "BLUOpera",
+            "BLUOperaPreinstall",
+            "ViaBrowser",
+            "Duckduckgo"
+          ],
+          "removeOverlays": [],
+          "privilegedPermissions": [],
+          "cleanFlashOnly": false,
+          "additionalInstallerScript": null,
+          "validationScript": null,
+          "addonIndex": "09"
+        },
+        "architectures": []
+      }
+    },
+    {
+      "id": "trichrome_library",
+      "channel": "stable",
+      "version": "699813532-759bae5d58e3",
+      "metadata": {
+        "versionName": "134.0.6998.135",
+        "versionCode": 699813532,
+        "packageName": "com.google.android.trichromelibrary",
+        "android": {
+          "minApi": 26,
+          "targetApi": 35,
+          "maxApi": null
+        },
+        "supportedAndroidVersions": [
+          "16",
+          "17"
+        ],
+        "sources": [
+          "legacy"
+        ],
+        "defaultPartition": "product",
+        "apk": {
+          "path": "app/TrichromeLibrary-Stub/TrichromeLibrary-Stub.apk",
+          "replaceable": true
+        },
+        "artifact": {
+          "url": "https://gitlab.com/api/v4/projects/85036487/packages/generic/nikgapps-trichrome_library/699813532-759bae5d58e3/trichrome_library.zip",
+          "sha256": "99799c117457b677b3b65a0bc7e999893bcf1e9aadc6098eb91a2b66d5a966f7",
+          "size": 66048656
+        },
+        "contentSha256": "759bae5d58e3cad4d8819649ad8ce5236fbc073cae05c81644140f91b105ae0e",
+        "files": [
+          {
+            "path": "app/TrichromeLibrary/TrichromeLibrary.apk.gz",
+            "archivePath": "___app___TrichromeLibrary/TrichromeLibrary.apk.gz",
+            "installPath": "product/app/TrichromeLibrary/TrichromeLibrary.apk.gz",
+            "sha256": "5fe1b01b908ae066eda07739dae4f1d01575dd77f920c057d644632d0c349c8b",
+            "size": 66033362,
+            "type": "supportingFile"
+          },
+          {
+            "path": "app/TrichromeLibrary-Stub/TrichromeLibrary-Stub.apk",
+            "archivePath": "___app___TrichromeLibrary-Stub/TrichromeLibrary-Stub.apk",
+            "installPath": "product/app/TrichromeLibrary-Stub/TrichromeLibrary-Stub.apk",
+            "sha256": "8715df31c1cb7d850557568feaecc48eed8f619dc460f34b46820f28325499cd",
+            "size": 12701,
+            "type": "primaryApk"
+          }
+        ],
+        "install": {
+          "format": "nikgapps-package-v1",
+          "title": "TrichromeLibrary-Stub",
+          "packageTitle": "TrichromeLibrary",
+          "payloadSize": 64499,
+          "removeFiles": [],
+          "removeOverlays": [],
+          "privilegedPermissions": [],
+          "cleanFlashOnly": false,
+          "additionalInstallerScript": null,
+          "validationScript": null,
+          "addonIndex": "09"
+        },
+        "architectures": []
+      }
+    }
+  ]
+}
