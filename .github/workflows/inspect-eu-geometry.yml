@@ -1,0 +1,34 @@
+name: Authenticate EU super geometry for Molcer OS packaging
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - inspect_eu_geometry.py
+      - test_eu_geometry.py
+      - .github/workflows/inspect-eu-geometry.yml
+permissions:
+  contents: read
+concurrency:
+  group: molcer-eu-geometry
+  cancel-in-progress: true
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Test sparse metadata checksums and bounds
+        run: python3 -m unittest -v test_eu_geometry
+      - name: Authenticate full owner-selected EU package
+        run: python3 prepare_eu_radio.py
+      - name: Validate declared super geometry and all LP metadata copies
+        run: python3 inspect_eu_geometry.py
+      - name: Save authenticated geometry report
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: molcer-authenticated-eu-super-geometry
+          path: reports/eu-super-geometry.json
+          retention-days: 7
