@@ -1,0 +1,31 @@
+name: Prepare authenticated global Android17 radio candidate
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - prepare_global_modem.py
+      - .github/workflows/prepare-global-radio.yml
+permissions:
+  contents: read
+concurrency:
+  group: molcer-global-radio-candidate
+  cancel-in-progress: true
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Check partition integrity safeguards
+        run: python3 -m unittest -v test_extraction
+      - name: Prepare signed-source global modem candidate
+        run: python3 prepare_global_modem.py
+      - name: Save candidate for offline review
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: NOT-INSTALLABLE-global-Android17-radio-candidate
+          path: out/global-radio-candidate/
+          retention-days: 3

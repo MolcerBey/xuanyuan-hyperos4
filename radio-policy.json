@@ -7,6 +7,8 @@
   "mnc": "03",
   "known_working_baseline": "owner reports Turk Telekom works on the currently installed Xiaomi.eu ROM",
   "baseline_baseband_version": null,
+  "candidate_global_donor_config": "global-donor.json",
+  "candidate_builder": "prepare_global_modem.py",
   "base_modem_sha256": "e0f16e9db87ad6b1f7a41c72da99b7b94585db83c48318de041fcdb7f31a4225",
   "base_modem_region": "CN",
   "base_modem_approved_for_global_hardware": false,
