@@ -75,11 +75,15 @@ def inspect_apk(path, config, build_tools, diagnostics=None):
     diagnostics['apk_signature_verifier']['strict_parser_certificate_sha256'] = signers
     badging = subprocess.run([str(aapt_tool), 'dump', 'badging', str(path)],
                              capture_output=True, text=True, check=True, timeout=120).stdout
+    diagnostics['apk_badging'] = badging[:65536]
+    diagnostics['apk_badging_truncated'] = len(badging) > 65536
     package = re.search(r"^package: name='([^']+)' versionCode='([^']+)' versionName='([^']+)'", badging, re.MULTILINE)
     if not package or package.groups() != (config['package'], config['version_code'], config['version']):
         raise ValueError('APK package or version does not match the candidate')
     minimum = re.search(r"^sdkVersion:'(\d+)'", badging, re.MULTILINE)
-    if not minimum or int(minimum.group(1)) > 37:
+    if not minimum:
+        raise ValueError('Candidate minimum SDK was not recognized in aapt2 output')
+    if int(minimum.group(1)) > 37:
         raise ValueError('Candidate minimum Android SDK exceeds target SDK37')
     manifest = subprocess.run([str(aapt_tool), 'dump', 'xmltree', str(path), '--file', 'AndroidManifest.xml'],
                               capture_output=True, text=True, check=True, timeout=120).stdout
