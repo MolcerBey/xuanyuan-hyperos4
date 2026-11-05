@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - fetch_chrome_candidate.py
+      - test_chrome_candidate.py
       - chrome-candidate.json
       - .github/workflows/inspect-chrome-candidate.yml
 permissions:
@@ -22,6 +23,7 @@ jobs:
           persist-credentials: false
       - name: Acquire and authenticate standalone Google Chrome
         run: |
+          python3 -m unittest -v test_chrome_candidate
           python3 fetch_chrome_candidate.py
           python3 -c "import json; r=json.load(open('reports/chrome-candidate.json')); assert r['status']=='verified-offline-candidate', r['status']"
       - name: Save verified candidate and evidence

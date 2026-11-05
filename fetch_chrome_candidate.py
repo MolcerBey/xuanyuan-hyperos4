@@ -19,6 +19,27 @@ def sha256(path):
         return hashlib.file_digest(stream, 'sha256').hexdigest()
 
 
+def parse_apk_signers(output, expected):
+    """Accept verified APK signer output; source stamps are separate identities."""
+    counts = re.findall(r'^Number of signers: (\d+)\s*$', output, re.MULTILINE)
+    if counts != ['1']:
+        raise ValueError('Expected exactly one APK signer')
+    certificate_lines = [line.strip() for line in output.splitlines()
+                         if 'certificate SHA-256 digest:' in line
+                         and not line.startswith('Source Stamp Signer:')]
+    pattern = re.compile(r'^(?:Signer #\d+:?|V[1-4](?:\.\d+)? Signer(?: #\d+)?:) '
+                         r'certificate SHA-256 digest: ([0-9a-fA-F]{64})$')
+    signers = []
+    for line in certificate_lines:
+        match = pattern.fullmatch(line)
+        if not match:
+            raise ValueError('Unrecognized APK signer certificate output')
+        signers.append(match.group(1).lower())
+    if not signers or set(signers) != {expected.lower()}:
+        raise ValueError('APK signer does not match the pinned Google signing certificate')
+    return sorted(set(signers))
+
+
 def inspect_apk(path, config, build_tools, diagnostics=None):
     diagnostics = diagnostics if diagnostics is not None else {}
     if path.stat().st_size != config['size'] or sha256(path) != config['sha256']:
@@ -49,12 +70,9 @@ def inspect_apk(path, config, build_tools, diagnostics=None):
     }
     if verified.returncode:
         raise ValueError('APK cryptographic verification failed; inspect verifier diagnostics')
-    signers = re.findall(r'^Signer #\d+ certificate SHA-256 digest: ([0-9a-fA-F]{64})$',
-                         signature, flags=re.MULTILINE)
-    diagnostics['apk_signature_verifier']['strict_parser_certificate_sha256'] = [value.lower() for value in signers]
     diagnostics['apk_signature_verifier']['expected_certificate_sha256'] = config['signer_certificate_sha256']
-    if [value.lower() for value in signers] != [config['signer_certificate_sha256']]:
-        raise ValueError('APK signer does not match the pinned Google signing certificate')
+    signers = parse_apk_signers(signature, config['signer_certificate_sha256'])
+    diagnostics['apk_signature_verifier']['strict_parser_certificate_sha256'] = signers
     badging = subprocess.run([str(aapt_tool), 'dump', 'badging', str(path)],
                              capture_output=True, text=True, check=True, timeout=120).stdout
     package = re.search(r"^package: name='([^']+)' versionCode='([^']+)' versionName='([^']+)'", badging, re.MULTILINE)
