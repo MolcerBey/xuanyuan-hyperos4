@@ -36,11 +36,11 @@ jobs:
         if: matrix.source == 'global'
         run: python3 download_global_donor.py
       - name: Inspect read-only mounted source images
-        run: sudo python3 inspect_radio_partitions.py
+        run: sudo python3 inspect_radio_partitions.py --partitions modemfirmware
       - name: Unmount inspection images
         if: always()
         run: |
-          for part in modem vendor odm product system system_ext; do
+          for part in modem modemfirmware vendor odm product system system_ext; do
             if mountpoint -q "work/mounted_$part"; then sudo umount "work/mounted_$part"; fi
           done
       - name: Upload radio evidence only

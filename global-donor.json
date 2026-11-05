@@ -9,6 +9,9 @@
   "otacert_sha256_der": "d45f076fe23a1a5b7f486e3ff41547a2023dbfe1fe73353b1e48ebdfed72cc6f",
   "expected_modem_sha256": "900280a03b7285f9b3495829d5564bd34aed0f128ba275fb59f193e66b627b07",
   "expected_modem_size": 169881600,
-  "status": "metadata-verified-pending-whole-file-authentication",
+  "expected_modemfirmware_sha256": "7fc1fdbed91049c0beca5aa66d7977f431c2bb458efc89e8f8ecd8bbe57cdb51",
+  "expected_modemfirmware_size": 141316096,
+  "archive_sha256": "46ad76b094e037d3fd51d20ccdf3353c6b1a58a9630dcbe9f05b0ee18e3f5251",
+  "status": "whole-file-Xiaomi-signature-and-modem-hash-verified",
   "runtime_compatibility_verified": false
 }

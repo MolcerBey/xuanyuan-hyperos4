@@ -1,5 +1,6 @@
 """Inspect one authenticated partition at a time within the free runner disk limit."""
 import json
+import argparse
 import pathlib
 import subprocess
 from extract_partition import extract
@@ -7,12 +8,15 @@ from inspect_radio import inspect
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--partitions', nargs='+', choices=('modem', 'modemfirmware', 'vendor', 'odm', 'product', 'system', 'system_ext'), default=['modem', 'modemfirmware', 'vendor', 'odm', 'product', 'system', 'system_ext'])
+    args = parser.parse_args()
     work = pathlib.Path('work')
     reports = pathlib.Path('reports')
     reports.mkdir(exist_ok=True)
     combined = None
     image_reports = []
-    for part in ('modem', 'vendor', 'odm', 'product', 'system', 'system_ext'):
+    for part in args.partitions:
         extract(work / 'base.zip', [part], work / 'images')
         image_reports.extend(json.loads((reports / 'extracted-images.json').read_text()))
         image = work / 'images' / (part + '.img')
@@ -43,7 +47,7 @@ def main():
     combined['mbn_candidate_count'] = len(combined['mbn_files'])
     (reports / 'extracted-images.json').write_text(json.dumps(image_reports, indent=2) + '\n')
     (reports / 'radio-static.json').write_text(json.dumps(combined, indent=2) + '\n')
-    print(json.dumps(combined), flush=True)
+    print(json.dumps({'inspected_partitions': args.partitions, 'mbn_count': combined['mbn_candidate_count'], 'errors': combined['errors'], 'omitted': combined['omitted'], 'runtime_verified': False}), flush=True)
     if combined['errors'] or combined['omitted']:
         raise ValueError('Radio inspection incomplete; examine evidence before integration')
 

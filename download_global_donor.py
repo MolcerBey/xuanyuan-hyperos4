@@ -33,6 +33,8 @@ def main():
         raise ValueError('Authenticated donor modem differs from reviewed metadata')
     with partial.open('rb') as stream:
         digest = hashlib.file_digest(stream, 'sha256').hexdigest()
+    if cfg.get('archive_sha256') and digest != cfg['archive_sha256']:
+        raise ValueError('Authenticated global archive differs from pinned source hash')
     report.update({'archive_sha256': digest, 'source_url': cfg['url'], 'global_modem_runtime_compatibility_verified': False})
     pathlib.Path('reports').mkdir(exist_ok=True)
     pathlib.Path('reports/verified-global-donor.json').write_text(json.dumps(report, indent=2) + '\n')

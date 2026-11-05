@@ -8,7 +8,7 @@ import re
 import xml.etree.ElementTree as ET
 import zipfile
 
-PARTITIONS = ("modem", "vendor", "odm", "product", "system_ext", "system")
+PARTITIONS = ("modem", "modemfirmware", "vendor", "odm", "product", "system_ext", "system")
 MAX_TEXT = 4 * 1024**2
 MAX_ENTRIES = 5000
 MAX_REPORT = 8 * 1024**2
@@ -88,7 +88,7 @@ def inspect(work):
         root = work / ("mounted_" + partition)
         report["partitions"][partition] = {"available": root.is_dir(), "files_seen": 0}
         image = work / "images" / (partition + ".img")
-        if partition == "modem" and image.is_file():
+        if partition in ("modem", "modemfirmware") and image.is_file():
             add("partition_images", {"partition": partition, "size": image.stat().st_size, "sha256": sha256(image)})
         if not root.is_dir():
             continue
@@ -109,7 +109,7 @@ def inspect(work):
                     else:
                         entry["text_scan_omitted_size_limit"] = True
                     add("mbn_files", entry)
-                elif partition == "modem" and not any(part in lower.split("/") for part in ("mcfg_sw", "mcfg_hw")):
+                elif partition in ("modem", "modemfirmware") and not any(part in lower.split("/") for part in ("mcfg_sw", "mcfg_hw")):
                     add("modem_firmware_files", {"path": label, "size": size, "sha256": sha256(path)}, 1000)
                 if path.name == "build.prop" and size <= MAX_TEXT:
                     for line in path.read_text(errors="replace").splitlines():
