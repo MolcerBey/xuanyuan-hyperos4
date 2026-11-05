@@ -1,0 +1,22 @@
+{
+  "device": "xuanyuan",
+  "hardware_variant": "global",
+  "rom": "xiaomi.eu OS3.0.314.0.WOACNXM",
+  "android": "16",
+  "archive": "xiaomi.eu_XUANYUAN_OS3.0.314.0.WOACNXM_16_343f98d215.zip",
+  "url": "https://downloads.sourceforge.net/project/xiaomi-eu-multilang-miui-roms/xiaomi.eu/HyperOS-STABLE-RELEASES/HyperOS3.0/xiaomi.eu_XUANYUAN_OS3.0.314.0.WOACNXM_16_343f98d215.zip",
+  "checksum_source": "https://sourceforge.net/projects/xiaomi-eu-multilang-miui-roms/files/xiaomi.eu/HyperOS-STABLE-RELEASES/HyperOS3.0/xiaomi.eu_XUANYUAN_OS3.0.314.0.WOACNXM_16_343f98d215.zip/download",
+  "size": 9613466547,
+  "sha256": "9c1eced1591d5ad28998e7731a0555ce824074fdfe2061e7cad43b59da835157",
+  "selection_evidence": "Official package scripts select modemfirmware_ww.img when HwCountry is not CN; common modem.img is used for both",
+  "installer_sha256": {
+    "linux_install_upgrade.sh": "ee9ac54928e331171ac2728cbb2990c9d70cac5e15da2263ee11599c02e123d3",
+    "windows_install_upgrade.bat": "ca9e473a81d4f4dda8f5aa8b7eef150a13c4edfa790741cd477b7e630a8652cc"
+  },
+  "members": [
+    {"path": "images/modem.img", "output": "NOT-INSTALLABLE-modem.img", "size": 172568576, "crc32": "1282e1b5"},
+    {"path": "images/modemfirmware_ww.img", "output": "NOT-INSTALLABLE-modemfirmware.img", "size": 140234752, "crc32": "a38388c0"}
+  ],
+  "phone_access_allowed": false,
+  "android17_runtime_compatibility_verified": false
+}

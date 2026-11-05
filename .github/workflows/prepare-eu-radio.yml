@@ -1,0 +1,32 @@
+name: Prepare exact Xiaomi.eu 3.0.314 global radio reference
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - prepare_eu_radio.py
+      - eu-radio-source.json
+      - .github/workflows/prepare-eu-radio.yml
+permissions:
+  contents: read
+concurrency:
+  group: molcer-eu-radio-reference
+  cancel-in-progress: true
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Test exact global branch selection and source integrity
+        run: python3 -m unittest -v test_eu_radio
+      - name: Verify official EU archive and extract its global radio pair
+        run: python3 prepare_eu_radio.py
+      - name: Save exact EU radio reference
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: NOT-INSTALLABLE-EU-3.0.314-global-radio-reference
+          path: out/eu-radio-reference/
+          retention-days: 3
