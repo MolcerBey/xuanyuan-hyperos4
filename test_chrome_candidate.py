@@ -1,8 +1,15 @@
 import unittest
-from fetch_chrome_candidate import parse_apk_signers
+from fetch_chrome_candidate import parse_apk_signers, minimum_sdk_version
 
 
 class ChromeSignerTests(unittest.TestCase):
+    def test_minimum_sdk_uses_sdk37_or_legacy_field(self):
+        self.assertEqual(minimum_sdk_version("minSdkVersion:'29'\ntargetSdkVersion:'36'\n"), 29)
+        self.assertEqual(minimum_sdk_version("sdkVersion:'29'\n"), 29)
+        for output in ("targetSdkVersion:'29'", "minSdkVersion:'29'\nsdkVersion:'38'"):
+            with self.assertRaises(ValueError):
+                minimum_sdk_version(output)
+
     def test_sdk37_v3_signer_with_separate_source_stamp(self):
         output = 'Number of signers: 1\nV3.0 Signer: certificate SHA-256 digest: ' + 'a'*64 + '\nSource Stamp Signer: certificate SHA-256 digest: ' + 'b'*64 + '\n'
         self.assertEqual(parse_apk_signers(output, 'a'*64), ['a'*64])

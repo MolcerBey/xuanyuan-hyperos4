@@ -40,6 +40,13 @@ def parse_apk_signers(output, expected):
     return sorted(set(signers))
 
 
+def minimum_sdk_version(badging):
+    values = re.findall(r"^(?:minSdkVersion|sdkVersion):'(\d+)'\s*$", badging, re.MULTILINE)
+    if len(values) != 1:
+        raise ValueError('Candidate minimum SDK was not uniquely recognized in aapt2 output')
+    return int(values[0])
+
+
 def inspect_apk(path, config, build_tools, diagnostics=None):
     diagnostics = diagnostics if diagnostics is not None else {}
     if path.stat().st_size != config['size'] or sha256(path) != config['sha256']:
@@ -80,10 +87,8 @@ def inspect_apk(path, config, build_tools, diagnostics=None):
     package = re.search(r"^package: name='([^']+)' versionCode='([^']+)' versionName='([^']+)'", badging, re.MULTILINE)
     if not package or package.groups() != (config['package'], config['version_code'], config['version']):
         raise ValueError('APK package or version does not match the candidate')
-    minimum = re.search(r"^sdkVersion:'(\d+)'", badging, re.MULTILINE)
-    if not minimum:
-        raise ValueError('Candidate minimum SDK was not recognized in aapt2 output')
-    if int(minimum.group(1)) > 37:
+    minimum = minimum_sdk_version(badging)
+    if minimum > 37:
         raise ValueError('Candidate minimum Android SDK exceeds target SDK37')
     manifest = subprocess.run([str(aapt_tool), 'dump', 'xmltree', str(path), '--file', 'AndroidManifest.xml'],
                               capture_output=True, text=True, check=True, timeout=120).stdout
@@ -105,7 +110,7 @@ def inspect_apk(path, config, build_tools, diagnostics=None):
         raise ValueError('No Turkish locale evidence found in the candidate')
     return {'signature_verified_for_sdk37': True, 'signer_certificate_sha256': signers[0].lower(),
             'package': package.group(1), 'version_code': package.group(2), 'version': package.group(3),
-            'minimum_sdk': int(minimum.group(1)), 'requires_static_library_or_split': False,
+            'minimum_sdk': minimum, 'requires_static_library_or_split': False,
             'arm64_native_libraries': native, 'turkish_pak_paths': turkish,
             'turkish_locale_in_badging': has_tr_locale,
             'signature_verification_output': signature,
