@@ -1,0 +1,66 @@
+{
+  "release": "v3.4.2",
+  "url": "https://github.com/KernelSU-Next/KernelSU-Next/releases/tag/v3.4.2",
+  "assets": [
+    {
+      "name": "aarch64_android12-5.10_kernelsu.ko",
+      "url": "https://github.com/KernelSU-Next/KernelSU-Next/releases/download/v3.4.2/aarch64_android12-5.10_kernelsu.ko",
+      "size": 481672,
+      "sha256": "9978f9f6b791d9cae8ccab204b4084bb5f5cda5e7641c01809429a93f046a970"
+    },
+    {
+      "name": "aarch64_android13-5.10_kernelsu.ko",
+      "url": "https://github.com/KernelSU-Next/KernelSU-Next/releases/download/v3.4.2/aarch64_android13-5.10_kernelsu.ko",
+      "size": 476512,
+      "sha256": "e29592cb7196869662df503b116e4efc48c92b0cdf8cb0dfe21e0567e59254c1"
+    },
+    {
+      "name": "aarch64_android13-5.15_kernelsu.ko",
+      "url": "https://github.com/KernelSU-Next/KernelSU-Next/releases/download/v3.4.2/aarch64_android13-5.15_kernelsu.ko",
+      "size": 501696,
+      "sha256": "d58d71d00e1ff49998a9c6d690fa2d8aa9567959ecff399a1b9ccc20199e68f0"
+    },
+    {
+      "name": "aarch64_android14-5.15_kernelsu.ko",
+      "url": "https://github.com/KernelSU-Next/KernelSU-Next/releases/download/v3.4.2/aarch64_android14-5.15_kernelsu.ko",
+      "size": 625080,
+      "sha256": "fac9464f54ebca4d1d7fd1ee3a4b8744bcb1965759dc1d7b68346ae9c85c9dd2"
+    },
+    {
+      "name": "aarch64_android14-6.1_kernelsu.ko",
+      "url": "https://github.com/KernelSU-Next/KernelSU-Next/releases/download/v3.4.2/aarch64_android14-6.1_kernelsu.ko",
+      "size": 541472,
+      "sha256": "961d2ef0e135a71d2620f10ebdc6932ff5b43069c5cf7da595fba5ab666c4b72"
+    },
+    {
+      "name": "aarch64_android15-6.6_kernelsu.ko",
+      "url": "https://github.com/KernelSU-Next/KernelSU-Next/releases/download/v3.4.2/aarch64_android15-6.6_kernelsu.ko",
+      "size": 435208,
+      "sha256": "8d610b3070d4aa6fb116008c2e2caf4e3972aa73744d9106dc257a50e9bda66d"
+    },
+    {
+      "name": "aarch64_android16-6.12_kernelsu.ko",
+      "url": "https://github.com/KernelSU-Next/KernelSU-Next/releases/download/v3.4.2/aarch64_android16-6.12_kernelsu.ko",
+      "size": 500656,
+      "sha256": "67c5d9e9026c52ff4c9b2e681aa81d1884160282ecef71bfa72f53e7a8c211e7"
+    },
+    {
+      "name": "aarch64_android17-6.18_kernelsu.ko",
+      "url": "https://github.com/KernelSU-Next/KernelSU-Next/releases/download/v3.4.2/aarch64_android17-6.18_kernelsu.ko",
+      "size": 473552,
+      "sha256": "71931508be33ae4a0c24e5d727299835bea5add595020adf8e19b87fd223f593"
+    },
+    {
+      "name": "KernelSU_Next_v3.4.2_33355-release.apk",
+      "url": "https://github.com/KernelSU-Next/KernelSU-Next/releases/download/v3.4.2/KernelSU_Next_v3.4.2_33355-release.apk",
+      "size": 16682167,
+      "sha256": "774a5511f7034a4930e881114e202319cbdc34c5aaaa5c7c6b6d2902364e4c58"
+    },
+    {
+      "name": "ksud-x86_64-unknown-linux-musl",
+      "url": "https://github.com/KernelSU-Next/KernelSU-Next/releases/download/v3.4.2/ksud-x86_64-unknown-linux-musl",
+      "size": 9222072,
+      "sha256": "4d22f89416e7eef8f684f1ed03d2bea19da33c7d41266546e94fd7d1f6cbeca9"
+    }
+  ]
+}

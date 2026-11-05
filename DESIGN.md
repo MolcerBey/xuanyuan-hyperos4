@@ -4,7 +4,7 @@ Target: Xiaomi 15 Ultra, device `xuanyuan`; requested China HyperOS 4 / Android 
 
 ## Current stage
 
-Source investigation only. No flashable custom ROM, modified partition, or performance improvement has been produced. No phone flash, wipe, reboot, root installation, or bootloader change has been performed.
+Authenticated source; package and locale inspection and offline root preparation in progress. No flashable custom ROM or measured performance improvement has been produced. No phone flash, wipe, reboot, root installation, or bootloader change has been performed.
 
 The owner explicitly waived camera runtime testing. This does not constitute a compatibility guarantee. Structural checks of downloaded files and generated images remain required.
 
@@ -17,10 +17,10 @@ The owner explicitly waived camera runtime testing. This does not constitute a c
 - Partition image total: 13,340,323,840 bytes.
 - Product image: 5,208,166,400 bytes.
 - Published MD5 from the download index: `bfc6faa7f2b6d205e3fa76f1f0438b6d`.
-- First complete GitHub download failed the published MD5/length gate. The follow-up job records both actual values and verifies the embedded whole-file signature.
+- The published MD5 was incorrect. Complete length matched. Actual MD5 is `bfc6faa7f25124b3352b7fb6e80d8e02`; authenticated SHA256 is `bd19c93fa7c1cb90ed194c5cc2ebfe786f55f1382b172e344522ca805c63f1ea`.
 - OTA signer certificate DER SHA256: `d45f076fe23a1a5b7f486e3ff41547a2023dbfe1fe73353b1e48ebdfed72cc6f`.
 - The signer certificate was independently extracted from the CMS signature and matches the OTA certificate in HyperOS 3.0.314.0 obtained from Xiaomi's `bigota.d.miui.com` CDN.
-- Certificate equality alone does not prove a valid signature over this archive. A failed checksum must not be replaced with a newly measured value without independently authenticating the exact content.
+- Whole-file CMS verification succeeded in run 41927267094. Strict verification now pins both the archive SHA256 and the signer certificate; embedded certificates alone are not trusted.
 
 ## Planned changes after source approval
 
@@ -30,7 +30,7 @@ The owner explicitly waived camera runtime testing. This does not constitute a c
 4. Keep stock thermal limits, CPU/GPU policies, encryption and SELinux. No speculative build.prop performance flags or forced refresh-rate settings.
 5. Preserve filesystem owners, modes, capabilities, SELinux labels and symlinks during repacking; compare retained file contents and metadata before accepting an output.
 6. Verify partition sizes and AVB/installation requirements before producing installation artifacts. Do not call an inspection report, module or stock ZIP a custom ROM.
-7. Treat Turkish UI, Google Play/Android Auto and root as explicit product choices; support depends on the inspected base and user preferences.
+7. Owner requested Turkish UI, Google Play, Chrome, KernelSU Next and Molcer OS branding. Verify actual locale and Google dependencies before claiming support. Root uses the stock kernel KMI and an official pinned KernelSU Next release. Stock modem/IMS/carrier files are preserved, but Turkish network runtime compatibility remains unverified.
 
 ## Workflows
 

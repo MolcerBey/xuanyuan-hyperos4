@@ -3,7 +3,7 @@ import hashlib
 import json
 import pathlib
 import shutil
-import urllib.request
+import subprocess
 
 from inspect_ota import inspect
 from verify_signature import verify_signature
@@ -17,19 +17,29 @@ def main():
     if shutil.disk_usage(work).free < config["size"] + 2 * 1024**3:
         raise RuntimeError("Insufficient free disk for the pinned OTA plus 2 GiB reserve")
     target = work / "base.zip.partial"
+    urls = [config["url"].replace("https://bigota.d.miui.com/", "https://bkt-sgp-miui-ota-update-alisgp.oss-ap-southeast-1.aliyuncs.com/"), config["url"]]
+    for url in urls:
+        print(f"Downloading pinned source: {url}", flush=True)
+        result = subprocess.run([
+            "curl", "--fail", "--location", "--show-error", "--connect-timeout", "30",
+            "--max-time", "1500", "--speed-limit", "131072", "--speed-time", "45",
+            "--retry", "2", "--retry-delay", "3", "--retry-max-time", "1800",
+            "--output", str(target), url,
+        ], timeout=1850)
+        if result.returncode == 0 and target.stat().st_size == config["size"]:
+            break
+    else:
+        raise RuntimeError("Pinned source download failed or had unexpected length")
     md5, sha256, length = hashlib.md5(), hashlib.sha256(), 0
-    with urllib.request.urlopen(config["url"], timeout=120) as response, target.open("wb") as output:
-        if int(response.headers.get("Content-Length", "0")) != config["size"]:
-            raise RuntimeError("Server content length changed")
-        while chunk := response.read(8 * 1024**2):
+    with target.open("rb") as source:
+        while chunk := source.read(8 * 1024**2):
             length += len(chunk)
             if length > config["size"]:
                 raise RuntimeError("Download exceeded expected length")
-            output.write(chunk)
             md5.update(chunk)
             sha256.update(chunk)
             if length % (256 * 1024**2) == 0:
-                print(f"Downloaded {length / 1024**3:.2f} GiB", flush=True)
+                print(f"Hashed {length / 1024**3:.2f} GiB", flush=True)
     measurements = {"bytes": length, "expected_bytes": config["size"], "md5": md5.hexdigest(), "expected_md5": config["md5"], "sha256": sha256.hexdigest(), "source_url": config["url"]}
     pathlib.Path("reports/download-measurements.json").write_text(json.dumps(measurements, indent=2) + "\n")
     print(json.dumps(measurements, indent=2), flush=True)
