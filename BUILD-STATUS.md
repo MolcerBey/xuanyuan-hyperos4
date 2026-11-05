@@ -32,7 +32,7 @@ Integration is selective: the Play Store and its privileged permission entry are
 
 ## Validation and remaining work
 
-Global-device radio evidence and the authenticated Android17 `modem` + `modemfirmware` candidate are recorded in [RADIO-STATUS.md](RADIO-STATUS.md). The Turk Telekom MBN exists in both sources but differs between China and global. Runtime compatibility remains pending; no modem change has been applied to the phone.
+The owner identified their working ROM as Xiaomi.eu OS3.0.314.0.WOACNXM and requested its radio files. The selected source is now that exact release's common `modem.img` plus global `modemfirmware_ww.img`, verified through `prepare_eu_radio.py`. The previously prepared Android17 global donor remains an alternative, not the selected source. See [RADIO-STATUS.md](RADIO-STATUS.md). Runtime compatibility remains pending; all phone access is prohibited.
 
 The owner confirmed GLOBAL hardware and a currently working Turk Telekom connection on Xiaomi.eu. This changes the radio integration assumptions: the China base's modem must not be automatically included in a global-device flash plan. [Xiaomi.eu maintainer documentation](https://miuipolska.pl/xiaomi-15-ultra-xiaomi-eu/) records loss of coverage with the China modem on global Xiaomi 15 Ultra hardware, but its linked Android15 modem is not evidence of compatibility with this Android17 beta. `radio-policy.json` records the requirement to preserve the known-working global modem pending identification and compatibility checks. This is a packaging constraint, not a modem modification already applied to the phone. Device-unique NV/calibration partitions remain untouched. Current source modem/MBN and IMS inspection runs separately in `inspect-radio.yml`.
 

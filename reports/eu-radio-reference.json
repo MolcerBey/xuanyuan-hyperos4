@@ -1,0 +1,31 @@
+{
+  "device": "xuanyuan",
+  "hardware_variant": "global",
+  "source_rom": "xiaomi.eu OS3.0.314.0.WOACNXM",
+  "source_android": "16",
+  "source_archive_sha256": "9c1eced1591d5ad28998e7731a0555ce824074fdfe2061e7cad43b59da835157",
+  "official_release_checksum_verified": true,
+  "source_url": "https://downloads.sourceforge.net/project/xiaomi-eu-multilang-miui-roms/xiaomi.eu/HyperOS-STABLE-RELEASES/HyperOS3.0/xiaomi.eu_XUANYUAN_OS3.0.314.0.WOACNXM_16_343f98d215.zip",
+  "selection_evidence": "Official package scripts select modemfirmware_ww.img when HwCountry is not CN; common modem.img is used for both",
+  "files": [
+    {
+      "source_member": "images/modem.img",
+      "output": "NOT-INSTALLABLE-modem.img",
+      "size": 172568576,
+      "sha256": "abdb08bc80e2b9c837b40f54df5c34c1ea929b5d1c14e7cfebfc0b433b9a6d69",
+      "zip_crc_verified": true
+    },
+    {
+      "source_member": "images/modemfirmware_ww.img",
+      "output": "NOT-INSTALLABLE-modemfirmware.img",
+      "size": 140234752,
+      "sha256": "bfab29aac6a9337cb168bbc76455fda068c59be899b917b0038af2c88a7a1fe6",
+      "zip_crc_verified": true
+    }
+  ],
+  "installers_executed": false,
+  "phone_accessed": false,
+  "active_phone_contents_verified": false,
+  "ready_to_flash": false,
+  "android17_runtime_compatibility_verified": false
+}

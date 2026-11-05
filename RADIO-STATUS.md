@@ -1,8 +1,23 @@
 # Global Xiaomi 15 Ultra / Turk Telekom radio work
 
-The owner confirmed global hardware and a working Turk Telekom connection on the current Xiaomi.eu installation. No phone radio settings or firmware have been changed. The phone is not currently available through ADB, so its working baseband version is not yet known.
+The owner confirmed global hardware, Xiaomi.eu OS3.0.314.0.WOACNXM (Android16), and a working Turk Telekom connection. All phone access, including read-only ADB, is prohibited by the owner. Work uses downloaded ROM files only; no active-device radio contents are claimed to have been read.
 
-## Confirmed source evidence
+## Selected source: exact owner-specified Xiaomi.eu ROM
+
+The selected Molcer OS radio integration source is now `eu-radio-source.json`, built by `prepare_eu_radio.py`. It uses `images/modem.img` and `images/modemfirmware_ww.img` from `xiaomi.eu_XUANYUAN_OS3.0.314.0.WOACNXM_16_343f98d215.zip`. Direct inspection of this package's Windows and Linux installers confirmed that `HwCountry=CN` selects the ordinary `modemfirmware.img`, while other hardware selects `modemfirmware_ww.img`. The installer scripts are read and hashed as evidence; they are never executed.
+
+The official Xiaomi.eu SourceForge download page publishes full archive SHA256 `9c1eced1591d5ad28998e7731a0555ce824074fdfe2061e7cad43b59da835157`. The builder verifies the complete archive before extracting either radio file, checks installer hashes and ZIP member sizes/CRCs, then records each extracted file's SHA256. This is verification against Xiaomi.eu's published release checksum, not a claim of Xiaomi whole-file signing for the customized EU ZIP.
+
+These files are selected because the owner explicitly requested the radio branch supplied with their working EU version. Matching that release does not prove that a later manual modem change was never made, or establish Android16-to-Android17 vendor/radio compatibility. Full Molcer OS installation and runtime validation remain pending. No phone connection is requested or required for source preparation.
+
+Preparation succeeded in [run 42067682905](https://github.com/MolcerBey/xuanyuan-hyperos4/actions/runs/42067682905). The [verified EU radio artifact](https://github.com/MolcerBey/xuanyuan-hyperos4/actions/runs/42067682905/artifacts/13433824127) contains the selected pair with checksums and provenance; artifact retention is three days. `reports/eu-radio-reference.json` records:
+
+- Common `modem.img`: 172,568,576 bytes; SHA256 `abdb08bc80e2b9c837b40f54df5c34c1ea929b5d1c14e7cfebfc0b433b9a6d69`.
+- Global `modemfirmware_ww.img`: 140,234,752 bytes; SHA256 `bfab29aac6a9337cb168bbc76455fda068c59be899b917b0038af2c88a7a1fe6`.
+
+The common/global distinction comes from the exact EU release's installer, not from guessing that all radio partitions must come from a separate stock Global ROM. No downloaded installer was executed.
+
+## Previously prepared Android17 alternative
 
 - China base: OS4.0.0.18.XOACNXM, Android17, device xuanyuan.
 - Global donor: OS4.0.0.6.XOAMIXM, Android17, device xuanyuan, downloaded from Xiaomi's own CDN. The whole-file CMS signature passed verification against the independently pinned Xiaomi certificate.
@@ -31,9 +46,9 @@ The global profile is already included unchanged inside the authenticated global
 
 `radio-policy.json` excludes the China `modem`, `modemfirmware` and `countrycode` partitions from any future global-device flash plan. The working global radio should be preserved until its identity and Android17 pairing are understood. Device-unique `modemst1`, `modemst2`, `fsg`, `fsc` and `persist` must remain untouched.
 
-Pending: identify the working baseband, validate the global radio pair with the target vendor/IMS implementation, finish full ROM/AVB packaging, and check registration, calls, SMS, data, VoLTE and Wi-Fi calling. Source signature and checksum success do not establish runtime compatibility.
+Pending: validate the selected EU radio pair with the Android17 target vendor/IMS implementation, finish full ROM/AVB packaging, and verify runtime behavior if the owner later explicitly authorizes device testing. Source signature and checksum success do not establish runtime compatibility. Do not request or perform phone access under the current instruction.
 
-`collect_radio_baseline.ps1` reads a fixed list of non-personal software/model properties. It does not extract applications or read SIM identifiers and writes its report only under the ignored local `work/` directory.
+`collect_radio_baseline.ps1` is disabled by `phone_access_allowed=false` in `radio-policy.json`; it exits before any ADB call.
 
 ## Primary references
 

@@ -21,7 +21,7 @@
   "base_modem_sha256": "e0f16e9db87ad6b1f7a41c72da99b7b94585db83c48318de041fcdb7f31a4225",
   "base_modem_region": "CN",
   "base_modem_approved_for_global_hardware": false,
-  "modem_strategy": "preserve-current-working-global-modem-until-Android17-compatibility-is-established",
+  "modem_strategy": "use-common-modem-and-global-modemfirmware_ww-from-owner-specified-xiaomi.eu-OS3.0.314.0-for-offline-integration",
   "exclude_base_partitions_from_future_flash_plan": ["modem", "modemfirmware", "countrycode"],
   "never_modify_device_unique_partitions": ["modemst1", "modemst2", "fsg", "fsc", "persist"],
   "force_carrier_provisioning_bypass": false,
@@ -29,7 +29,9 @@
   "android17_global_modem_compatibility_verified": false,
   "runtime_network_verified_on_target_rom": false,
   "installation_allowed": false,
-  "status": "authenticated-global-Android17-modem-candidate-prepared; device-baseband-and-runtime-pairing-pending",
+  "selected_radio_source_verified": true,
+  "selected_radio_report": "reports/eu-radio-reference.json",
+  "status": "exact-EU-3.0.314-global-radio-source-verified-and-selected; Android17-integration-pending",
   "maintainer_evidence": "https://miuipolska.pl/xiaomi-15-ultra-xiaomi-eu/",
   "maintainer_evidence_limit": "Documents a global-hardware/China-modem mismatch for Android15; its A15 modem ZIP is not approved here for Android17"
 }

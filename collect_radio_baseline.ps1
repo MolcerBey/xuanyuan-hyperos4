@@ -1,5 +1,9 @@
 param([string]$AdbPath = 'C:\adb\adb.exe')
 $ErrorActionPreference = 'Stop'
+$radioPolicy = Get-Content -LiteralPath (Join-Path $PSScriptRoot 'radio-policy.json') -Raw | ConvertFrom-Json
+if ($radioPolicy.phone_access_allowed -ne $true) {
+    throw 'Phone access is prohibited by the owner. This collector must not run.'
+}
 $state = (& $AdbPath get-state 2>$null | Out-String).Trim()
 if ($LASTEXITCODE -ne 0 -or $state -ne 'device') {
     throw 'Exactly one authorized ADB phone must be connected.'
