@@ -13,6 +13,7 @@ import xml.etree.ElementTree as ET
 ANDROID = "http://schemas.android.com/apk/res/android"
 ET.register_namespace("android", ANDROID)
 TARGETS = {
+    "AndroidDefaults.apk": ("system/system/framework/framework-res.apk", "android"),
     "MiuiHome.apk": ("product/priv-app/MiuiHome/MiuiHome.apk", "com.miui.home"),
     "MiuiSystemUI.apk": ("system_ext/priv-app/MiuiSystemUI/MiuiSystemUI.apk", "com.android.systemui"),
     "Settings.apk": ("system_ext/priv-app/Settings/Settings.apk", "com.android.settings"),
@@ -60,8 +61,9 @@ def build():
     key.chmod(0o600)
     report = {"source": config["source"], "commit": config["commit"], "credit": config["credit"], "original_apks_modified": False, "runtime_verified": False, "complete_translation": False, "preview_signing_key": True, "targets": []}
     additions, overlays = {}, []
-    for item in config["targets"]:
+    for item in config["targets"] + [{"path": "internal/AndroidDefaults.apk"}]:
         filename = item["path"].split("/")[1]
+        defaults = filename == "AndroidDefaults.apk"
         target_path, target_package = TARGETS[filename]
         partition, relative = target_path.split("/", 1)
         apk = pathlib.Path("work/mounted_" + partition, relative)
@@ -69,12 +71,15 @@ def build():
         overlayable = subprocess.check_output([aapt, "dump", "overlayable", str(apk)], text=True)
         names = target_strings(resource_table)
         allowed = allowed_resources(overlayable)
-        url = f"https://raw.githubusercontent.com/{config['source']}/{config['commit']}/{item['path']}"
-        with urllib.request.urlopen(url, timeout=60) as response:
-            data = response.read(item["size"] + 1)
-        digest = hashlib.sha1(f"blob {len(data)}\0".encode() + data).hexdigest()
-        if len(data) != item["size"] or digest != item["blob_sha1"]:
-            raise ValueError("Translation source blob checksum mismatch")
+        if defaults:
+            data = b'<resources><string name="config_defaultBrowser">com.android.chrome</string></resources>'
+        else:
+            url = f"https://raw.githubusercontent.com/{config['source']}/{config['commit']}/{item['path']}"
+            with urllib.request.urlopen(url, timeout=60) as response:
+                data = response.read(item["size"] + 1)
+            digest = hashlib.sha1(f"blob {len(data)}\0".encode() + data).hexdigest()
+            if len(data) != item["size"] or digest != item["blob_sha1"]:
+                raise ValueError("Translation source blob checksum mismatch")
         groups = collections.defaultdict(list)
         skipped = collections.Counter()
         for entry in ET.fromstring(data):
@@ -85,7 +90,7 @@ def build():
                 skipped["non_plain_string"] += 1
             elif resource not in names:
                 skipped["not_in_this_base"] += 1
-            elif re.match(r"(?:config|key|pref_key|uri|url|action|default)_", name) or value.startswith(("@", "?")) or "://" in value:
+            elif not defaults and (re.match(r"(?:config|key|pref_key|uri|url|action|default)_", name) or value.startswith(("@", "?")) or "://" in value):
                 skipped["non_ui_configuration"] += 1
             elif "%" in value or "%" in names[resource]:
                 skipped["format_requires_manual_review"] += 1
@@ -93,19 +98,20 @@ def build():
                 skipped["not_product_overlayable"] += 1
             else:
                 groups[allowed.get(resource, "")].append(entry)
-        target_report = {"package": target_package, "compiled_strings": 0, "skipped": dict(skipped), "overlays": []}
+        target_report = {"package": target_package, "purpose": "default-browser" if defaults else "turkish-ui", "compiled_strings": 0, "skipped": dict(skipped), "overlays": []}
         for number, (target_name, entries) in enumerate(sorted(groups.items())):
             overlay_package = f"com.molcer.os.tr.{filename[:-4].lower()}.g{number}"
             directory = work / overlay_package
             res = directory / "res"
-            (res / "values-tr").mkdir(parents=True)
+            qualifier = "values" if defaults else "values-tr"
+            (res / qualifier).mkdir(parents=True)
             (res / "xml").mkdir()
             values = ET.Element("resources")
             mapping = ET.Element("overlay")
             for entry in entries:
                 values.append(entry)
                 ET.SubElement(mapping, "item", target="string/" + entry.get("name"), value="@string/" + entry.get("name"))
-            ET.ElementTree(values).write(res / "values-tr/strings.xml", encoding="utf-8", xml_declaration=True)
+            ET.ElementTree(values).write(res / qualifier / "strings.xml", encoding="utf-8", xml_declaration=True)
             ET.ElementTree(mapping).write(res / "xml/overlays.xml", encoding="utf-8", xml_declaration=True)
             manifest = ET.Element("manifest", {"package": overlay_package, f"{{{ANDROID}}}versionCode": "1", f"{{{ANDROID}}}versionName": "0.1-preview"})
             ET.SubElement(manifest, "uses-sdk", {f"{{{ANDROID}}}minSdkVersion": "37", f"{{{ANDROID}}}targetSdkVersion": "37"})

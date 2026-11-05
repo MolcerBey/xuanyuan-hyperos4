@@ -51,7 +51,16 @@ def main():
     gapps = json.loads(pathlib.Path("gapps-assets.json").read_text())
     archive = fetch(gapps["core"], inputs)
     additions = {}
+    google_core = []
     with zipfile.ZipFile(archive) as source:
+        for member, stock in [
+            ("system/product/apex/com.google.android.gmssystem.prodvic.apex", ROOT / "apex/com.google.android.gmssystem.prodvic.apex"),
+            ("system/system_ext/priv-app/GoogleServicesFramework/GoogleServicesFramework.apk", pathlib.Path("work/mounted_system_ext/priv-app/GoogleServicesFramework/GoogleServicesFramework.apk")),
+        ]:
+            expected = hashlib.sha256(source.read(member)).hexdigest()
+            with stock.open("rb") as stream:
+                actual = hashlib.file_digest(stream, "sha256").hexdigest()
+            google_core.append({"path": member, "selected_release_sha256": expected, "stock_sha256": actual, "identical": actual == expected})
         additions["priv-app/Phonesky/Phonesky.apk"] = source.read("system/product/priv-app/Phonesky/Phonesky.apk")
         permissions = ET.fromstring(source.read("system/product/etc/permissions/privapp-permissions-google-product.xml"))
         selected = [element for element in permissions if element.tag == "privapp-permissions" and element.get("package") == "com.android.vending"]
@@ -141,7 +150,7 @@ def main():
     text, count = re.subn(r"(?m)^ro.build.display.id=.*$", "ro.build.display.id=Molcer OS 0.1 Preview", text)
     if count != 1:
         raise ValueError("Unexpected stock display ID declaration")
-    props.write_text(text + "\nro.molcer.os.name=Molcer OS\nro.molcer.os.version=0.1-preview\n")
+    props.write_text(text + "\nro.molcer.os.name=Molcer OS\nro.molcer.os.version=0.1-preview\npersist.sys.timezone=Europe/Istanbul\n")
     if overlay_configuration_bytes is not None:
         target = STAGE / "overlay/config/config.xml"
         if target.is_symlink():
@@ -166,6 +175,10 @@ def main():
     with image.open("rb") as stream:
         digest = hashlib.file_digest(stream, "sha256").hexdigest()
     report = {"name": "Molcer OS", "stage": "product image preview only", "ready_to_flash": False, "product_sha256": digest, "image_size": image.stat().st_size, "retained_entries_verified": retained, "removed_packages": removed, "added_files": sorted(additions), "stock_camera_unchanged": True, "stock_google_runtime_preserved": True, "full_google_runtime_update": False, "complete_turkish_translation": False, "default_locale": "tr-TR", "default_browser_role_verified": False, "pending": ["full Turkish resource integration", "Google runtime/APEX integration assessment", "AVB chain and complete installation packaging", "boot and telephony verification"]}
+    report["google_core_comparison"] = google_core
+    report["google_core_matches_selected_release"] = all(item["identical"] for item in google_core)
+    if report["google_core_matches_selected_release"]:
+        report["pending"].remove("Google runtime/APEX integration assessment")
     pathlib.Path("reports/product-preview.json").write_text(json.dumps(report, indent=2) + "\n")
     (OUT / "NOT-INSTALLABLE.txt").write_text("Product image preview only. Full Turkish UI, Google runtime update, AVB and complete installation packaging remain pending. Do not flash this standalone image.\n")
     print(json.dumps(report), flush=True)
