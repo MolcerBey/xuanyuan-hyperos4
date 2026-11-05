@@ -1,0 +1,71 @@
+name: Check EU radio versus Molcer Android17 source offline
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - compare_radio_static.py
+      - test_radio_compat.py
+      - stage_radio_compat.py
+      - .github/workflows/check-radio-compatibility.yml
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: molcer-radio-compatibility
+  cancel-in-progress: true
+jobs:
+  compare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Test compatibility evidence classification
+        run: python3 -m unittest -v test_radio_compat
+      - name: Retrieve and verify previously prepared EU radio pair
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p work
+          gh api repos/MolcerBey/xuanyuan-hyperos4/actions/artifacts/13433824127/zip > work/eu-reference.zip
+          python3 stage_radio_compat.py
+      - name: Authenticate exact Molcer Android17 base
+        run: python3 download_base.py
+      - name: Extract authenticated target radio images
+        run: python3 extract_partition.py --partitions modem modemfirmware --output work/compat/target/images
+      - name: Inspect both radio pairs read-only
+        run: |
+          for variant in eu target; do
+            for part in modem modemfirmware; do
+              img="work/compat/$variant/images/$part.img"
+              dest="work/compat/$variant/mounted_$part"
+              mkdir -p "$dest"
+              fs="$(sudo blkid -p -s TYPE -o value "$img")"
+              case "$fs" in
+                vfat|erofs) sudo mount -t "$fs" -o loop,ro "$img" "$dest" ;;
+                *) echo "Unexpected radio image filesystem: $fs"; exit 1 ;;
+              esac
+            done
+          done
+          sudo python3 compare_radio_static.py
+      - name: Unmount comparison images
+        if: always()
+        run: |
+          for variant in eu target; do
+            for part in modem modemfirmware; do
+              dest="work/compat/$variant/mounted_$part"
+              if mountpoint -q "$dest"; then sudo umount "$dest"; fi
+            done
+          done
+      - name: Save static compatibility evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: eu-radio-vs-molcer-static-compatibility
+          path: |
+            reports/eu-molcer-radio-compatibility.json
+            reports/extracted-images.json
+            reports/verified-base.json
+          retention-days: 7
