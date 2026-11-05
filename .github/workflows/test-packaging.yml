@@ -10,6 +10,9 @@ on:
       - host-tools.json
       - build_super.py
       - test_super_builder.py
+      - assemble_candidate.py
+      - release_metadata.py
+      - test_release_metadata.py
       - .github/workflows/test-packaging.yml
 permissions:
   contents: read
@@ -34,6 +37,8 @@ jobs:
           python3 -m unittest -v test_avb_rebuild test_packaging_inspection test_eu_geometry
           if test -f test_super_builder.py; then python3 -m unittest -v test_super_builder; fi
           if test -f build_super.py; then python3 build_super.py --smoke-test --report reports/super-smoke-test.json; fi
+          if test -f assemble_candidate.py; then python3 assemble_candidate.py --smoke-test --report reports/assembly-payload-smoke.json; fi
+          if test -f test_release_metadata.py; then python3 -m unittest -v test_release_metadata; fi
       - name: Save tool evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -42,4 +47,5 @@ jobs:
           path: |
             reports/host-tools.json
             reports/super-smoke-test.json
+            reports/assembly-payload-smoke.json
           retention-days: 7

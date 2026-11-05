@@ -6,6 +6,7 @@ on:
     paths:
       - inspect_app_dependencies.py
       - build_translations.py
+      - build_oled_overlay.py
       - test_translations.py
       - .github/workflows/audit-customizations.yml
 permissions:
@@ -22,7 +23,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Validate resource selection rules
-        run: python3 -m unittest -v test_translations
+        run: python3 -m unittest -v test_translations test_app_dependencies test_brand_assets
       - name: Authenticate source and extract inspection partitions
         run: |
           python3 download_base.py
@@ -47,6 +48,8 @@ jobs:
               target.parent.mkdir(parents=True, exist_ok=True)
               target.write_bytes(data)
           PY
+      - name: Compile default OLED resources for local signing
+        run: sudo env ANDROID_HOME="$ANDROID_HOME" python3 build_oled_overlay.py
       - name: Unmount source images
         if: always()
         run: |
@@ -61,6 +64,8 @@ jobs:
           path: |
             reports/app-dependencies.json
             reports/translations.json
+            reports/oled-overlays.json
             work/translation-dumps/
             out/unsigned-overlays/
+            out/unsigned-oled/
           retention-days: 7

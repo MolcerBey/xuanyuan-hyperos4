@@ -10,8 +10,9 @@ from unittest import mock
 
 from prepare_avb import (ALGORITHM, apply_signature, check_chain_key, descriptor_key, digest,
                          exact_descriptor, init_boot_body_size, load_tool,
-                         parse_blob, public_only_key, replace_descriptors,
+                         parse_blob, public_only_key, replace_descriptors, run_tool,
                          unsigned_blob, validate_request, verify_full_chain)
+from inspect_packaging import read_vbmeta_blob
 
 
 class AVBRebuildTests(unittest.TestCase):
@@ -146,9 +147,37 @@ class AVBRebuildTests(unittest.TestCase):
                     verify_full_chain(m, 'avbtool.py', root, 'root.pem')
                 verifier.assert_not_called()
 
+    @unittest.skipUnless(shutil.which('fec'), 'Pinned Linux fec required for the real FEC2 footer regression')
+    def test_real_fec2_footer_generation_and_data_verification(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path = pathlib.Path(temp) / 'product.img'
+            body = hashlib.shake_256(b'Molcer AVB FEC integration fixture').digest(1024**2)
+            path.write_bytes(body)
+            run_tool('.tools/avbtool.py', 'add_hashtree_footer', '--image', path,
+                     '--partition_name', 'product', '--hash_algorithm', 'sha256',
+                     '--block_size', 4096, '--salt', '00' * 32,
+                     '--algorithm', 'NONE', '--fec_num_roots', 2)
+            footer, blob = read_vbmeta_blob(path)
+            header, descriptors, _, _, _ = parse_blob(self.module, blob)
+            descriptor = exact_descriptor(descriptors, 'AvbHashtreeDescriptor', 'product')
+            self.assertEqual(header.flags, 0)
+            self.assertEqual(header.algorithm_type, 0)
+            self.assertEqual(footer['original_image_size'], len(body))
+            self.assertEqual(descriptor.fec_num_roots, 2)
+            self.assertGreater(descriptor.fec_size, 0)
+            self.assertEqual(descriptor.fec_offset, descriptor.tree_offset + descriptor.tree_size)
+            run_tool('.tools/avbtool.py', 'verify_image', '--image', path)
+            with path.open('r+b') as stream:
+                stream.write(bytes([body[0] ^ 1]))
+            with self.assertRaisesRegex(ValueError, 'avbtool failed'):
+                run_tool('.tools/avbtool.py', 'verify_image', '--image', path)
+
     @unittest.skipUnless(shutil.which('openssl'), 'OpenSSL required; cryptographic roundtrip runs in Linux CI')
     def test_signature_roundtrip_and_tamper_rejection(self):
         m = self.module
+        from validate_signing_requests import avb_public_from_xml, verify_public_signature
+        self.assertEqual(avb_public_from_xml('keys/avb-public.xml'),
+                         public_only_key(m, 'keys/avb-public.pem'))
         with tempfile.TemporaryDirectory() as temp:
             root = pathlib.Path(temp); private = root / 'ephemeral-test-key.pem'; public = root / 'public.pem'
             subprocess.run(['openssl', 'genpkey', '-algorithm', 'RSA', '-pkeyopt', 'rsa_keygen_bits:4096', '-out', str(private)], check=True, capture_output=True)
@@ -168,6 +197,7 @@ class AVBRebuildTests(unittest.TestCase):
             response['signature_hex'] = (root / 'signature').read_bytes().hex()
             signed = apply_signature(m, request, response, key, public)
             self.assertTrue(m.verify_vbmeta_signature(m.AvbVBMetaHeader(signed[:256]), signed))
+            verify_public_signature(m, signed)
             bad = copy.deepcopy(request); b = bytearray(blob); b[-1] ^= 1; bad['unsigned_blob_hex'] = b.hex()
             with self.assertRaisesRegex(ValueError, 'blob hash'):
                 validate_request(m, bad, key)

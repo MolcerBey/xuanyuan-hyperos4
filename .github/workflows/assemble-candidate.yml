@@ -1,0 +1,83 @@
+name: Assemble offline Molcer OS candidate
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - assemble-build.json
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: molcer-offline-assembly
+  cancel-in-progress: false
+jobs:
+  gate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      enabled: ${{ steps.config.outputs.enabled }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Read reviewed assembly switch
+        id: config
+        run: |
+          python3 - <<'PY'
+          import json, os, pathlib
+          config = json.loads(pathlib.Path('assemble-build.json').read_text())
+          if config.get('schema') != 1 or type(config.get('build_enabled')) is not bool:
+              raise ValueError('Expected assembly schema 1 and a boolean build_enabled')
+          if os.environ['GITHUB_REPOSITORY'] != 'MolcerBey/xuanyuan-hyperos4':
+              raise ValueError('Unexpected repository')
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write('enabled=' + str(config['build_enabled']).lower() + '\n')
+          print('Offline assembly enabled:', config['build_enabled'])
+          PY
+  assemble:
+    needs: gate
+    if: needs.gate.outputs.enabled == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Measure disk and authenticate build tools
+        run: |
+          python3 - <<'PY'
+          import pathlib, shutil
+          pathlib.Path('work').mkdir(exist_ok=True)
+          free = shutil.disk_usage('work').free
+          print('Measured free GiB:', free / 1024**3)
+          if free < 28 * 1024**3:
+              raise ValueError('Need at least 28 GiB measured free space; no broad runner cleanup is performed')
+          PY
+          sudo apt-get update -qq
+          sudo apt-get install -y openssl
+          python3 prepare_packaging_tools.py
+          python3 prepare_host_tools.py
+          echo "$GITHUB_WORKSPACE/.tools/aosp-host/linux-x86/bin" >> "$GITHUB_PATH"
+      - name: Verify signing and partition tooling before assembly
+        run: |
+          python3 -m unittest -v test_avb_rebuild test_extraction test_packaging_inspection test_eu_geometry test_rom_radio test_super_builder
+          python3 build_super.py --smoke-test --report reports/assembly-super-smoke.json
+          python3 assemble_candidate.py --smoke-test --report reports/assembly-payload-smoke.json
+      - name: Verify, assemble and save a private draft candidate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 assemble_candidate.py --config assemble-build.json
+      - name: Save small assembly evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: molcer-assembled-candidate-reports-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            reports/
+            work/assembly/candidate-manifest.json
+            work/assembly/signing-requests.json
+            work/assembly/signatures.json
+            out/avb-signed/avb-signature-verification.json
+            out/assembled-candidate/NOT-INSTALLABLE.txt
+          retention-days: 7

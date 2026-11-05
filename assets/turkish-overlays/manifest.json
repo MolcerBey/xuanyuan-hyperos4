@@ -1,0 +1,72 @@
+{
+    "credit":  "MIUITR Forum / haqanguven — https://forum.miuitr.info/",
+    "signer_certificate_sha256":  "229e4058d2ada87d1fd5762e16166ecd587fabd107b3c23985ffda4811ed9bca",
+    "overlays":  [
+                     {
+                         "size":  16782,
+                         "unsigned_sha256":  "8341779735ad6d9f902f7ddc4818327479ba640b6d54725127610ce672a2566d",
+                         "destination":  "overlay/MolcerTurkish/com.molcer.os.tr.androiddefaults.g0.apk",
+                         "target_apk":  "system/system/framework/framework-res.apk",
+                         "target_apk_sha256":  "a477f21080d3ba868ebc493804d5728e7ae5bc7eaec71bcfa174ef49bd0132a3",
+                         "path":  "assets/turkish-overlays/com.molcer.os.tr.androiddefaults.g0.apk",
+                         "package":  "com.molcer.os.tr.androiddefaults.g0",
+                         "sha256":  "6249225cc0e03655cbe428ea236c1fd71265ad917087ec7a6c4eea3a118194d4"
+                     },
+                     {
+                         "size":  291214,
+                         "unsigned_sha256":  "c4787324f5ab5ed060e1c281e9b755082d5523b0b775939ffd74da5c0ca97608",
+                         "destination":  "overlay/MolcerTurkish/com.molcer.os.tr.framework_res.g0.apk",
+                         "target_apk":  "system/system/framework/framework-res.apk",
+                         "target_apk_sha256":  "a477f21080d3ba868ebc493804d5728e7ae5bc7eaec71bcfa174ef49bd0132a3",
+                         "path":  "assets/turkish-overlays/com.molcer.os.tr.framework_res.g0.apk",
+                         "package":  "com.molcer.os.tr.framework_res.g0",
+                         "sha256":  "f476be8e7811fcebb493995a17957101dcbc39168ee6712f74f33bae4433f6f4"
+                     },
+                     {
+                         "size":  24974,
+                         "unsigned_sha256":  "031efee37317887e2fa76bef2e832b3faabead853c11f7bb4c48eb2fa5fdf9c3",
+                         "destination":  "overlay/MolcerTurkish/com.molcer.os.tr.miuihome.g0.apk",
+                         "target_apk":  "product/priv-app/MiuiHome/MiuiHome.apk",
+                         "target_apk_sha256":  "e71573104356226bed39ae38b3700d724b2381bac87207aeafda613a3569a6a3",
+                         "path":  "assets/turkish-overlays/com.molcer.os.tr.miuihome.g0.apk",
+                         "package":  "com.molcer.os.tr.miuihome.g0",
+                         "sha256":  "71735d9faa5439763348556166c62611ac73669dbc0fd052ac1599dd4cc903a6"
+                     },
+                     {
+                         "size":  270734,
+                         "unsigned_sha256":  "a2ff4bd2f9c79b93bb7ac0930a88d78bb6169d568289b0943c0cf5398291f636",
+                         "destination":  "overlay/MolcerTurkish/com.molcer.os.tr.miuisystemui.g0.apk",
+                         "target_apk":  "system_ext/priv-app/MiuiSystemUI/MiuiSystemUI.apk",
+                         "target_apk_sha256":  "a0e738e41fe599b97950cbf52a9e2ddc6ae2ceff986efbacb1c9840bea78768d",
+                         "path":  "assets/turkish-overlays/com.molcer.os.tr.miuisystemui.g0.apk",
+                         "package":  "com.molcer.os.tr.miuisystemui.g0",
+                         "sha256":  "a1e563476c1dfb0f8cef31cd02bc848a6064c05e7abb6d5f9c76faa5c2859ee0"
+                     },
+                     {
+                         "size":  123278,
+                         "unsigned_sha256":  "de6d4ff6f6b3fd33c22677e5acd1f5b599c87bd3e82a44b31ca67dd3afdac5f0",
+                         "destination":  "overlay/MolcerTurkish/com.molcer.os.tr.provision.g0.apk",
+                         "target_apk":  "system_ext/priv-app/Provision/Provision.apk",
+                         "target_apk_sha256":  "9c57149ec790f173c8bdb219a602c629d33399d61ff7be2f4b97e589c275191f",
+                         "path":  "assets/turkish-overlays/com.molcer.os.tr.provision.g0.apk",
+                         "package":  "com.molcer.os.tr.provision.g0",
+                         "sha256":  "1f74ca0c872220f4f6bf3717aee2f98933d4610a025dab34b74b3ade978f63da"
+                     },
+                     {
+                         "size":  1446286,
+                         "unsigned_sha256":  "04af5ec017ad7985a06d9eb24e7295ef035130b885941a4b58d1df4c1b34745e",
+                         "destination":  "overlay/MolcerTurkish/com.molcer.os.tr.settings.g0.apk",
+                         "target_apk":  "system_ext/priv-app/Settings/Settings.apk",
+                         "target_apk_sha256":  "5e9b1be97521e4ac334a942083be05bb4aa7e3461ded659bf9ac5115d5e8e5b4",
+                         "path":  "assets/turkish-overlays/com.molcer.os.tr.settings.g0.apk",
+                         "package":  "com.molcer.os.tr.settings.g0",
+                         "sha256":  "621b5c0b85a9aeb86f9ea4f2f7f1b5f5a4a6f7b47a882f97b31f15b7134c61d0"
+                     }
+                 ],
+    "signing_identity":  "Molcer OS Resource Overlays",
+    "permanent_local_signature":  true,
+    "runtime_verified":  false,
+    "schema":  1,
+    "source_report_sha256":  "ae9308eb5166f2a32f08f0554d3e34a005dfe21235c7d5438e3e59414593c8cf",
+    "original_apks_modified":  false
+}

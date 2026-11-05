@@ -1,0 +1,176 @@
+name: Prepare unsigned Molcer OS candidate
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - candidate-build.json
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: molcer-unsigned-candidate
+  cancel-in-progress: false
+jobs:
+  gate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      enabled: ${{ steps.config.outputs.enabled }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Read reviewed build switch
+        id: config
+        run: |
+          python3 - <<'PY'
+          import json, os, pathlib
+          config = json.loads(pathlib.Path('candidate-build.json').read_text())
+          if config.get('schema') != 1 or type(config.get('build_enabled')) is not bool:
+              raise ValueError('Expected candidate-build schema 1 and a boolean build_enabled')
+          if os.environ['GITHUB_REPOSITORY'] != 'MolcerBey/xuanyuan-hyperos4':
+              raise ValueError('Unexpected repository')
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write('enabled=' + str(config['build_enabled']).lower() + '\n')
+          print('Unsigned candidate build enabled:', config['build_enabled'])
+          PY
+  prepare:
+    needs: gate
+    if: needs.gate.outputs.enabled == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Measure disk and require approved inputs
+        run: |
+          python3 - <<'PY'
+          import json, pathlib, shutil
+          pathlib.Path('work').mkdir(exist_ok=True)
+          pathlib.Path('reports').mkdir(exist_ok=True)
+          free = shutil.disk_usage('work').free
+          minimum = 28 * 1024**3
+          pathlib.Path('reports/candidate-disk.json').write_text(json.dumps({'free_bytes': free, 'required_bytes': minimum, 'broad_cleanup_performed': False}, indent=2) + '\n')
+          if free < minimum:
+              raise ValueError(f'Need at least 28 GiB measured free space; available {free / 1024**3:.2f} GiB')
+          chrome = json.loads(pathlib.Path('chrome-candidate.json').read_text())
+          policy = json.loads(pathlib.Path('radio-policy.json').read_text())
+          if chrome.get('build_integration_approved') is not True or policy.get('phone_access_allowed') is not False:
+              raise ValueError('Approved Chrome and no-phone policy are required')
+          PY
+      - name: Prepare and authenticate build tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y erofs-utils lz4 openssl
+          test -x "$ANDROID_HOME/build-tools/37.0.0/aapt2"
+          test -x "$ANDROID_HOME/build-tools/37.0.0/apksigner"
+          python3 prepare_packaging_tools.py
+          python3 prepare_host_tools.py
+          echo "$GITHUB_WORKSPACE/.tools/aosp-host/linux-x86/bin" >> "$GITHUB_PATH"
+      - name: Verify extraction, filesystem and signing gates
+        run: python3 -m unittest -v test_inspection test_extraction test_root test_tree_audit test_translations test_rom_radio test_chrome_candidate test_avb_rebuild test_packaging_inspection test_eu_geometry
+      - name: Restore and reverify the approved Chrome candidate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api repos/MolcerBey/xuanyuan-hyperos4/actions/artifacts/13452379210/zip > work/chrome-reference.zip
+          python3 - <<'PY'
+          import hashlib, json, pathlib, zipfile
+          config = json.loads(pathlib.Path('chrome-candidate.json').read_text())
+          source = pathlib.Path('work/chrome-reference.zip')
+          if source.stat().st_size > config['size'] + 8 * 1024**2:
+              raise ValueError('Chrome reference archive exceeds its bounded size')
+          member = 'out/chrome-candidate/Chrome.apk'
+          output = pathlib.Path('work/verifiedChrome.apk')
+          measured = hashlib.sha256()
+          length = 0
+          with zipfile.ZipFile(source) as archive:
+              entries = [item for item in archive.infolist() if item.filename == member]
+              if len(entries) != 1 or entries[0].file_size != config['size'] or entries[0].flag_bits & 1:
+                  raise ValueError('Expected exactly the pinned Chrome APK member')
+              with archive.open(entries[0]) as stream, output.open('xb') as target:
+                  while data := stream.read(8 * 1024**2):
+                      length += len(data)
+                      if length > config['size']:
+                          raise ValueError('Chrome ZIP member exceeds its pinned size')
+                      measured.update(data)
+                      target.write(data)
+          if length != config['size'] or measured.hexdigest() != config['sha256']:
+              raise ValueError('Chrome artifact does not match the pinned APK bytes')
+          PY
+          python3 fetch_chrome_candidate.py --input work/verifiedChrome.apk
+          python3 - <<'PY'
+          import json, pathlib
+          report = json.loads(pathlib.Path('reports/chrome-candidate.json').read_text())
+          if report.get('status') != 'verified-offline-candidate':
+              raise ValueError('Chrome signature/package inspection did not approve the candidate')
+          pathlib.Path('work/chrome-reference.zip').unlink()
+          pathlib.Path('work/verifiedChrome.apk').unlink()
+          PY
+      - name: Authenticate the selected A17 source
+        run: python3 download_base.py
+      - name: Extract only the eight required preparation images
+        run: python3 extract_partition.py --partitions product system system_ext vendor boot init_boot vbmeta vbmeta_system
+      - name: Audit source packages and telephony files offline
+        run: |
+          for part in product system system_ext vendor; do
+            mkdir -p "work/mounted_$part"
+            sudo mount -t erofs -o loop,ro "work/images/$part.img" "work/mounted_$part"
+            sudo python3 inventory_product.py "$part" "$ANDROID_HOME/build-tools/37.0.0/aapt2"
+          done
+          sudo python3 inspect_telephony.py
+      - name: Prepare KernelSU Next with the unchanged stock kernel
+        run: python3 prepare_root.py
+      - name: Build and remount-audit the customized product
+        run: |
+          python3 -c "from pathlib import Path; Path('work/base.zip').unlink()"
+          sudo env ANDROID_HOME="$ANDROID_HOME" python3 build_product.py
+      - name: Release audited staging space before AVB preparation
+        run: |
+          for part in product system system_ext vendor; do
+            if mountpoint -q "work/mounted_$part"; then sudo umount "work/mounted_$part"; fi
+          done
+          sudo python3 - <<'PY'
+          import pathlib, shutil
+          workspace = pathlib.Path.cwd().resolve()
+          stage = workspace / 'work/staged_product'
+          if stage.is_symlink() or not stage.resolve().is_relative_to(workspace / 'work'):
+              raise ValueError('Unexpected staging cleanup target')
+          shutil.rmtree(stage)
+          for relative in ('work/images/product.img', 'work/images/boot.img'):
+              path = workspace / relative
+              if path.is_symlink() or not path.resolve().is_relative_to(workspace / 'work/images'):
+                  raise ValueError('Unexpected source cleanup target')
+              path.unlink()
+          PY
+      - name: Prepare unsigned AVB metadata with preserved FEC
+        run: |
+          python3 prepare_avb.py prepare --stock-avb work/images --fec-mode preserve --output out/avb-prepared
+          python3 - <<'PY'
+          import json, pathlib
+          from validate_signing_requests import validate_bundle
+          result = validate_bundle('out/avb-prepared/signing-requests.json', stock_dir='work/images')
+          pathlib.Path('reports/candidate-signing-scope.json').write_text(json.dumps(result, indent=2) + '\n')
+          PY
+      - name: Save unsigned images in bounded draft release chunks
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 publish_candidate.py --prepared out/avb-prepared --stock-avb work/images
+      - name: Unmount any remaining offline inspection images
+        if: always()
+        run: |
+          for part in product system system_ext vendor; do
+            if mountpoint -q "work/mounted_$part"; then sudo umount "work/mounted_$part"; fi
+          done
+      - name: Save small reports and signing requests
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: molcer-unsigned-candidate-reports-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            reports/
+            out/avb-prepared/signing-requests.json
+            out/avb-prepared/NOT-INSTALLABLE.txt
+          retention-days: 7

@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "product": "Molcer OS",
+  "version_name": "0.2.0-experimental.1",
+  "version_code": 2026110601,
+  "channel": "experimental",
+  "device": "xuanyuan",
+  "hardware_variant": "global",
+  "base": "OS4.0.0.18.XOACNXM",
+  "android": 17,
+  "update_mechanism": "manual-full-package",
+  "automatic_installation": false,
+  "android_ota_updater_implemented": false,
+  "public_release_available": false
+}

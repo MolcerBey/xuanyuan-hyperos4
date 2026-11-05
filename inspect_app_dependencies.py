@@ -12,6 +12,7 @@ import subprocess
 import tempfile
 import zipfile
 import xml.etree.ElementTree as ET
+from xml.parsers import expat
 
 PARTITIONS = ('product', 'system', 'system_ext', 'vendor')
 CANDIDATES = {
@@ -30,6 +31,7 @@ TARGETS = {
 MAX_APKS = 1500
 MAX_MANIFEST = 2 * 1024**2
 MAX_XML = 4 * 1024**2
+ANDROID_ATTRIBUTE_PREFIX = 'http://schemas.android.com/apk/res/android:'
 
 
 def digest(path):
@@ -68,7 +70,15 @@ def parse_manifest(text):
             continue
         attribute = re.match(r'^\s*A: ([^\s(=]+)(?:\(0x[0-9a-fA-F]+\))?=(.*)$', line)
         if attribute and stack:
-            stack[-1][1]['attrs'][attribute.group(1)] = decode_attribute(attribute.group(2))
+            name = attribute.group(1)
+            # SDK 37 emits the full namespace URI, while older aapt2 versions
+            # use android:name. Downstream dependency keys use the latter.
+            if name.startswith(ANDROID_ATTRIBUTE_PREFIX):
+                name = 'android:' + name[len(ANDROID_ATTRIBUTE_PREFIX):]
+            attrs = stack[-1][1]['attrs']
+            if name in attrs:
+                raise ValueError('Duplicate normalized manifest attribute: ' + name)
+            attrs[name] = decode_attribute(attribute.group(2))
     if not root or root['tag'] != 'manifest':
         raise ValueError('No manifest root in aapt2 dump')
     package = root['attrs'].get('package', '')
@@ -92,6 +102,7 @@ def parse_manifest(text):
                       for child in node['children'] if child['tag'] == 'provider'],
         'queries': selected({'package'}),
         'application': selected({'application'}),
+        'overlays': selected({'overlay'}),
     }
 
 
@@ -173,6 +184,30 @@ def build_reverse_dependencies(apps):
     return result
 
 
+def parse_xml_reference(text):
+    """Read a document, or explicitly reported multiple-root OEM fragments.
+
+    Only Expat's exact trailing-document-element error permits this fallback.
+    Keep all elements and the original text; never repair mismatched XML or
+    discard arbitrary non-XML data following a valid root.
+    """
+    try:
+        return ET.fromstring(text), {'parse_mode': 'xml-document'}
+    except ET.ParseError as exc:
+        if exc.code != expat.errors.codes[expat.errors.XML_ERROR_JUNK_AFTER_DOC_ELEMENT]:
+            raise
+        initial_error = str(exc)
+    stripped, declarations = re.subn(r'\A\ufeff?\s*<\?xml\s[^?]*\?>', '', text, count=1)
+    wrapped = ET.fromstring('<molcer-xml-fragments>\n' + stripped + '\n</molcer-xml-fragments>')
+    if (len(wrapped) < 2 or (wrapped.text or '').strip() or
+            any((child.tail or '').strip() for child in wrapped)):
+        raise ValueError('Trailing XML content is not a sequence of complete root fragments')
+    return wrapped, {'parse_mode': 'xml-fragments-wrapped',
+                     'initial_parse_error': initial_error,
+                     'leading_xml_declaration_removed_for_parsing': bool(declarations),
+                     'fragment_root_count': len(wrapped)}
+
+
 def inspect_xml(roots, candidates):
     findings, errors = [], []
     needles = set(candidates)
@@ -192,26 +227,36 @@ def inspect_xml(roots, candidates):
     if len(files) > 12000:
         raise ValueError('XML inventory exceeds bound')
     for partition, root, path in files:
+        evidence = {'path': partition + '/' + path.relative_to(root).as_posix(),
+                    'raw_text_limit_bytes': MAX_XML}
         if path.stat().st_size > MAX_XML:
-            errors.append({'path': partition + '/' + path.relative_to(root).as_posix(), 'error': 'XML exceeds bound'})
+            errors.append({**evidence, 'error': 'XML exceeds bound',
+                           'parse_mode': 'not-parsed-size-limit', 'raw_text_truncated': True})
             continue
         try:
-            raw = path.read_bytes()
+            with path.open('rb') as stream:
+                raw = stream.read(MAX_XML + 1)
+            if len(raw) > MAX_XML:
+                raise ValueError('XML grew beyond inspection bound')
+            evidence.update({'sha256': hashlib.sha256(raw).hexdigest(), 'raw_size_bytes': len(raw),
+                             'raw_text': raw.decode('utf-8', errors='replace'),
+                             'raw_text_truncated': False})
             text = raw.decode('utf-8')
             hits = sorted(n for n in needles if n in text)
             if not hits:
                 continue
-            parsed = ET.fromstring(text)
+            parsed, parse_evidence = parse_xml_reference(text)
+            evidence.update(parse_evidence)
             entries = []
             for node in parsed.iter():
                 if any(n in str(node.attrib) or n in (node.text or '') for n in hits):
                     entries.append({'tag': node.tag, 'attributes': dict(node.attrib),
                                     'text': (node.text or '').strip()[:500]})
-            findings.append({'path': partition + '/' + path.relative_to(root).as_posix(), 'sha256': hashlib.sha256(raw).hexdigest(),
+            findings.append({**evidence,
                              'references': hits, 'entries': entries[:100], 'entries_truncated': len(entries) > 100,
                              'interpretation': 'Configuration reference; inspect semantics before classifying as a hard dependency'})
-        except (OSError, UnicodeError, ET.ParseError) as exc:
-            errors.append({'path': partition + '/' + path.relative_to(root).as_posix(), 'error': str(exc)[:300]})
+        except (OSError, UnicodeError, ValueError, ET.ParseError) as exc:
+            errors.append({**evidence, 'parse_mode': 'failed', 'error': str(exc)[:300]})
     return {'files_considered': len(files), 'candidate_references': findings, 'errors': errors}
 
 

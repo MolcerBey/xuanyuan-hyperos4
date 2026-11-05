@@ -21,6 +21,11 @@
     }
   ],
   "source_url_note": "Observed public download URLs may expire. Refresh through the linked download pages; never bypass access challenges or relax byte/signature checks.",
-  "build_integration_approved": false,
-  "phone_access_allowed": false
+  "build_integration_approved": true,
+  "phone_access_allowed": false,
+  "verified_artifact": {
+    "id": 13452379210,
+    "run_id": 42108938040,
+    "archive_sha256": "8b92e677321446b664a1ae0577dff53a515af47315e8879894cead1cad10423e"
+  }
 }
