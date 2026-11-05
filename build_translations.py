@@ -13,6 +13,8 @@ import xml.etree.ElementTree as ET
 ANDROID = "http://schemas.android.com/apk/res/android"
 ET.register_namespace("android", ANDROID)
 TARGETS = {
+    "framework-res.apk": ("system/system/framework/framework-res.apk", "android"),
+    "Provision.apk": ("system_ext/priv-app/Provision/Provision.apk", "com.android.provision"),
     "AndroidDefaults.apk": ("system/system/framework/framework-res.apk", "android"),
     "MiuiHome.apk": ("product/priv-app/MiuiHome/MiuiHome.apk", "com.miui.home"),
     "MiuiSystemUI.apk": ("system_ext/priv-app/MiuiSystemUI/MiuiSystemUI.apk", "com.android.systemui"),
@@ -100,7 +102,8 @@ def build():
                 groups[allowed.get(resource, "")].append(entry)
         target_report = {"package": target_package, "purpose": "default-browser" if defaults else "turkish-ui", "compiled_strings": 0, "skipped": dict(skipped), "overlays": []}
         for number, (target_name, entries) in enumerate(sorted(groups.items())):
-            overlay_package = f"com.molcer.os.tr.{filename[:-4].lower()}.g{number}"
+            component = re.sub(r"[^a-z0-9_]", "_", filename[:-4].lower())
+            overlay_package = f"com.molcer.os.tr.{component}.g{number}"
             directory = work / overlay_package
             res = directory / "res"
             qualifier = "values" if defaults else "values-tr"
@@ -125,7 +128,7 @@ def build():
             compiled, unsigned, signed = directory / "compiled.zip", directory / "unsigned.apk", directory / "signed.apk"
             subprocess.run([aapt, "compile", "--dir", str(res), "-o", str(compiled)], check=True)
             subprocess.run([aapt, "link", "-I", str(base), "--manifest", str(manifest_path), "--no-resource-deduping", "--no-resource-removal", "-o", str(unsigned), str(compiled)], check=True)
-            subprocess.run([str(tools / "apksigner"), "sign", "--ks", str(key), "--ks-pass", "file:" + str(password), "--key-pass", "file:" + str(password), "--out", str(signed), str(unsigned)], check=True)
+            subprocess.run([str(tools / "apksigner"), "sign", "--ks", str(key), "--ks-pass", "file:" + str(password), "--out", str(signed), str(unsigned)], check=True)
             subprocess.run([str(tools / "apksigner"), "verify", str(signed)], check=True)
             additions[f"overlay/MolcerTurkish/{overlay_package}.apk"] = signed.read_bytes()
             overlays.append(overlay_package)

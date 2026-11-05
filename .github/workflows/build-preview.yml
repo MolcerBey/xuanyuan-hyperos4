@@ -14,7 +14,7 @@ permissions:
   contents: write
 concurrency:
   group: molcer-product-preview
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   build:
     runs-on: ubuntu-24.04

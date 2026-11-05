@@ -4,6 +4,16 @@
   "credit": "MIUITR Forum / haqanguven — https://forum.miuitr.info/",
   "targets": [
     {
+      "path": "main/framework-res.apk/res/values-tr-rTR/strings.xml",
+      "blob_sha1": "414fe6a56c4a0eee251bb062e56bea60fdf7892d",
+      "size": 230918
+    },
+    {
+      "path": "main/Provision.apk/res/values-tr/strings.xml",
+      "blob_sha1": "02f3800e44b8d756dfb8f43fcd20099c920abf8b",
+      "size": 93407
+    },
+    {
       "path": "main/MiuiHome.apk/res/values-tr/strings.xml",
       "blob_sha1": "a61b25a19a7b7381da0a5755c55e1cbbc72c22f5",
       "size": 76585
