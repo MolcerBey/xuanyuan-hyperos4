@@ -1,0 +1,58 @@
+name: Inspect stock Turkey modem and IMS profiles
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - inspect_radio.py
+      - test_radio.py
+      - .github/workflows/inspect-radio.yml
+permissions:
+  contents: read
+concurrency:
+  group: molcer-radio-inspection
+  cancel-in-progress: true
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Test inspection boundaries
+        run: python3 -m unittest -v test_radio test_extraction
+      - name: Authenticate pinned Xiaomi source
+        run: python3 download_base.py
+      - name: Extract verified radio and framework images
+        run: python3 extract_partition.py --partitions modem vendor odm product system system_ext
+      - name: Inspect read-only mounted source images
+        run: |
+          for part in modem vendor odm product system system_ext; do
+            mkdir -p "work/mounted_$part"
+            fs="$(sudo blkid -p -s TYPE -o value "work/images/$part.img")"
+            case "$fs" in
+              erofs|vfat) sudo mount -t "$fs" -o loop,ro "work/images/$part.img" "work/mounted_$part" ;;
+              ext4) sudo mount -t ext4 -o loop,ro,noload "work/images/$part.img" "work/mounted_$part" ;;
+              *) echo "Unsupported source filesystem: $part $fs"; exit 1 ;;
+            esac
+          done
+          sudo python3 inspect_radio.py
+          sudo python3 inspect_telephony.py
+      - name: Unmount inspection images
+        if: always()
+        run: |
+          for part in modem vendor odm product system system_ext; do
+            if mountpoint -q "work/mounted_$part"; then sudo umount "work/mounted_$part"; fi
+          done
+      - name: Upload radio evidence only
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: molcer-radio-static-reports
+          path: |
+            reports/radio-static.json
+            reports/telephony-static.json
+            reports/verified-base.json
+            reports/extracted-images.json
+          retention-days: 7
