@@ -1,0 +1,189 @@
+{
+  "runtime_verified": false,
+  "radio_files_modified": false,
+  "turkish_apns": [
+    {
+      "source": "product/etc/apns-conf.xml",
+      "mcc": "286",
+      "mnc": "01",
+      "carrier": "TURKCELL INTERNET",
+      "type": "default,supl"
+    },
+    {
+      "source": "product/etc/apns-conf.xml",
+      "mcc": "286",
+      "mnc": "01",
+      "carrier": "TURKCELL MMS",
+      "type": "mms"
+    },
+    {
+      "source": "product/etc/apns-conf.xml",
+      "mcc": "286",
+      "mnc": "01",
+      "carrier": "Turkcell VoLTE",
+      "type": "ims"
+    },
+    {
+      "source": "product/etc/apns-conf.xml",
+      "mcc": "286",
+      "mnc": "01",
+      "carrier": "cepten.kktcell",
+      "type": "default"
+    },
+    {
+      "source": "product/etc/apns-conf.xml",
+      "mcc": "286",
+      "mnc": "01",
+      "carrier": "IMS",
+      "type": "ims"
+    },
+    {
+      "source": "product/etc/apns-conf.xml",
+      "mcc": "286",
+      "mnc": "02",
+      "carrier": "Vodafone internet",
+      "type": "default,supl"
+    },
+    {
+      "source": "product/etc/apns-conf.xml",
+      "mcc": "286",
+      "mnc": "02",
+      "carrier": "Vodafone MMS",
+      "type": "mms"
+    },
+    {
+      "source": "product/etc/apns-conf.xml",
+      "mcc": "286",
+      "mnc": "02",
+      "carrier": "IMS",
+      "type": "ims"
+    },
+    {
+      "source": "product/etc/apns-conf.xml",
+      "mcc": "286",
+      "mnc": "03",
+      "carrier": "TURK TELEKOM INTERNET",
+      "type": "default,supl"
+    },
+    {
+      "source": "product/etc/apns-conf.xml",
+      "mcc": "286",
+      "mnc": "03",
+      "carrier": "TURK TELEKOM MMS",
+      "type": "mms"
+    },
+    {
+      "source": "product/etc/apns-conf.xml",
+      "mcc": "286",
+      "mnc": "03",
+      "carrier": "ims",
+      "type": "ims"
+    },
+    {
+      "source": "product/etc/apns-conf.xml",
+      "mcc": "286",
+      "mnc": "04",
+      "carrier": "Avea Internet",
+      "type": "default,supl"
+    },
+    {
+      "source": "product/etc/apns-conf.xml",
+      "mcc": "286",
+      "mnc": "04",
+      "carrier": "Avea gprs wap",
+      "type": "default,supl"
+    },
+    {
+      "source": "product/etc/apns-conf.xml",
+      "mcc": "286",
+      "mnc": "04",
+      "carrier": "Avea mms",
+      "type": "mms"
+    },
+    {
+      "source": "system/system/etc/apns-conf.xml",
+      "mcc": "286",
+      "mnc": "01",
+      "carrier": "TURKCELL INTERNET",
+      "type": "default,ia,supl"
+    },
+    {
+      "source": "system/system/etc/apns-conf.xml",
+      "mcc": "286",
+      "mnc": "01",
+      "carrier": "TURKCELL MMS",
+      "type": "mms"
+    },
+    {
+      "source": "system/system/etc/apns-conf.xml",
+      "mcc": "286",
+      "mnc": "01",
+      "carrier": "Turkcell IMS",
+      "type": "ims"
+    },
+    {
+      "source": "system/system/etc/apns-conf.xml",
+      "mcc": "286",
+      "mnc": "02",
+      "carrier": "Vodafone internet",
+      "type": "default,ia,supl"
+    },
+    {
+      "source": "system/system/etc/apns-conf.xml",
+      "mcc": "286",
+      "mnc": "02",
+      "carrier": "Vodafone MMS",
+      "type": "mms"
+    },
+    {
+      "source": "system/system/etc/apns-conf.xml",
+      "mcc": "286",
+      "mnc": "02",
+      "carrier": "Vodafone IMS",
+      "type": "ims"
+    },
+    {
+      "source": "system/system/etc/apns-conf.xml",
+      "mcc": "286",
+      "mnc": "02",
+      "carrier": "Vodafone Ut",
+      "type": "xcap"
+    },
+    {
+      "source": "system/system/etc/apns-conf.xml",
+      "mcc": "286",
+      "mnc": "03",
+      "carrier": "Turk Telekom Internet",
+      "type": "default,ia,supl"
+    },
+    {
+      "source": "system/system/etc/apns-conf.xml",
+      "mcc": "286",
+      "mnc": "03",
+      "carrier": "Turk Telekom MMS",
+      "type": "mms"
+    },
+    {
+      "source": "system/system/etc/apns-conf.xml",
+      "mcc": "286",
+      "mnc": "03",
+      "carrier": "Turk Telekom IMS",
+      "type": "ims"
+    },
+    {
+      "source": "system/system/etc/apns-conf.xml",
+      "mcc": "286",
+      "mnc": "13",
+      "carrier": "Netgsm Internet",
+      "type": "default,ia,supl"
+    }
+  ],
+  "parse_errors": [],
+  "mnc_codes_present": [
+    "01",
+    "02",
+    "03",
+    "04",
+    "13"
+  ]
+}

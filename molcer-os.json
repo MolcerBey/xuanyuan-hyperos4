@@ -11,5 +11,5 @@
   "camera_runtime_tests": false,
   "debloat_policy": "Remove reviewed optional apps; retain camera, telephony, IMS, carrier configuration, security and update dependencies",
   "telephony_runtime_verified": false,
-  "status": "preparation-not-a-flashable-ROM"
+  "status": "audited-product-preview-not-a-flashable-ROM"
 }

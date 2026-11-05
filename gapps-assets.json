@@ -15,5 +15,9 @@
     "system/product/app/PrebuiltExchange3Google/PrebuiltExchange3Google.apk"
   ],
   "exclusion_reason": "Exchange is not requested and its APK fails signature verification; it must never be integrated",
-  "status": "selected-for-inspection-not-yet-integrated"
+  "latest_release_checked_on": "2026-11-05",
+  "integration_mode": "selective-hyperos-integration-preserve-matching-google-core",
+  "phone_apk_extraction": false,
+  "runtime_compatibility_verified": false,
+  "status": "signature-verified-source-used-in-product-preview"
 }

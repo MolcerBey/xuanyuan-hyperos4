@@ -4,7 +4,7 @@ Target: Xiaomi 15 Ultra, device `xuanyuan`; requested China HyperOS 4 / Android 
 
 ## Current stage
 
-Authenticated source; package and locale inspection and offline root preparation in progress. No flashable custom ROM or measured performance improvement has been produced. No phone flash, wipe, reboot, root installation, or bootloader change has been performed.
+Authenticated source; an audited product image preview and offline root candidate have been produced. See [BUILD-STATUS.md](BUILD-STATUS.md) for the current implementation and validation results; the planned scope below is architectural background. No flashable custom ROM or measured performance improvement has been produced. No phone flash, wipe, reboot, root installation, or bootloader change has been performed.
 
 The owner explicitly waived camera runtime testing. This does not constitute a compatibility guarantee. Structural checks of downloaded files and generated images remain required.
 
@@ -36,11 +36,11 @@ The owner explicitly waived camera runtime testing. This does not constitute a c
 
 - `Verify HyperOS 4 base`: unit checks, bounded metadata inspection, full source download, checksum verification, quarantine diagnostics on failure.
 - `Inspect product partition`: verifies the source before extracting the product image; checks operation hashes and final partition SHA256; generates a read-only APK inventory.
-- Both jobs run on GitHub's standard public-repository Linux runner with short artifact retention. Artifacts currently contain reports only, not the ROM or phone data.
+- Inspection and build jobs run on GitHub's standard public-repository Linux runner with short report-artifact retention. Product image previews are saved separately in draft releases. No phone data is collected.
 
 ## Validation
 
-Eight local unit checks cover valid identity, wrong device, delta rejection, truncated protobuf, raw/bzip2/xz partition reconstruction and corruption rejection.
+Nineteen unit checks cover identity, wrong device, delta rejection, truncated protobuf, raw/bzip2/xz partition reconstruction, corruption rejection, kernel KMI detection, filesystem preservation and resource overlay policy selection.
 
 ## Sources
 

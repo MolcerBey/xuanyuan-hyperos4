@@ -4,11 +4,11 @@ Work in progress for `xuanyuan`, based on the manufacturer-signed China HyperOS 
 
 Requested configuration: KernelSU Next, Google Play, Turkish UI, Chrome as default browser, and removal of reviewed optional applications. Preserve stock camera, modem, IMS, carrier configuration and security services. No speculative performance properties or thermal-limit changes.
 
-**No installable Molcer OS ROM has been produced yet.** Source authentication and extraction tools are implemented. The Actions workflow inventories product/system/system_ext packages and locale resources, then prepares an offline KernelSU Next init_boot candidate. That candidate is not an installation package: AVB, complete packaging and boot validation are pending.
+**No installable Molcer OS ROM has been produced yet.** An audited modified product image and an offline KernelSU Next init_boot candidate have been built. AVB, complete packaging and boot validation remain pending. See [BUILD-STATUS.md](BUILD-STATUS.md) for the current Google package selection, completed checks and remaining limitations.
 
 The original download index contained an incorrect MD5. The exact source archive was independently authenticated with its valid whole-file CMS signature and the Xiaomi certificate also present in the stock HyperOS 3 OTA. `base.json` pins the authenticated archive SHA256 and certificate. Downloads must pass both checks.
 
-The previous inspection run timed out during download. Downloads now have transfer-speed and duration limits and try the manufacturer's alternate OTA endpoint.
+Downloads have transfer-speed and duration limits and use the manufacturer's alternate OTA endpoint when appropriate. All APK inputs come from pinned public packages; applications are not extracted from the phone.
 
 Camera runtime tests were waived by the owner. Camera, Turkish carrier/VoLTE/VoWiFi operation, Play certification and full Turkish coverage are not verified. No phone flashing, wiping or rebooting is performed by this project.
 
