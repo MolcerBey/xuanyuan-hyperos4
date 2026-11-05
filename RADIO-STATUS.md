@@ -23,6 +23,8 @@ At the owner's explicit request, `integrate_radio.py` now stages the selected pa
 
 The full preview workflow includes these two images and their manifest alongside the product and KernelSU Next assets. The lightweight `integrate-radio.yml` workflow packages the same inputs and attaches them to the existing owner draft preview, allowing radio integration without rebuilding an unchanged product image. An expired source artifact falls back to downloading and authenticating the exact EU archive; it never silently chooses a different donor.
 
+[Integration run 42076078828](https://github.com/MolcerBey/xuanyuan-hyperos4/actions/runs/42076078828) passed all nine tests, staged both pinned images, and uploaded `NOT-INSTALLABLE-Molcer-OS-EU-radio.zip` plus its manifest to the existing draft release. The release ZIP SHA256 is `584801c068786147ba555da355b64d758aa73e2a50edf2426b29f7726e49d15e`. See [build evidence](reports/rom-radio-preview-build.json).
+
 This is actual inclusion in build staging and preview packaging, **not completion of a flashable ROM**. The integration workflow never accesses a device and does not provide a flashing script. Full packaging, AVB and Android17 runtime compatibility remain pending.
 
 ## Completed offline compatibility comparison

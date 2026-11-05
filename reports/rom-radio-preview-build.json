@@ -1,0 +1,44 @@
+{
+  "run_id": 42076078828,
+  "job_id": 127416496426,
+  "commit": "22cdb79cae655c786c37d9b0bc46a686b0bbda47",
+  "conclusion": "success",
+  "tests_passed": 9,
+  "release_id": 435155024,
+  "release_is_draft": true,
+  "release_assets": [
+    {
+      "id": 714234660,
+      "name": "NOT-INSTALLABLE-Molcer-OS-EU-radio.zip",
+      "size": 179941873,
+      "digest": "sha256:584801c068786147ba555da355b64d758aa73e2a50edf2426b29f7726e49d15e"
+    },
+    {
+      "id": 714234663,
+      "name": "rom-radio-integration.json",
+      "size": 1585,
+      "digest": "sha256:68bdd6c2be52398150def2e6c6d6e83f4404ac1a5b73dde7b9f59591e7ccaa53"
+    }
+  ],
+  "artifact": {
+    "id": 13439025796,
+    "name": "Molcer-OS-integrated-EU-radio-NOT-INSTALLABLE",
+    "size_in_bytes": 179522571,
+    "url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/actions/artifacts/13439025796",
+    "archive_download_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/actions/artifacts/13439025796/zip",
+    "expired": false,
+    "created_at": "2026-11-05T17:35:46Z",
+    "expires_at": "2026-11-12T17:35:42Z",
+    "updated_at": "2026-11-05T17:35:46Z",
+    "digest": "sha256:b396e7b48b97b016dda43da6ba0b2d971261dea6d79f8a5210ca2f9f693a01fa",
+    "workflow_run": {
+      "id": 42076078828,
+      "repository_id": 1446267960,
+      "head_repository_id": 1446267960,
+      "head_branch": "main",
+      "head_sha": "22cdb79cae655c786c37d9b0bc46a686b0bbda47"
+    }
+  },
+  "phone_accessed": false,
+  "installable_rom_produced": false
+}
