@@ -19,18 +19,40 @@ def sha256(path):
         return hashlib.file_digest(stream, 'sha256').hexdigest()
 
 
-def inspect_apk(path, config, build_tools):
+def inspect_apk(path, config, build_tools, diagnostics=None):
+    diagnostics = diagnostics if diagnostics is not None else {}
     if path.stat().st_size != config['size'] or sha256(path) != config['sha256']:
         raise ValueError('Candidate length/SHA256 does not match the exact published APK')
+    diagnostics['exact_candidate_bytes_verified'] = True
     signer_tool = build_tools / ('apksigner.bat' if os.name == 'nt' else 'apksigner')
     aapt_tool = build_tools / ('aapt2.exe' if os.name == 'nt' else 'aapt2')
     if not signer_tool.is_file() or not aapt_tool.is_file():
         raise ValueError('Android SDK Build Tools 37.0.0 are required for candidate approval')
-    signature = subprocess.run([str(signer_tool), 'verify', '--verbose', '--print-certs',
-                                '--min-sdk-version', '37', '--max-sdk-version', '37', str(path)],
-                               capture_output=True, text=True, check=True, timeout=180).stdout
+    verified = subprocess.run([str(signer_tool), 'verify', '--verbose', '--print-certs',
+                               '--min-sdk-version', '37', '--max-sdk-version', '37', str(path)],
+                              capture_output=True, text=True, check=False, timeout=180)
+    signature = verified.stdout
+    # Preserve bounded evidence even if the strict identity parser or pin rejects.
+    # Broadly observed certificates below are diagnostics only, never an allowlist.
+    observed_lines = [line for line in (verified.stdout + '\n' + verified.stderr).splitlines()
+                      if 'certificate SHA-256 digest:' in line]
+    diagnostics['apk_signature_verifier'] = {
+        'exit_code': verified.returncode,
+        'stdout': verified.stdout[:16384], 'stderr': verified.stderr[:4096],
+        'stdout_truncated': len(verified.stdout) > 16384,
+        'stderr_truncated': len(verified.stderr) > 4096,
+        'observed_certificate_lines': [line[:500] for line in observed_lines[:32]],
+        'observed_certificate_sha256': [value.lower() for value in re.findall(
+            r'certificate SHA-256 digest:\s*([0-9a-fA-F]{64})',
+            '\n'.join(observed_lines[:32]))],
+        'observation_is_not_approval': True,
+    }
+    if verified.returncode:
+        raise ValueError('APK cryptographic verification failed; inspect verifier diagnostics')
     signers = re.findall(r'^Signer #\d+ certificate SHA-256 digest: ([0-9a-fA-F]{64})$',
                          signature, flags=re.MULTILINE)
+    diagnostics['apk_signature_verifier']['strict_parser_certificate_sha256'] = [value.lower() for value in signers]
+    diagnostics['apk_signature_verifier']['expected_certificate_sha256'] = config['signer_certificate_sha256']
     if [value.lower() for value in signers] != [config['signer_certificate_sha256']]:
         raise ValueError('APK signer does not match the pinned Google signing certificate')
     badging = subprocess.run([str(aapt_tool), 'dump', 'badging', str(path)],
@@ -107,8 +129,9 @@ def main():
                 report['attempts'].append({'source': source['name'], 'status': 'download-unavailable',
                                            'error_type': type(exc).__name__})
     if obtained:
+        diagnostics = {}
         try:
-            inspected = inspect_apk(candidate, config, pathlib.Path(args.build_tools))
+            inspected = inspect_apk(candidate, config, pathlib.Path(args.build_tools), diagnostics)
             output = pathlib.Path('out/chrome-candidate/Chrome.apk')
             output.parent.mkdir(parents=True, exist_ok=True)
             if output.exists():
@@ -121,6 +144,7 @@ def main():
         except (OSError, ValueError, subprocess.SubprocessError, zipfile.BadZipFile) as exc:
             report.update({'status': 'rejected-or-unverified', 'error_type': type(exc).__name__,
                            'error': str(exc)[:500], 'approved_for_builder_review': False})
+        report['inspection_diagnostics'] = diagnostics
     path = pathlib.Path(args.report); path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
     print(json.dumps({key: report[key] for key in ('status', 'attempts', 'phone_accessed', 'runtime_verified')}))
