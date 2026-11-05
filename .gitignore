@@ -4,3 +4,4 @@ out/
 *.zip
 *.img
 __pycache__/
+inputs/
