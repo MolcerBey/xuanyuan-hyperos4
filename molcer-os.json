@@ -14,5 +14,13 @@
   "camera_runtime_tests": false,
   "debloat_policy": "Remove reviewed optional apps; retain camera, telephony, IMS, carrier configuration, security and update dependencies",
   "telephony_runtime_verified": false,
-  "status": "audited-product-preview-not-a-flashable-ROM"
+  "status": "audited-product-preview-not-a-flashable-ROM",
+  "radio_builder": "integrate_radio.py",
+  "radio_integration_report": "reports/rom-radio-integration.json",
+  "radio_source": "xiaomi.eu OS3.0.314.0.WOACNXM common modem.img + global modemfirmware_ww.img",
+  "radio_payload": {
+    "modem": "out/rom-radio/images/modem.img",
+    "modemfirmware": "out/rom-radio/images/modemfirmware.img"
+  },
+  "radio_included_in_build_staging": true
 }

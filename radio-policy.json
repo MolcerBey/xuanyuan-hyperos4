@@ -40,7 +40,7 @@
   "installation_allowed": false,
   "selected_radio_source_verified": true,
   "selected_radio_report": "reports/eu-radio-reference.json",
-  "status": "exact-EU-radio-offline-comparison-complete; full-Android17-compatibility-not-proven; integration-pending",
+  "status": "exact-EU-global-radio-pair-staged-and-wired-into-preview-build; full-ROM-and-Android17-runtime-validation-pending",
   "maintainer_evidence": "https://miuipolska.pl/xiaomi-15-ultra-xiaomi-eu/",
   "maintainer_evidence_limit": "Documents a global-hardware/China-modem mismatch for Android15; its A15 modem ZIP is not approved here for Android17",
   "selected_radio_static_comparison_completed": true,
@@ -49,5 +49,10 @@
   "selected_radio_turk_telekom_mbn_sha256": "e48dcc969890d95fc66d458fbf8a1ad0c81d198df1d69c6a7b0e37584a279030",
   "selected_radio_turk_telekom_profile_indexed": true,
   "selected_radio_integrated_into_installable_rom": false,
-  "alternative_android17_global_mbn_sha256": "3e9633c05cd956644236ff0e7d9fd2b76b2398ded730bd2168cd0347eb1e3a0d"
+  "alternative_android17_global_mbn_sha256": "3e9633c05cd956644236ff0e7d9fd2b76b2398ded730bd2168cd0347eb1e3a0d",
+  "selected_radio_integration_builder": "integrate_radio.py",
+  "selected_radio_included_in_build_staging": true,
+  "selected_radio_integration_report": "reports/rom-radio-integration.json",
+  "selected_radio_staging_directory": "out/rom-radio",
+  "selected_radio_full_preview_workflow": ".github/workflows/build-preview.yml"
 }

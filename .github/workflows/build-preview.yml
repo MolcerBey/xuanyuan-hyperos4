@@ -9,9 +9,11 @@ on:
       - debloat.json
       - build_translations.py
       - translations.json
-      - .github/workflows/build-preview.yml
+# Workflow/radio-only edits are checked by integrate-radio.yml without rebuilding
+# unchanged product images. Use workflow_dispatch for a complete preview rebuild.
 permissions:
   contents: write
+  actions: read
 concurrency:
   group: molcer-product-preview
   cancel-in-progress: true
@@ -30,7 +32,7 @@ jobs:
           test -x "$ANDROID_HOME/build-tools/37.0.0/aapt2"
           test -x "$ANDROID_HOME/build-tools/37.0.0/apksigner"
       - name: Test identity, extraction and preservation gates
-        run: python3 -m unittest -v test_inspection test_extraction test_root test_tree_audit test_translations
+        run: python3 -m unittest -v test_inspection test_extraction test_root test_tree_audit test_translations test_rom_radio
       - name: Authenticate source
         run: python3 download_base.py
       - name: Reconstruct verified images
@@ -49,6 +51,17 @@ jobs:
         run: |
           rm -f work/base.zip
           sudo env ANDROID_HOME="$ANDROID_HOME" python3 build_product.py
+      - name: Integrate exact owner-selected EU global radio pair
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh api repos/MolcerBey/xuanyuan-hyperos4/actions/artifacts/13433824127/zip > work/eu-radio-reference.zip; then
+            python3 integrate_radio.py --artifact work/eu-radio-reference.zip
+          else
+            rm -f work/eu-radio-reference.zip
+            python3 prepare_eu_radio.py
+            python3 integrate_radio.py
+          fi
       - name: Prepare reviewable draft assets
         run: |
           mkdir -p out/review-assets
@@ -59,6 +72,10 @@ jobs:
           cp reports/translations.json out/review-assets/
           cp reports/telephony-static.json out/review-assets/
           cp out/root-candidate/init_boot.img out/review-assets/NOT-INSTALLABLE-init_boot.img
+          cp out/rom-radio/images/modem.img out/review-assets/NOT-INSTALLABLE-modem.img
+          cp out/rom-radio/images/modemfirmware.img out/review-assets/NOT-INSTALLABLE-modemfirmware.img
+          cp reports/rom-radio-integration.json out/review-assets/
+          printf '\nThis preview includes the exact EU OS3.0.314.0 global radio pair. Android17 runtime compatibility and complete installation/AVB packaging remain unverified. See rom-radio-integration.json.\n' >> out/review-assets/NOT-INSTALLABLE.txt
           cd out/review-assets
           sha256sum *.part-* *.img > SHA256SUMS.txt
       - name: Save private draft release for owner review

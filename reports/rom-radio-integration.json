@@ -1,0 +1,45 @@
+{
+  "device": "xuanyuan",
+  "hardware_variant": "global",
+  "rom_name": "Molcer OS",
+  "source_rom": "xiaomi.eu OS3.0.314.0.WOACNXM",
+  "source_android": "16",
+  "target_android": "17",
+  "source_archive_sha256": "9c1eced1591d5ad28998e7731a0555ce824074fdfe2061e7cad43b59da835157",
+  "verification_reference": "reports/eu-radio-reference.json",
+  "source_mode": "directory",
+  "radio_pair_included_in_build_staging": true,
+  "files": [
+    {
+      "source_member": "images/modem.img",
+      "input_name": "NOT-INSTALLABLE-modem.img",
+      "partition": "modem",
+      "path": "images/modem.img",
+      "size": 172568576,
+      "sha256": "abdb08bc80e2b9c837b40f54df5c34c1ea929b5d1c14e7cfebfc0b433b9a6d69",
+      "unchanged_from_verified_source": true
+    },
+    {
+      "source_member": "images/modemfirmware_ww.img",
+      "input_name": "NOT-INSTALLABLE-modemfirmware.img",
+      "partition": "modemfirmware",
+      "path": "images/modemfirmware.img",
+      "size": 140234752,
+      "sha256": "bfab29aac6a9337cb168bbc76455fda068c59be899b917b0038af2c88a7a1fe6",
+      "unchanged_from_verified_source": true
+    }
+  ],
+  "china_base_radio_replaced_in_staging": true,
+  "excluded_china_base_partitions": [
+    "modem",
+    "modemfirmware",
+    "countrycode"
+  ],
+  "device_unique_partitions_included": [],
+  "phone_accessed": false,
+  "installers_executed": false,
+  "ready_to_flash": false,
+  "installable_rom_produced": false,
+  "android17_runtime_compatibility_verified": false,
+  "status": "selected-EU-global-radio-pair-staged; full-ROM-packaging-and-runtime-validation-pending"
+}

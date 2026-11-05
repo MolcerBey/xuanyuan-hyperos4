@@ -1,0 +1,58 @@
+name: Integrate selected EU radio into Molcer OS preview
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - integrate_radio.py
+      - test_rom_radio.py
+      - radio-policy.json
+      - eu-radio-source.json
+      - reports/eu-radio-reference.json
+      - .github/workflows/integrate-radio.yml
+      - .github/workflows/build-preview.yml
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: molcer-integrated-eu-radio
+  cancel-in-progress: true
+jobs:
+  integrate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Test radio selection and integrity enforcement
+        run: python3 -m unittest -v test_eu_radio test_rom_radio
+      - name: Integrate the verified EU global pair
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p work
+          if gh api repos/MolcerBey/xuanyuan-hyperos4/actions/artifacts/13433824127/zip > work/eu-radio-reference.zip; then
+            python3 integrate_radio.py --artifact work/eu-radio-reference.zip
+          else
+            rm -f work/eu-radio-reference.zip
+            python3 prepare_eu_radio.py
+            python3 integrate_radio.py
+          fi
+      - name: Package integrated radio preview
+        run: python3 -m zipfile -c out/NOT-INSTALLABLE-Molcer-OS-EU-radio.zip out/rom-radio
+      - name: Attach selected radio to the existing owner draft preview
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test "$(gh api repos/MolcerBey/xuanyuan-hyperos4/releases/435155024 --jq .draft)" = true
+          tag="$(gh api repos/MolcerBey/xuanyuan-hyperos4/releases/435155024 --jq .tag_name)"
+          gh release upload "$tag" out/NOT-INSTALLABLE-Molcer-OS-EU-radio.zip reports/rom-radio-integration.json --clobber
+      - name: Save integrated radio evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: Molcer-OS-integrated-EU-radio-NOT-INSTALLABLE
+          path: |
+            out/NOT-INSTALLABLE-Molcer-OS-EU-radio.zip
+            reports/rom-radio-integration.json
+          retention-days: 7

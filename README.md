@@ -12,6 +12,6 @@ Downloads have transfer-speed and duration limits and use the manufacturer's alt
 
 Camera runtime tests were waived by the owner. Camera, Turkish carrier/VoLTE/VoWiFi operation, Play certification and full Turkish coverage are not verified. No phone flashing, wiping or rebooting is performed by this project.
 
-The target is GLOBAL hardware on Turk Telekom. At the owner's request, the selected radio source is the global hardware branch inside their exact Xiaomi.eu OS3.0.314.0.WOACNXM release (`modem.img` plus `modemfirmware_ww.img`). See [RADIO-STATUS.md](RADIO-STATUS.md) for release verification and Android16-to-Android17 integration limits. All phone access is prohibited; work uses downloaded packages only.
+The target is GLOBAL hardware on Turk Telekom. At the owner's request, the global hardware branch inside their exact Xiaomi.eu OS3.0.314.0.WOACNXM release (`modem.img` plus `modemfirmware_ww.img`) is staged and wired into preview packaging by `integrate_radio.py`. See the [output manifest](reports/rom-radio-integration.json) and [RADIO-STATUS.md](RADIO-STATUS.md) for release verification and Android16-to-Android17 integration limits. All phone access is prohibited; work uses downloaded packages only.
 
 See [Actions](https://github.com/MolcerBey/xuanyuan-hyperos4/actions) for actual results. Reports and offline candidates must not be mistaken for a finished ROM.

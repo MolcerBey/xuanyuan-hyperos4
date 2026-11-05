@@ -17,6 +17,14 @@ Preparation succeeded in [run 42067682905](https://github.com/MolcerBey/xuanyuan
 
 The common/global distinction comes from the exact EU release's installer, not from guessing that all radio partitions must come from a separate stock Global ROM. No downloaded installer was executed.
 
+## Integrated into Molcer OS build staging
+
+At the owner's explicit request, `integrate_radio.py` now stages the selected pair into `out/rom-radio/images/modem.img` and `out/rom-radio/images/modemfirmware.img`. The latter contains the unchanged **WW** image, despite using the destination partition name. The [integration manifest](reports/rom-radio-integration.json) records both actual output hashes. Both source hashes must pass before any output is created, and the copies are checked again. China/global substitutions, a mixed pair, duplicate ZIP names and unexpected archive paths are rejected.
+
+The full preview workflow includes these two images and their manifest alongside the product and KernelSU Next assets. The lightweight `integrate-radio.yml` workflow packages the same inputs and attaches them to the existing owner draft preview, allowing radio integration without rebuilding an unchanged product image. An expired source artifact falls back to downloading and authenticating the exact EU archive; it never silently chooses a different donor.
+
+This is actual inclusion in build staging and preview packaging, **not completion of a flashable ROM**. The integration workflow never accesses a device and does not provide a flashing script. Full packaging, AVB and Android17 runtime compatibility remain pending.
+
 ## Completed offline compatibility comparison
 
 **Verdict: full Android17 compatibility is not proven.** This does not mean that definite incompatibility has been established. [Run 42071526692](https://github.com/MolcerBey/xuanyuan-hyperos4/actions/runs/42071526692) successfully compared the exact selected EU pair with the original radio pair from the authenticated OS4.0.0.18.XOACNXM Molcer OS base. All four images were mounted read-only in GitHub Actions; no phone was accessed.
