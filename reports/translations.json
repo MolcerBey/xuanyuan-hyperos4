@@ -1,0 +1,89 @@
+{
+  "source": "haqanguven/HYPEROS-V1-V2-V3-V4-All-Langs",
+  "commit": "2157178a81b8e2d376b769ac28670e0f455dc76c",
+  "credit": "MIUITR Forum / haqanguven — https://forum.miuitr.info/",
+  "original_apks_modified": false,
+  "runtime_verified": false,
+  "complete_translation": false,
+  "preview_signing_key": true,
+  "targets": [
+    {
+      "package": "android",
+      "purpose": "turkish-ui",
+      "compiled_strings": 2106,
+      "skipped": {
+        "format_requires_manual_review": 239,
+        "non_ui_configuration": 21,
+        "non_plain_string": 15,
+        "not_in_this_base": 17
+      },
+      "overlays": [
+        "com.molcer.os.tr.framework_res.g0"
+      ]
+    },
+    {
+      "package": "com.android.provision",
+      "purpose": "turkish-ui",
+      "compiled_strings": 795,
+      "skipped": {
+        "format_requires_manual_review": 29,
+        "non_plain_string": 5,
+        "not_in_this_base": 2,
+        "non_ui_configuration": 2
+      },
+      "overlays": [
+        "com.molcer.os.tr.provision.g0"
+      ]
+    },
+    {
+      "package": "com.miui.home",
+      "purpose": "turkish-ui",
+      "compiled_strings": 88,
+      "skipped": {
+        "not_in_this_base": 851,
+        "non_ui_configuration": 5,
+        "format_requires_manual_review": 2
+      },
+      "overlays": [
+        "com.molcer.os.tr.miuihome.g0"
+      ]
+    },
+    {
+      "package": "com.android.systemui",
+      "purpose": "turkish-ui",
+      "compiled_strings": 1958,
+      "skipped": {
+        "not_in_this_base": 296,
+        "format_requires_manual_review": 273,
+        "non_plain_string": 4,
+        "non_ui_configuration": 5
+      },
+      "overlays": [
+        "com.molcer.os.tr.miuisystemui.g0"
+      ]
+    },
+    {
+      "package": "com.android.settings",
+      "purpose": "turkish-ui",
+      "compiled_strings": 11216,
+      "skipped": {
+        "format_requires_manual_review": 895,
+        "not_in_this_base": 181,
+        "non_plain_string": 42,
+        "non_ui_configuration": 79
+      },
+      "overlays": [
+        "com.molcer.os.tr.settings.g0"
+      ]
+    },
+    {
+      "package": "android",
+      "purpose": "default-browser",
+      "compiled_strings": 1,
+      "skipped": {},
+      "overlays": [
+        "com.molcer.os.tr.androiddefaults.g0"
+      ]
+    }
+  ]
+}

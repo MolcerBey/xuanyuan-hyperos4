@@ -2,21 +2,33 @@
 
 **An audited product image preview has been produced, not an installable ROM.** Complete installation packaging, AVB integration and boot validation remain unfinished. Draft assets are explicitly named `NOT-INSTALLABLE`; do not flash them independently.
 
-## First successful preview
+## Latest successful preview
 
-- Google Play Store 51.8.09-29 from MindTheGapps Android 17 ARM64 replaces the China Play updater stub. Existing Google runtime and framework are preserved and compared against the selected release.
+[Build 42022961429](https://github.com/MolcerBey/xuanyuan-hyperos4/actions/runs/42022961429) succeeded for commit `4591cf49c0c9c88b50bbb7b5fc2b1f8c83758214`. All ten assets are uploaded in the [owner-visible draft release](https://github.com/MolcerBey/xuanyuan-hyperos4/releases/tag/untagged-ec2b439672af0ec463e9). APK package inspection also passed in [run 42024352099](https://github.com/MolcerBey/xuanyuan-hyperos4/actions/runs/42024352099).
+
+- Google Play Store 51.8.09-29 from MindTheGapps Android 17 ARM64 replaces the China Play updater stub. The retained Google runtime APEX and Google Services Framework are byte-identical to the selected release; both SHA256 comparisons passed.
 - Official KernelSU Next 3.4.2 manager; a separate patched `init_boot` candidate uses the stock kernel's detected `android15-6.6` KMI.
 - Chrome and its matching Trichrome library. The pinned NikGapps catalog build is 134.0.6998.135; it is **not current Chrome**. A current browser package or verified Play update path is still needed before release.
 - Eleven reviewed optional packages removed; Xiaomi browser replaced. Camera, gallery, editing dependencies, modem, IMS, carrier and thermal configuration are retained.
-- Molcer OS branding and the `tr-TR` default locale. Resource-only Turkish overlays are under build validation; full Turkish coverage is not established.
+- Molcer OS branding, `tr-TR` default locale and Europe/Istanbul timezone. Six resource-only overlays compiled and passed APK signature verification: five Turkish overlays contain 16,163 strings, and one sets the framework's default-browser resource to Chrome. Runtime activation and full Turkish coverage are not established.
 
-The first product image shrank from 5,208,166,400 to 4,519,911,424 bytes. The build checked 2,277 retained filesystem entries, then remounted the generated EROFS image and compared its content, ownership, permissions, extended attributes and symlinks with the staged tree. This is a size measurement, not a performance or battery-life benchmark.
+The latest product image is 4,521,066,496 bytes, compared with the stock image's 5,208,166,400 bytes. SHA256: `d0acdf531ecb428823c52c782704f39d180cb29ce79b0be5758f62ec8d83c0c1`. The build checked 2,277 retained filesystem entries, then remounted the generated EROFS image and compared its content, ownership, permissions, extended attributes and symlinks with the staged tree. This is a size measurement, not a performance or battery-life benchmark.
+
+| Turkish resource target | Compiled strings |
+| --- | ---: |
+| Android framework | 2,106 |
+| Setup | 795 |
+| Launcher | 88 |
+| System UI | 1,958 |
+| Settings | 11,216 |
+
+See `reports/translations.json` for skipped strings and `reports/product-preview-latest.json` for exact Google core hashes. The draft's generic NOT-INSTALLABLE note still lists Google runtime assessment; the accompanying build report resolves that item through byte-for-byte equality. The installation and runtime limitations remain.
 
 ## Google package source
 
 No application is extracted from the phone. As checked on 2026-11-05, the latest published stable [MindTheGapps Android 17 ARM64 release](https://github.com/MindTheGapps/17.0.0-arm64/releases/tag/MindTheGapps-17.0.0-arm64-20261022_132445) is dated 2026-10-22. `gapps-assets.json` pins its URL, size and SHA256. APK/APEX signatures were inspected with Android SDK Build Tools 37.0.0.
 
-Integration is selective: the Play Store and its privileged permission entry are installed, while existing core services are compared before replacement is considered. The entire GApps installer is not run against HyperOS. The unrequested Exchange component fails signature verification and is excluded. Android version and architecture matching do not establish runtime compatibility or Play certification.
+Integration is selective: the Play Store and its privileged permission entry are installed, while existing core services are preserved because they match exactly. The entire GApps installer is not run against HyperOS. The unrequested Exchange component fails signature verification and is excluded. Android version and architecture matching do not establish runtime compatibility or Play certification.
 
 ## Validation and remaining work
 

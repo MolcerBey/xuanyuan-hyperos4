@@ -1,0 +1,63 @@
+{
+  "name": "Molcer OS",
+  "stage": "product image preview only",
+  "ready_to_flash": false,
+  "product_sha256": "d0acdf531ecb428823c52c782704f39d180cb29ce79b0be5758f62ec8d83c0c1",
+  "image_size": 4521066496,
+  "retained_entries_verified": 2277,
+  "removed_packages": {
+    "app/AnalyticsCore": "com.miui.analytics",
+    "app/MSA": "com.miui.systemAdSolution",
+    "app/MIUIReporter": "com.miui.uireporter",
+    "app/MiBugReportOS4": "com.miui.bugreport",
+    "data-app/MIUIDuokanReader": "com.duokan.reader",
+    "data-app/MIUIGameCenter": "com.xiaomi.gamecenter",
+    "data-app/MIUIMusicT": "com.miui.player",
+    "data-app/MIUIVideo": "com.miui.video",
+    "data-app/MIUIYoupin": "com.xiaomi.youpin",
+    "data-app/MiShop": "com.xiaomi.shop",
+    "data-app/wps-lite": "cn.wps.moffice_eng.xiaomi.lite",
+    "priv-app/MIUIBrowser": "com.android.browser",
+    "priv-app/GooglePlayServicesUpdater": "com.android.vending"
+  },
+  "added_files": [
+    "app/Chrome/Chrome.apk",
+    "app/KernelSUNext/KernelSUNext.apk",
+    "app/TrichromeLibrary/TrichromeLibrary.apk",
+    "etc/molcer-translation-credits.txt",
+    "etc/permissions/molcer-google-play.xml",
+    "overlay/MolcerTurkish/com.molcer.os.tr.androiddefaults.g0.apk",
+    "overlay/MolcerTurkish/com.molcer.os.tr.framework_res.g0.apk",
+    "overlay/MolcerTurkish/com.molcer.os.tr.miuihome.g0.apk",
+    "overlay/MolcerTurkish/com.molcer.os.tr.miuisystemui.g0.apk",
+    "overlay/MolcerTurkish/com.molcer.os.tr.provision.g0.apk",
+    "overlay/MolcerTurkish/com.molcer.os.tr.settings.g0.apk",
+    "priv-app/Phonesky/Phonesky.apk"
+  ],
+  "stock_camera_unchanged": true,
+  "stock_google_runtime_preserved": true,
+  "full_google_runtime_update": false,
+  "complete_turkish_translation": false,
+  "default_locale": "tr-TR",
+  "default_browser_role_verified": false,
+  "pending": [
+    "full Turkish resource integration",
+    "AVB chain and complete installation packaging",
+    "boot and telephony verification"
+  ],
+  "google_core_comparison": [
+    {
+      "path": "system/product/apex/com.google.android.gmssystem.prodvic.apex",
+      "selected_release_sha256": "fd56d1e45eb46c9a56253129242231c0d47555e568870ae39c1317ca818efa4c",
+      "stock_sha256": "fd56d1e45eb46c9a56253129242231c0d47555e568870ae39c1317ca818efa4c",
+      "identical": true
+    },
+    {
+      "path": "system/system_ext/priv-app/GoogleServicesFramework/GoogleServicesFramework.apk",
+      "selected_release_sha256": "a923583e561945309599a8117cad54de2896f4f93b333e50789dc7b3f2cc30eb",
+      "stock_sha256": "a923583e561945309599a8117cad54de2896f4f93b333e50789dc7b3f2cc30eb",
+      "identical": true
+    }
+  ],
+  "google_core_matches_selected_release": true
+}
