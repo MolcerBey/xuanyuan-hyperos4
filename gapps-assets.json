@@ -11,5 +11,9 @@
     "size": 544284463,
     "sha256": "a6844eeb2613541558237e467b20feb01f8b45b2ebab0109834140ea59b6ca4d"
   },
+  "excluded_optional_paths": [
+    "system/product/app/PrebuiltExchange3Google/PrebuiltExchange3Google.apk"
+  ],
+  "exclusion_reason": "Exchange is not requested and its APK fails signature verification; it must never be integrated",
   "status": "selected-for-inspection-not-yet-integrated"
 }

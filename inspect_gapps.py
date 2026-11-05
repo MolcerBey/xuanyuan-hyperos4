@@ -22,7 +22,7 @@ def inspect_zip(path, root):
             if item.is_dir():
                 continue
             result["files"].append({"path": item.filename, "size": item.file_size})
-            if item.filename.endswith((".apk", ".apk.gz")):
+            if item.filename.endswith((".apk", ".apk.gz", ".apex")):
                 target = root.joinpath(*name.parts)
                 target.parent.mkdir(parents=True, exist_ok=True)
                 with archive.open(item) as source, target.open("wb") as out:
@@ -51,7 +51,7 @@ def main():
         if "17" not in meta["supportedAndroidVersions"]:
             raise ValueError("Chrome catalog lacks Android 17 support")
         assets.append({"name": package["id"] + ".zip", **meta["artifact"]})
-    report = {"android": 17, "architecture": "arm64", "runtime_compatibility_verified": False, "archives": []}
+    report = {"android": 17, "architecture": "arm64", "runtime_compatibility_verified": False, "excluded_optional_paths": config["excluded_optional_paths"], "archives": []}
     for asset in assets:
         path = fetch(asset, work)
         record = inspect_zip(path, work / path.stem)
@@ -60,7 +60,7 @@ def main():
     pathlib.Path("reports").mkdir(exist_ok=True)
     pathlib.Path("reports/gapps-inventory.json").write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps(report), flush=True)
-    if any(a["signature_exit"] != 0 or a["badging_exit"] != 0 for r in report["archives"] for a in r["apks"]):
+    if any(a["signature_exit"] != 0 or a["badging_exit"] != 0 for r in report["archives"] for a in r["apks"] if a["path"] not in config["excluded_optional_paths"]):
         raise ValueError("GApps APK inspection failed; examine report before integration")
 
 
