@@ -1,0 +1,52 @@
+name: Inspect authenticated Molcer OS partitions and AVB
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - inspect_packaging.py
+      - test_packaging_inspection.py
+      - packaging-tools.json
+      - prepare_packaging_tools.py
+      - .github/workflows/inspect-packaging.yml
+permissions:
+  contents: read
+concurrency:
+  group: molcer-packaging-inspection
+  cancel-in-progress: true
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Test metadata and AVB evidence parsing
+        run: python3 -m unittest -v test_packaging_inspection
+      - name: Download and verify pinned AOSP avbtool
+        run: python3 prepare_packaging_tools.py
+      - name: Authenticate complete source
+        run: python3 download_base.py
+      - name: Extract stock verification and boot images
+        run: python3 extract_partition.py --partitions vbmeta vbmeta_system product init_boot boot vendor_boot recovery dtbo vendor
+      - name: Inspect source chain and vendor fstab
+        run: |
+          mkdir -p work/mounted_vendor
+          sudo mount -t erofs -o loop,ro work/images/vendor.img work/mounted_vendor
+          sudo python3 inspect_packaging.py --avbtool .tools/avbtool.py --vendor-root work/mounted_vendor
+      - name: Unmount source vendor
+        if: always()
+        run: |
+          if mountpoint -q work/mounted_vendor; then sudo umount work/mounted_vendor; fi
+      - name: Save packaging evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: molcer-packaging-inspection
+          path: |
+            reports/packaging-inspection.json
+            reports/verified-base.json
+            work/images/vbmeta.img
+            work/images/vbmeta_system.img
+          retention-days: 7
