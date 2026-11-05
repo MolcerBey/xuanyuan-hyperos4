@@ -1,0 +1,45 @@
+name: Verify AVB and logical partition tooling
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - prepare_avb.py
+      - test_avb_rebuild.py
+      - prepare_host_tools.py
+      - host-tools.json
+      - build_super.py
+      - test_super_builder.py
+      - .github/workflows/test-packaging.yml
+permissions:
+  contents: read
+concurrency:
+  group: molcer-packaging-tests
+  cancel-in-progress: true
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Verify official tools before execution
+        run: |
+          python3 prepare_packaging_tools.py
+          python3 prepare_host_tools.py
+          echo "$GITHUB_WORKSPACE/.tools/aosp-host/linux-x86/bin" >> "$GITHUB_PATH"
+      - name: Verify signatures, tamper rejection and partition bounds
+        run: |
+          python3 -m unittest -v test_avb_rebuild test_packaging_inspection test_eu_geometry
+          if test -f test_super_builder.py; then python3 -m unittest -v test_super_builder; fi
+          if test -f build_super.py; then python3 build_super.py --smoke-test --report reports/super-smoke-test.json; fi
+      - name: Save tool evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: molcer-packaging-tool-tests
+          path: |
+            reports/host-tools.json
+            reports/super-smoke-test.json
+          retention-days: 7

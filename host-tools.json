@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "source": "AOSP kernel/prebuilts/build-tools",
+  "repository": "https://android.googlesource.com/kernel/prebuilts/build-tools",
+  "upstream_commit": "010d8a83d84ced4beef7779453766350db8c08cd",
+  "platform": "linux-x86_64-glibc",
+  "encoding": "base64",
+  "source_revisions": {
+    "platform/system/core": "0cd212cb95ecf293122e39cdbb435e688bc306c9",
+    "platform/system/extras": "a57002736ca339d7d4a0437e82c5ef40b66fb1d8"
+  },
+  "required_lpmake_options": ["--virtual-ab", "--auto-slot-suffixing"],
+  "files": [
+    {"path": "linux-x86/bin/lpmake", "size": 40448, "sha256": "8997d82cb464e77323da92b84357c8661652b5f4bdd74750b621df626855d9cf"},
+    {"path": "linux-x86/bin/fec", "size": 1569200, "sha256": "9d8b7a4cb217e2a806552d4c31d1360ff6cda6f0c30e9602fcd37d754ce1e8ca"},
+    {"path": "linux-x86/lib64/libbase.so", "size": 227056, "sha256": "eac31f380d74987cc2d8a29b48b8c92d0a843efa44f1b26e1662528a4858560f"},
+    {"path": "linux-x86/lib64/liblog.so", "size": 52680, "sha256": "ea0f994520f853af3d3447ad76d66c26f4eb97d33968c14bf6aa1ab0172a175d"},
+    {"path": "linux-x86/lib64/liblp.so", "size": 215312, "sha256": "cc69d4f8b7cd7cc425baf6f0c30fae5f5defc2b653db3de0bd0aa89ea99826ad"},
+    {"path": "linux-x86/lib64/libc++.so", "size": 1306352, "sha256": "7b91de1cba2ad902aad871b77e58af40ec339aac6d514452f71475e895e1fba6"},
+    {"path": "linux-x86/lib64/libcrypto-host.so", "size": 1920496, "sha256": "2eef790dfa06cb7bfbfe941959678894113e0fa58bc1589be6d200d2945bc135"},
+    {"path": "linux-x86/lib64/libcrypto_utils.so", "size": 7184, "sha256": "d7b1c7d3b501d0accba65948365d451d29c4aa2e3d9c37a9bc6aab4d2b3ee68d"},
+    {"path": "linux-x86/lib64/libsparse-host.so", "size": 36512, "sha256": "3d8c7a4fe62604896bfb1646b14c69e484cd019167ad52312088eb04f33ae7fa"},
+    {"path": "linux-x86/lib64/libext4_utils.so", "size": 13216, "sha256": "9675acbe19bc3a7a345d4daafd8d709bd419befdad1eaec974856856e6e32200"},
+    {"path": "linux-x86/lib64/libz-host.so", "size": 104848, "sha256": "dc07f70f554bb876e0ac56a647b37eb4415d5edb4125bcf654c6b9eec68d2dea"}
+  ]
+}
