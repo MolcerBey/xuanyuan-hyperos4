@@ -5,6 +5,7 @@ import hashlib
 import json
 import lzma
 import pathlib
+import re
 import shutil
 import struct
 import zipfile
@@ -13,6 +14,8 @@ from inspect_ota import fields
 
 
 def extract(archive, names, destination):
+    if not names or len(names) != len(set(names)) or any(not re.fullmatch(r'[A-Za-z0-9_][A-Za-z0-9_-]*', name) for name in names):
+        raise ValueError('Invalid or duplicate partition name')
     destination = pathlib.Path(destination)
     destination.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(archive) as z:
@@ -49,8 +52,6 @@ def extract(archive, names, destination):
                 raise ValueError("Insufficient disk for partition extraction")
             reports = []
             for name in names:
-                if not name.replace("_", "").isalnum():
-                    raise ValueError("Invalid partition name")
                 part = available[name]
                 info = fields(part[7][0])
                 image_size = info[1][0]

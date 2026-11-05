@@ -178,7 +178,7 @@ def unsigned_blob(module, key_path, stock_header, descriptors):
 
     module.RSAPublicKey = RecordingPublicKey
     try:
-        blob = module.AvbTool()._generate_vbmeta_blob(
+        blob = module.Avb()._generate_vbmeta_blob(
             algorithm_name=ALGORITHM, key_path=str(key_path), public_key_metadata_path=None,
             descriptors=copy.deepcopy(descriptors), chain_partitions_use_ab=None,
             chain_partitions_do_not_use_ab=None, rollback_index=stock_header.rollback_index,

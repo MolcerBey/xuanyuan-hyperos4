@@ -22,20 +22,22 @@ class AVBRebuildTests(unittest.TestCase):
     def descriptors(self):
         m = self.module
         init = m.AvbHashDescriptor(); init.partition_name = 'init_boot'; init.image_size = 4096
+        init.hash_algorithm = 'sha256'; init.digest = b'\0' * 32
         country = m.AvbHashDescriptor(); country.partition_name = 'countrycode'; country.image_size = 32
+        country.hash_algorithm = 'sha256'; country.digest = b'\0' * 32
         boot = m.AvbChainPartitionDescriptor(); boot.partition_name = 'boot'; boot.rollback_index_location = 3; boot.public_key = b'original'
         prop = m.AvbPropertyDescriptor(); prop.key = 'test'; prop.value = b'keep'
         return [init, country, boot, prop]
 
     def test_only_selected_descriptors_change(self):
         original = self.descriptors()
-        replacement = copy.deepcopy(original[0]); replacement.digest = b'new-digest'
+        replacement = copy.deepcopy(original[0]); replacement.digest = b'\x01' * 32
         result, kept = replace_descriptors(original, {('AvbHashDescriptor', 'init_boot'): replacement},
                                            {('AvbHashDescriptor', 'countrycode')})
         self.assertEqual([d.encode() for d in result[1:]], [d.encode() for d in original[2:]])
         self.assertEqual(len(kept), 2)
         self.assertFalse(any(getattr(d, 'partition_name', None) == 'countrycode' for d in result))
-        self.assertEqual(original[0].digest, b'')
+        self.assertEqual(original[0].digest, b'\0' * 32)
         with self.assertRaisesRegex(ValueError, 'duplicate'):
             replace_descriptors(original + [copy.deepcopy(original[0])], {('AvbHashDescriptor', 'init_boot'): replacement})
 
@@ -43,6 +45,27 @@ class AVBRebuildTests(unittest.TestCase):
         original = self.descriptors()
         with self.assertRaisesRegex(ValueError, 'identity'):
             replace_descriptors(original, {('AvbHashDescriptor', 'init_boot'): original[1]})
+
+    def test_pinned_aosp_builder_api_runs_without_openssl(self):
+        # Only public-key loading is stubbed. Execute the real pinned builder so
+        # API/class regressions are caught even where OpenSSL is unavailable.
+        class SyntheticPublicKey:
+            def __init__(self, path):
+                self.num_bits = 4096
+
+            def encode(self):
+                return struct.pack('>II', 4096, 0) + b'\x01' * 1024
+
+        m = self.module
+        header = m.AvbVBMetaHeader()
+        header.rollback_index = 123
+        with mock.patch.object(m, 'RSAPublicKey', SyntheticPublicKey):
+            blob, request = unsigned_blob(m, 'synthetic-test-public.pem', header, self.descriptors())
+        parsed, descriptors, auth, aux, _ = parse_blob(m, blob)
+        self.assertEqual(parsed.rollback_index, 123)
+        self.assertEqual([d.encode() for d in descriptors], [d.encode() for d in self.descriptors()])
+        self.assertEqual(request['digest_sha256'], digest(blob[:256] + aux))
+        self.assertEqual(auth[parsed.signature_offset:parsed.signature_offset + parsed.signature_size], b'\0' * 512)
 
     def test_init_boot_uses_updated_header_not_stale_footer(self):
         with tempfile.TemporaryDirectory() as temp:
