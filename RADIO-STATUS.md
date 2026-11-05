@@ -17,6 +17,20 @@ Preparation succeeded in [run 42067682905](https://github.com/MolcerBey/xuanyuan
 
 The common/global distinction comes from the exact EU release's installer, not from guessing that all radio partitions must come from a separate stock Global ROM. No downloaded installer was executed.
 
+## Completed offline compatibility comparison
+
+**Verdict: full Android17 compatibility is not proven.** This does not mean that definite incompatibility has been established. [Run 42071526692](https://github.com/MolcerBey/xuanyuan-hyperos4/actions/runs/42071526692) successfully compared the exact selected EU pair with the original radio pair from the authenticated OS4.0.0.18.XOACNXM Molcer OS base. All four images were mounted read-only in GitHub Actions; no phone was accessed.
+
+The permanent [assessment](reports/eu-radio-compatibility-assessment.json) records source hashes and the full report's SHA256. The [full report artifact](https://github.com/MolcerBey/xuanyuan-hyperos4/actions/runs/42071526692/artifacts/13436542038) expires on 2026-11-12; a local copy is retained in `reports/eu-molcer-radio-compatibility.json`.
+
+- EU contains 1,134 files and the target 1,151, with no inventory read errors or omissions. Of 1,131 shared paths, 339 files are identical and 792 differ. Three paths exist only in EU and twenty only in the target. These counts are not a compatibility score.
+- All 71 shared ELF headers match in the inspected class, endianness, machine, ELF type and ABI-version fields. Segment layout and proprietary protocols were not validated.
+- Both pairs declare the same FAT logical volume lengths: 211,812,352 bytes for `modem` and 257,949,696 for `modemfirmware`. Stored image lengths are shorter. This does not prove corruption or actual GPT partition fit; allocated-file reads succeeded, but a full FAT allocation check was not performed.
+- The selected EU global firmware contains and indexes the Turk Telekom profile in both `mbn_sw.txt` and `oem_sw.txt`. Its size is 51,008 bytes and SHA256 is `e48dcc969890d95fc66d458fbf8a1ad0c81d198df1d69c6a7b0e37584a279030`. The target China profile is 52,432 bytes with SHA256 `823ad8435f85f110ce7d203b95db7042bf7e2269d09d747dfb96ee9d59b98f06`. Profile availability does not prove active selection or IMS registration.
+- EU `qdsp6_oemsw.mbn` contains the literal identifier `MPSS.DE.7.0.c5-00035-PAKALA_GEN_PACK-1.115597.42.123326.19`. No equivalent core modem version string was recovered from the target by this scanner, so an exact core baseband-version comparison cannot be claimed. The ADSP/CDSP/SOCCP literal identifiers match. Literal identifiers do not establish protocol interoperability.
+
+The unresolved issue is pairing an Android16 radio release with the Android17 vendor/RIL/IMS implementation. [Android's IMS documentation](https://source.android.com/docs/core/connect/ims) describes vendor-specific interfaces for work offloaded to the modem; matching public interfaces alone cannot establish that pairing. Active carrier selection, calls/data/VoLTE/VoWiFi, boot acceptance, firmware rollback and device partition capacity remain unverified. The exact EU source remains selected as requested, but it has not been integrated into an installable Molcer OS package, and `installation_allowed` remains false. No alternative modem was silently substituted.
+
 ## Previously prepared Android17 alternative
 
 - China base: OS4.0.0.18.XOACNXM, Android17, device xuanyuan.

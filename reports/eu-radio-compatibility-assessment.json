@@ -1,0 +1,253 @@
+{
+  "checked_at_utc": "2026-11-05T17:11:19Z",
+  "verdict": "not-proven-full-compatible",
+  "verdict_explanation": "Offline source, file structure and carrier-profile checks completed. These checks neither prove full Android17 interoperability nor establish definite incompatibility.",
+  "phone_accessed": false,
+  "phone_operations_performed": false,
+  "installation_allowed": false,
+  "integrated_into_installable_rom": false,
+  "eu_source": {
+    "rom": "xiaomi.eu OS3.0.314.0.WOACNXM",
+    "android": 16,
+    "device": "xuanyuan",
+    "selected_members": [
+      "images/modem.img",
+      "images/modemfirmware_ww.img"
+    ],
+    "provenance_report": "reports/eu-radio-reference.json"
+  },
+  "target_source": {
+    "rom": "OS4.0.0.18.XOACNXM",
+    "android": 17,
+    "device": "xuanyuan",
+    "role": "Molcer OS base; comparison against its original radio pair"
+  },
+  "evidence": {
+    "workflow_run": "https://github.com/MolcerBey/xuanyuan-hyperos4/actions/runs/42071526692",
+    "checked_commit": "89b48dd8bd51b084881a656ad75b11b3a3e66f41",
+    "artifact": "https://github.com/MolcerBey/xuanyuan-hyperos4/actions/runs/42071526692/artifacts/13436542038",
+    "artifact_expires_at_utc": "2026-11-12T17:11:18Z",
+    "artifact_zip_sha256": "2264d34083b4a6d26ba57d0dc27575fb33ef12fc86cc1fb30f4fb2dbb155427e",
+    "full_report_local_path": "reports/eu-molcer-radio-compatibility.json",
+    "full_report_sha256": "671f59e65e5288de107064e5c51818293784e4dbed1bf90f0dcf811f1d1d2a08",
+    "full_report_bytes": 791798,
+    "full_report_in_artifact": true
+  },
+  "file_comparison": {
+    "shared_file_count": 1131,
+    "identical_shared_file_count": 339,
+    "changed_shared_file_count": 792,
+    "only_eu": [
+      "modem/image/adsp.b26",
+      "modemfirmware/image/modem_oem/qdsp6_oemsw.mbn",
+      "modemfirmware/image/qdsp6_oemsw.mbn"
+    ],
+    "only_target": [
+      "modem/image/adsp.b27",
+      "modem/image/peach/bdwlan.e3e",
+      "modem/image/peach/bdwlan.e3f",
+      "modem/image/peach/bdwlan.e40",
+      "modemfirmware/image/modem.b33",
+      "modemfirmware/image/modem.b35",
+      "modemfirmware/image/modem.b36",
+      "modemfirmware/image/modem.b37",
+      "modemfirmware/image/modem.b38",
+      "modemfirmware/image/modem.b39",
+      "modemfirmware/image/modem.b40",
+      "modemfirmware/image/modem.b42",
+      "modemfirmware/image/modem_pr/mcfg/configs/mcfg_ddr/rf/rf_config_1112_0_0.mbn",
+      "modemfirmware/image/modem_pr/mcfg/configs/mcfg_ddr/rf/rf_config_1280_0_0.mbn",
+      "modemfirmware/image/modem_pr/mcfg/configs/mcfg_sw/generic/AF/Airtel/Commercial/NG/mcfg_sw.mbn",
+      "modemfirmware/image/modem_pr/mcfg/configs/mcfg_sw/generic/APAC/Nurtelecom/Commercial/KG/mcfg_sw.mbn",
+      "modemfirmware/image/modem_pr/mcfg/configs/mcfg_sw/generic/EU/Lebara/Commercial/DE/mcfg_sw.mbn",
+      "modemfirmware/image/modem_pr/mcfg/configs/mcfg_sw/generic/EU/Vodafone/VoLTE/Spain/PTV/mcfg_sw.mbn",
+      "modemfirmware/image/modem_pr/mcfg/configs/mcfg_sw/generic/LATAM/RACSA/Commercial/CR/mcfg_sw.mbn",
+      "modemfirmware/image/modem_pr/mcfg/configs/mcfg_sw/generic/MEA/VM/Commercial/SA/mcfg_sw.mbn"
+    ],
+    "changed_list_truncated": false,
+    "turk_telekom_profile_hashes_equal": false
+  },
+  "sources": {
+    "eu": {
+      "images": {
+        "modem": {
+          "image_file_bytes": 172568576,
+          "gpt_partition_capacity_bytes": null,
+          "partition_size_fit_verified": false,
+          "filesystem_allocation_integrity_verified": false,
+          "bpb_recognized": true,
+          "bytes_per_sector": 4096,
+          "sectors_per_cluster": 4,
+          "total_sectors": 51712,
+          "declared_logical_volume_bytes": 211812352,
+          "fat_label": "FAT16",
+          "fat16_header_cluster_count": 12923,
+          "image_shorter_than_declared_volume": true,
+          "size_interpretation": "BPB volume length and stored image length are not GPT partition capacity. A shorter image may omit a free tail; this comparison neither proves corruption nor proves partition fit.",
+          "sha256": "abdb08bc80e2b9c837b40f54df5c34c1ea929b5d1c14e7cfebfc0b433b9a6d69"
+        },
+        "modemfirmware": {
+          "image_file_bytes": 140234752,
+          "gpt_partition_capacity_bytes": null,
+          "partition_size_fit_verified": false,
+          "filesystem_allocation_integrity_verified": false,
+          "bpb_recognized": true,
+          "bytes_per_sector": 4096,
+          "sectors_per_cluster": 4,
+          "total_sectors": 62976,
+          "declared_logical_volume_bytes": 257949696,
+          "fat_label": "FAT16",
+          "fat16_header_cluster_count": 15738,
+          "image_shorter_than_declared_volume": true,
+          "size_interpretation": "BPB volume length and stored image length are not GPT partition capacity. A shorter image may omit a free tail; this comparison neither proves corruption nor proves partition fit.",
+          "sha256": "bfab29aac6a9337cb168bbc76455fda068c59be899b917b0038af2c88a7a1fe6"
+        }
+      },
+      "file_count": 1134,
+      "mbn_file_count": 529,
+      "turk_telekom_profiles": [
+        {
+          "path": "modemfirmware/image/modem_pr/mcfg/configs/mcfg_sw/generic/EU/TurkTelekom/Commercial/TR/mcfg_sw.mbn",
+          "size": 51008,
+          "sha256": "e48dcc969890d95fc66d458fbf8a1ad0c81d198df1d69c6a7b0e37584a279030"
+        }
+      ],
+      "profile_indexes": [
+        {
+          "path": "modemfirmware/image/modem_pr/mcfg/configs/mcfg_sw/mbn_sw.txt",
+          "references": [
+            "mcfg_sw/generic/EU/TurkTelekom/Commercial/TR/mcfg_sw.mbn"
+          ],
+          "references_truncated": false
+        },
+        {
+          "path": "modemfirmware/image/modem_pr/mcfg/configs/mcfg_sw/oem_sw.txt",
+          "references": [
+            "mcfg_sw/generic/EU/TurkTelekom/Commercial/TR/mcfg_sw.mbn"
+          ],
+          "references_truncated": false
+        }
+      ],
+      "inventory_errors": [],
+      "inventory_omissions": [],
+      "core_literal_version_identifiers": [
+        "IMAGE_VARIANT_STRING=pakala.adsp.prodQ",
+        "IMAGE_VARIANT_STRING=pakala.cdsp.prodQ",
+        "IMAGE_VARIANT_STRING=pakala.gen.prodQ",
+        "IMAGE_VARIANT_STRING=pakala.soccp.prod",
+        "QC_IMAGE_VERSION_STRING=CDSP.HT.3.1-00833-PAKALA-1",
+        "QC_IMAGE_VERSION_STRING=LPAIDSP.HT.1.1-01119-PAKALA-1",
+        "QC_IMAGE_VERSION_STRING=MPSS.DE.7.0.c5-00035-PAKALA_GEN_PACK-1.115597.42.123326.19",
+        "QC_IMAGE_VERSION_STRING=SOCCP.FW.1.0-00171-PAKALA_SOCCP_PACK-1"
+      ],
+      "version_scan_limits_reached": false
+    },
+    "target": {
+      "images": {
+        "modem": {
+          "image_file_bytes": 169881600,
+          "gpt_partition_capacity_bytes": null,
+          "partition_size_fit_verified": false,
+          "filesystem_allocation_integrity_verified": false,
+          "bpb_recognized": true,
+          "bytes_per_sector": 4096,
+          "sectors_per_cluster": 4,
+          "total_sectors": 51712,
+          "declared_logical_volume_bytes": 211812352,
+          "fat_label": "FAT16",
+          "fat16_header_cluster_count": 12923,
+          "image_shorter_than_declared_volume": true,
+          "size_interpretation": "BPB volume length and stored image length are not GPT partition capacity. A shorter image may omit a free tail; this comparison neither proves corruption nor proves partition fit.",
+          "sha256": "e0f16e9db87ad6b1f7a41c72da99b7b94585db83c48318de041fcdb7f31a4225"
+        },
+        "modemfirmware": {
+          "image_file_bytes": 137121792,
+          "gpt_partition_capacity_bytes": null,
+          "partition_size_fit_verified": false,
+          "filesystem_allocation_integrity_verified": false,
+          "bpb_recognized": true,
+          "bytes_per_sector": 4096,
+          "sectors_per_cluster": 4,
+          "total_sectors": 62976,
+          "declared_logical_volume_bytes": 257949696,
+          "fat_label": "FAT16",
+          "fat16_header_cluster_count": 15738,
+          "image_shorter_than_declared_volume": true,
+          "size_interpretation": "BPB volume length and stored image length are not GPT partition capacity. A shorter image may omit a free tail; this comparison neither proves corruption nor proves partition fit.",
+          "sha256": "4c37c43abb6789d6c9a5c271bbb1fa754e0e38dd366281b5a05a5e4838f665db"
+        }
+      },
+      "file_count": 1151,
+      "mbn_file_count": 535,
+      "turk_telekom_profiles": [
+        {
+          "path": "modemfirmware/image/modem_pr/mcfg/configs/mcfg_sw/generic/EU/TurkTelekom/Commercial/TR/mcfg_sw.mbn",
+          "size": 52432,
+          "sha256": "823ad8435f85f110ce7d203b95db7042bf7e2269d09d747dfb96ee9d59b98f06"
+        }
+      ],
+      "profile_indexes": [
+        {
+          "path": "modemfirmware/image/modem_pr/mcfg/configs/mcfg_sw/mbn_sw.txt",
+          "references": [
+            "mcfg_sw/generic/EU/TurkTelekom/Commercial/TR/mcfg_sw.mbn"
+          ],
+          "references_truncated": false
+        },
+        {
+          "path": "modemfirmware/image/modem_pr/mcfg/configs/mcfg_sw/oem_sw.txt",
+          "references": [
+            "mcfg_sw/generic/EU/TurkTelekom/Commercial/TR/mcfg_sw.mbn"
+          ],
+          "references_truncated": false
+        }
+      ],
+      "inventory_errors": [],
+      "inventory_omissions": [],
+      "core_literal_version_identifiers": [
+        "IMAGE_VARIANT_STRING=pakala.adsp.prodQ",
+        "IMAGE_VARIANT_STRING=pakala.cdsp.prodQ",
+        "IMAGE_VARIANT_STRING=pakala.soccp.prod",
+        "QC_IMAGE_VERSION_STRING=CDSP.HT.3.1-00833-PAKALA-1",
+        "QC_IMAGE_VERSION_STRING=LPAIDSP.HT.1.1-01119-PAKALA-1",
+        "QC_IMAGE_VERSION_STRING=SOCCP.FW.1.0-00171-PAKALA_SOCCP_PACK-1"
+      ],
+      "version_scan_limits_reached": false
+    }
+  },
+  "unverified": [
+    "Actual installed modem identity (owner reports working EU version; phone not inspected)",
+    "Vendor/RIL/IMS and modem protocol interoperability across Android16 and Android17",
+    "Active carrier profile selection and network registration",
+    "Calls, SMS, mobile data, VoLTE, VoWiFi, 4G/5G and handovers",
+    "GPT partition capacity and boot-chain/firmware rollback acceptance",
+    "Complete FAT allocation integrity and firmware signature acceptance at boot",
+    "Complete Molcer OS installation/AVB packaging and boot"
+  ],
+  "interpretation": [
+    "Source hashes authenticate the selected downloaded bytes, not runtime interoperability.",
+    "Matching ELF headers and FAT logical volume lengths do not prove modem/vendor protocol compatibility.",
+    "Different bytes and added/removed firmware segments do not themselves establish incompatibility.",
+    "A shorter stored FAT image can omit a free tail; stored length and BPB logical volume length are not GPT capacity.",
+    "A TurkTelekom MBN and index entry establish profile availability, not active selection or operator provisioning."
+  ],
+  "references": [
+    {
+      "url": "https://source.android.com/docs/core/connect/ims",
+      "scope": "Android IMS architecture uses vendor-specific extensions for offloaded modem work; public framework/HAL matching alone is not proof of proprietary modem pairing."
+    },
+    {
+      "url": "https://miuipolska.pl/xiaomi-15-ultra-xiaomi-eu/",
+      "scope": "Historical global-hardware/China-modem mismatch; not approval of this exact Android16-to-Android17 pair."
+    }
+  ],
+  "elf_header_comparison": {
+    "eu_count": 71,
+    "target_count": 71,
+    "shared_count": 71,
+    "different_headers": [],
+    "eu_only": [],
+    "target_only": [],
+    "scope": "Only class, endianness, machine, ELF type and ABI-version fields; no segment-layout or protocol validation."
+  }
+}
