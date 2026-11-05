@@ -1,0 +1,66 @@
+name: Audit optional apps and compile Turkish resources
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - inspect_app_dependencies.py
+      - build_translations.py
+      - test_translations.py
+      - .github/workflows/audit-customizations.yml
+permissions:
+  contents: read
+concurrency:
+  group: molcer-customization-audit
+  cancel-in-progress: true
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Validate resource selection rules
+        run: python3 -m unittest -v test_translations
+      - name: Authenticate source and extract inspection partitions
+        run: |
+          python3 download_base.py
+          python3 extract_partition.py --partitions product system system_ext vendor
+      - name: Mount source images read only
+        run: |
+          for part in product system system_ext vendor; do
+            mkdir -p "work/mounted_$part"
+            sudo mount -t erofs -o loop,ro "work/images/$part.img" "work/mounted_$part"
+          done
+      - name: Audit dependency, setup and customization evidence
+        run: sudo env ANDROID_HOME="$ANDROID_HOME" python3 inspect_app_dependencies.py
+      - name: Compile resources for permanent local signing
+        run: |
+          sudo env ANDROID_HOME="$ANDROID_HOME" python3 - <<'PY'
+          import pathlib
+          from build_translations import build
+          additions, overlays = build(preview_sign=False)
+          root = pathlib.Path('out/unsigned-overlays')
+          for relative, data in additions.items():
+              target = root / relative
+              target.parent.mkdir(parents=True, exist_ok=True)
+              target.write_bytes(data)
+          PY
+      - name: Unmount source images
+        if: always()
+        run: |
+          for part in product system system_ext vendor; do
+            if mountpoint -q "work/mounted_$part"; then sudo umount "work/mounted_$part"; fi
+          done
+      - name: Save reviewable evidence and unsigned own overlays
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: molcer-customization-audit
+          path: |
+            reports/app-dependencies.json
+            reports/translations.json
+            work/translation-dumps/
+            out/unsigned-overlays/
+          retention-days: 7

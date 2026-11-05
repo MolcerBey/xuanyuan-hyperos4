@@ -1,16 +1,8 @@
 name: Build audited Molcer OS product preview
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - build_product.py
-      - tree_audit.py
-      - debloat.json
-      - build_translations.py
-      - translations.json
-# Workflow/radio-only edits are checked by integrate-radio.yml without rebuilding
-# unchanged product images. Use workflow_dispatch for a complete preview rebuild.
+# Explicit dispatch only: intermediate resource/dependency audits must not start
+# an obsolete preview build while complete AVB/super packaging is being assembled.
 permissions:
   contents: write
   actions: read
