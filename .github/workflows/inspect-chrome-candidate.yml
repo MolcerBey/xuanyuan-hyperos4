@@ -1,0 +1,35 @@
+name: Verify current Google Chrome candidate
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - fetch_chrome_candidate.py
+      - chrome-candidate.json
+      - .github/workflows/inspect-chrome-candidate.yml
+permissions:
+  contents: read
+concurrency:
+  group: molcer-chrome-candidate
+  cancel-in-progress: true
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Acquire and authenticate standalone Google Chrome
+        run: |
+          python3 fetch_chrome_candidate.py
+          python3 -c "import json; r=json.load(open('reports/chrome-candidate.json')); assert r['status']=='verified-offline-candidate', r['status']"
+      - name: Save verified candidate and evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: molcer-current-chrome-candidate
+          path: |
+            reports/chrome-candidate.json
+            out/chrome-candidate/Chrome.apk
+          retention-days: 7

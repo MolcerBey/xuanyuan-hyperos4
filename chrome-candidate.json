@@ -1,0 +1,26 @@
+{
+  "version": "157.0.8103.38",
+  "version_code": "810303804",
+  "package": "com.android.chrome",
+  "architecture": "arm64-v8a",
+  "size": 291833630,
+  "sha256": "dcc9fb8a49b8991ffef9fa8a29b6231c2c7667056cc0a6c342234e0b1af19d16",
+  "signer_certificate_sha256": "f0fd6c5b410f25cb25c3b53346c8972fae30f8ee7411df910480ad6b2d60db83",
+  "release_announcement": "https://chromereleases.googleblog.com/2026/11/chrome-for-android-update.html?amp=1",
+  "checksum_source": "https://www.apkmirror.com/apk/google-inc/chrome/google-chrome-157-0-8103-38-release/google-chrome-157-0-8103-38-android-apk-download/",
+  "sources": [
+    {
+      "name": "APKMirror",
+      "url": "https://www.apkmirror.com/wp-content/themes/APKMirror/download.php?forcebaseapk=true&id=17029265&key=835d934bb07fd95783e83c9c3a80683c86e1850f",
+      "referer": "https://www.apkmirror.com/apk/google-inc/chrome/google-chrome-157-0-8103-38-release/google-chrome-157-0-8103-38-android-apk-download/download/?forcebaseapk=true&key=9328914d117c7a0f7345045bb4e6924ee49a8919"
+    },
+    {
+      "name": "AndroidAPKsFree",
+      "url": "https://dl.androidapksfree.net/file/541f1e21ee2bff7b?e=1794009600&s=eb896c2d0b2aef9b76595e20687486103dc30aff1b1a604affe9171891aac1dd",
+      "referer": "https://google-chrome.androidapks.com/download/"
+    }
+  ],
+  "source_url_note": "Observed public download URLs may expire. Refresh through the linked download pages; never bypass access challenges or relax byte/signature checks.",
+  "build_integration_approved": false,
+  "phone_access_allowed": false
+}
