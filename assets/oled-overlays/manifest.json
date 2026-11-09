@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "credit": "Molcer OS original black wallpaper and default dark-mode overlay.",
+  "signing_identity": "Molcer OS Resource Overlays",
+  "signer_certificate_sha256": "229e4058d2ada87d1fd5762e16166ecd587fabd107b3c23985ffda4811ed9bca",
+  "permanent_local_signature": true,
+  "original_apks_modified": false,
+  "runtime_verified": false,
+  "source_report_sha256": "fae8d4facca571feca3ac114d82d0d4eda0d47a026ab874941818754f374c47d",
+  "overlays": [
+    {
+      "package": "com.molcer.os.tr.oleddefaults.g0",
+      "path": "assets/oled-overlays/com.molcer.os.tr.oleddefaults.g0.apk",
+      "destination": "overlay/MolcerTurkish/com.molcer.os.tr.oleddefaults.g0.apk",
+      "size": 20972,
+      "sha256": "5c2270b2e510853cc4ab8e19aa37e37757ddeb2ebe311bca5943f75bf81d11e7",
+      "unsigned_sha256": "b4b8f0951c9489adc3ccd500d0bc2387f4ffbc6431a1ce727d84ef43639f68e6",
+      "target_apk": "system/system/framework/framework-res.apk",
+      "target_apk_sha256": "a477f21080d3ba868ebc493804d5728e7ae5bc7eaec71bcfa174ef49bd0132a3"
+    }
+  ]
+}
