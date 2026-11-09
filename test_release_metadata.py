@@ -69,6 +69,27 @@ class UpdateMetadataTests(unittest.TestCase):
         self.assertFalse(index['updates'][0]['public_release_available'])
         self.assertFalse(index['updates'][0]['installation_allowed'])
 
+    def test_draft_asset_urls_are_identity_bound_and_normalized(self):
+        item = manifest()
+        tag = item['release_tag']
+        draft = 'untagged-0123456789abcdef0123'
+        item['release_url'] = f'https://github.com/{REPOSITORY}/releases/tag/{draft}'
+        for image in item['uploaded_images']:
+            for chunk in image['chunks']:
+                chunk['download_url'] = chunk['download_url'].replace('/' + tag + '/', '/' + draft + '/')
+        for asset in item['small_assets']:
+            asset['download_url'] = asset['download_url'].replace('/' + tag + '/', '/' + draft + '/')
+        images = validate_assembly(item)
+        self.assertTrue(all('/' + tag + '/' in chunk['download_url']
+                            for image in images for chunk in image['chunks']))
+        index = make_index(version(), self.key, item)
+        self.assertTrue(all('/' + tag + '/' in chunk['download_url']
+                            for image in index['updates'][0]['images'] for chunk in image['chunks']))
+        item['uploaded_images'][0]['chunks'][0]['download_url'] = item['uploaded_images'][0]['chunks'][0]['download_url'].replace(
+            draft, 'untagged-1234567890abcdef0123')
+        with self.assertRaisesRegex(ValueError, 'exact release download'):
+            validate_assembly(item)
+
     def test_wrong_device_or_failed_offline_gate_is_rejected(self):
         for field, value in [('device', 'other'), ('hardware_variant', 'cn'),
                              ('full_partition_chain_verified', False), ('avb_flags', 2),

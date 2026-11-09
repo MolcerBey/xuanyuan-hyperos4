@@ -111,13 +111,18 @@ def safe_tag(tag):
     return tag
 
 
-def validate_asset_url(url, tag, asset_name):
+def validate_asset_url(url, tag, asset_name, draft_tag=None):
     safe_tag(tag)
     if not isinstance(asset_name, str) or not re.fullmatch('[A-Za-z0-9][A-Za-z0-9._-]{0,199}', asset_name):
         raise ValueError('Unsafe asset filename')
     expected = f'https://github.com/{REPOSITORY}/releases/download/{tag}/{asset_name}'
+    allowed = {expected}
+    if draft_tag is not None:
+        if not isinstance(draft_tag, str) or not re.fullmatch('untagged-[0-9a-f]{20}', draft_tag):
+            raise ValueError('Unexpected GitHub draft release identity')
+        allowed.add(f'https://github.com/{REPOSITORY}/releases/download/{draft_tag}/{asset_name}')
     parsed = urllib.parse.urlsplit(url)
-    if (url != expected or parsed.scheme != 'https' or parsed.netloc != 'github.com'
+    if (url not in allowed or parsed.scheme != 'https' or parsed.netloc != 'github.com'
             or parsed.query or parsed.fragment):
         raise ValueError('Only exact release download URLs from the project repository are allowed')
     return url
@@ -139,7 +144,7 @@ def validate_version(version):
     return version
 
 
-def validate_images(images, tag):
+def validate_images(images, tag, draft_tag=None):
     if not isinstance(images, list) or not 1 <= len(images) <= 100:
         raise ValueError('Missing or excessive uploaded image list')
     result, names, asset_names, total = [], set(), set(), 0
@@ -166,7 +171,7 @@ def validate_images(images, tag):
             asset_names.add(asset)
             normalized.append({'index': number, 'offset': offset, 'size': length,
                                'sha256': require_hash(chunk.get('sha256')), 'asset_name': asset,
-                               'download_url': validate_asset_url(chunk.get('download_url'), tag, asset)})
+                               'download_url': validate_asset_url(chunk.get('download_url'), tag, asset, draft_tag)})
             offset += length
         if offset != size:
             raise ValueError('Chunk sizes do not equal the image size')
@@ -198,14 +203,22 @@ def validate_assembly(manifest):
         raise ValueError('Missing exact offline verification report digests')
     assets = manifest.get('small_assets', [])
     tag = safe_tag(manifest.get('release_tag'))
+    draft_tag = None
+    release_url = manifest.get('release_url')
+    if release_url is not None:
+        match = re.fullmatch(f'https://github.com/{REPOSITORY}/releases/tag/(untagged-[0-9a-f]{{20}})',
+                             release_url)
+        if match is None:
+            raise ValueError('Assembly release URL does not identify its GitHub draft')
+        draft_tag = match.group(1)
     for name in REPORT_NAMES:
         digest = require_hash(reports[name])
         matches = [x for x in assets if x.get('asset_name') == name]
         if len(matches) != 1 or matches[0].get('sha256') != digest:
             raise ValueError('Verification report is not bound to its released asset')
         require_size(matches[0].get('size'), 4 * 1024**2)
-        validate_asset_url(matches[0].get('download_url'), tag, name)
-    images = validate_images(manifest.get('uploaded_images'), tag)
+        validate_asset_url(matches[0].get('download_url'), tag, name, draft_tag)
+    images = validate_images(manifest.get('uploaded_images'), tag, draft_tag)
     partitions = manifest.get('all_partition_images', [])
     if not isinstance(partitions, list) or not 1 <= len(partitions) <= 100:
         raise ValueError('Missing verified full partition inventory')
@@ -220,6 +233,9 @@ def validate_assembly(manifest):
     for image in images:
         if by_name.get(image['name']) != {key: image[key] for key in ('size', 'sha256')}:
             raise ValueError('Uploaded bytes differ from the verified partition inventory')
+        for chunk in image['chunks']:
+            chunk['download_url'] = (f'https://github.com/{REPOSITORY}/releases/download/'
+                                     f'{tag}/{chunk["asset_name"]}')
     return images
 
 
