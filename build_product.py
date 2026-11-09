@@ -15,6 +15,7 @@ from load_overlays import load as load_signed_overlays
 from fetch_chrome_candidate import inspect_apk
 from camera_guard import prepare_product_guard, verify_product_guard
 from policy_audit import validate_product_properties, optimization_report
+from build_brand_assets import build as build_brand_assets
 
 ROOT = pathlib.Path("work/mounted_product")
 STAGE = pathlib.Path("work/staged_product")
@@ -93,7 +94,20 @@ def main():
             raise ValueError("Replacement APK package identity mismatch")
     translated_files, overlays = load_signed_overlays(TOOLS)
     additions.update(translated_files)
+    oled_files, oled_packages = load_signed_overlays(TOOLS, 'assets/oled-overlays/manifest.json', 'etc/molcer-oled-credits.txt')
+    if set(oled_files) & set(additions) or set(oled_packages) & set(overlays):
+        raise ValueError('OLED and translation pack paths overlap')
+    additions.update(oled_files)
+    overlays += oled_packages
+    brand_evidence = json.loads(pathlib.Path('branding-evidence.json').read_text())
+    stock_bootanimation = ROOT / 'media/bootanimation.zip'
+    with stock_bootanimation.open('rb') as stream:
+        if hashlib.file_digest(stream, 'sha256').hexdigest() != brand_evidence['bootanimation']['sha256']:
+            raise ValueError('Stock bootanimation differs from inspected evidence')
+    brand_report = build_brand_assets('out/brand-assets', evidence=brand_evidence)
+    additions['media/wallpaper/molcer-black.png'] = pathlib.Path('out/brand-assets/wallpaper.png').read_bytes()
     modified = {"etc/build.prop"}
+    modified.add('media/bootanimation.zip')
     overlay_configuration = ROOT / "overlay/config/config.xml"
     overlay_configuration_bytes = None
     if overlays and overlay_configuration.exists():
@@ -155,6 +169,10 @@ def main():
     text += '\nro.molcer.os.name=Molcer OS\nro.molcer.os.version=' + version + '\npersist.sys.timezone=Europe/Istanbul\n'
     property_evidence = validate_product_properties(original_properties, text, version)
     props.write_text(text)
+    bootanimation_target = STAGE / 'media/bootanimation.zip'
+    if bootanimation_target.is_symlink():
+        raise ValueError('Unexpected boot animation symlink')
+    bootanimation_target.write_bytes(pathlib.Path('out/brand-assets/bootanimation.zip').read_bytes())
     if overlay_configuration_bytes is not None:
         target = STAGE / "overlay/config/config.xml"
         if target.is_symlink():
@@ -183,6 +201,9 @@ def main():
     report["google_core_comparison"] = google_core
     pathlib.Path('reports/camera-preservation.json').write_text(json.dumps(camera_report, indent=2) + '\n')
     pathlib.Path('reports/optimization-policy.json').write_text(json.dumps(optimization_report(property_evidence, config['remove']), indent=2) + '\n')
+    brand_report['installed_into_rom'] = True
+    brand_report['installation_destinations'] = ['product/media/bootanimation.zip', 'product/media/wallpaper/molcer-black.png']
+    pathlib.Path('reports/branding-integration.json').write_text(json.dumps(brand_report, indent=2) + '\n')
     report['chrome'] = chrome_inspection
     report['chrome_sha256'] = chrome['sha256']
     report["google_core_matches_selected_release"] = all(item["identical"] for item in google_core)

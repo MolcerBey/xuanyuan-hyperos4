@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "phone_accessed": false,
+  "source_archive_hash_verified": true,
+  "source_archive_sha256": "bd19c93fa7c1cb90ed194c5cc2ebfe786f55f1382b172e344522ca805c63f1ea",
+  "bootanimation": {
+    "path": "product/media/bootanimation.zip",
+    "sha256": "c13e5d57d7abe190f0c24d34f073562d9c5714f3b55cefca5c5baf8f73fcf29b",
+    "desc": "1440 3200 5\r\np 0 5 part0\r\n\r\n",
+    "desc_sha256": "625232f86b163da2a7a638c32292cf082fc1d8041b088caf88860ecd68d6bd9f"
+  }
+}

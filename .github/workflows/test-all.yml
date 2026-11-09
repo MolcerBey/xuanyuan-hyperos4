@@ -1,0 +1,43 @@
+name: Verify all offline Molcer OS tooling
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+concurrency:
+  group: molcer-all-offline-tests-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Prepare pinned packaging tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y openssl
+          python3 prepare_packaging_tools.py
+          python3 prepare_host_tools.py
+          echo "$GITHUB_WORKSPACE/.tools/aosp-host/linux-x86/bin" >> "$GITHUB_PATH"
+      - name: Run the complete unit test suite
+        run: python3 -m unittest discover -v
+      - name: Exercise real lpmake and super payload verification
+        run: |
+          python3 build_super.py --smoke-test --report reports/super-smoke-test.json
+          python3 assemble_candidate.py --smoke-test --report reports/assembly-payload-smoke.json
+      - name: Save verification evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: molcer-all-offline-tests-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            reports/host-tools.json
+            reports/super-smoke-test.json
+            reports/assembly-payload-smoke.json
+          retention-days: 7
+          if-no-files-found: warn

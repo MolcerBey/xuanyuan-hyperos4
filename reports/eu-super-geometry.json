@@ -1,1 +1,397 @@
-{"sparse":{"major_version":1,"minor_version":0,"block_size":4096,"total_blocks":2883584,"expanded_image_bytes":11811160064,"total_chunks":17,"prefix_chunks_processed":3,"member_uncompressed_bytes_read":401476,"sparse_image_checksum_field":0,"whole_sparse_crc_verified":false},"geometry":{"metadata_max_size":65536,"metadata_slot_count":3,"logical_block_size":4096,"sha256":"bb51bbfa583316a57f8a78459c926727d8d4a007b1b43129613294c4f84e1108","checksum_verified":true},"metadata_copies":[{"major_version":10,"minor_version":2,"header_size":256,"header_checksum_verified":true,"table_checksum_verified":true,"tables_size":1232,"header_flags":1,"groups":[{"name":"default","flags":0,"maximum_size_bytes":0},{"name":"qti_dynamic_partitions_a","flags":0,"maximum_size_bytes":11800674304},{"name":"qti_dynamic_partitions_b","flags":0,"maximum_size_bytes":11800674304}],"block_devices":[{"name":"super","first_logical_sector":2048,"alignment_bytes":1048576,"alignment_offset_bytes":0,"declared_size_bytes":11811160064,"flags":0}],"partition_names":["odm_a","odm_b","product_a","product_b","system_a","system_b","system_dlkm_a","system_dlkm_b","system_ext_a","system_ext_b","vendor_a","vendor_b","vendor_dlkm_a","vendor_dlkm_b","mi_ext_a","mi_ext_b"],"extent_count":8,"metadata_sha256":"c6727c8fb12d45901ceb863bc4f2f8150c920095314f5bfd0174707764e0240c","slot":0,"copy":"primary","offset":12288},{"major_version":10,"minor_version":2,"header_size":256,"header_checksum_verified":true,"table_checksum_verified":true,"tables_size":1232,"header_flags":1,"groups":[{"name":"default","flags":0,"maximum_size_bytes":0},{"name":"qti_dynamic_partitions_a","flags":0,"maximum_size_bytes":11800674304},{"name":"qti_dynamic_partitions_b","flags":0,"maximum_size_bytes":11800674304}],"block_devices":[{"name":"super","first_logical_sector":2048,"alignment_bytes":1048576,"alignment_offset_bytes":0,"declared_size_bytes":11811160064,"flags":0}],"partition_names":["odm_a","odm_b","product_a","product_b","system_a","system_b","system_dlkm_a","system_dlkm_b","system_ext_a","system_ext_b","vendor_a","vendor_b","vendor_dlkm_a","vendor_dlkm_b","mi_ext_a","mi_ext_b"],"extent_count":8,"metadata_sha256":"c6727c8fb12d45901ceb863bc4f2f8150c920095314f5bfd0174707764e0240c","slot":1,"copy":"primary","offset":77824},{"major_version":10,"minor_version":2,"header_size":256,"header_checksum_verified":true,"table_checksum_verified":true,"tables_size":1232,"header_flags":1,"groups":[{"name":"default","flags":0,"maximum_size_bytes":0},{"name":"qti_dynamic_partitions_a","flags":0,"maximum_size_bytes":11800674304},{"name":"qti_dynamic_partitions_b","flags":0,"maximum_size_bytes":11800674304}],"block_devices":[{"name":"super","first_logical_sector":2048,"alignment_bytes":1048576,"alignment_offset_bytes":0,"declared_size_bytes":11811160064,"flags":0}],"partition_names":["odm_a","odm_b","product_a","product_b","system_a","system_b","system_dlkm_a","system_dlkm_b","system_ext_a","system_ext_b","vendor_a","vendor_b","vendor_dlkm_a","vendor_dlkm_b","mi_ext_a","mi_ext_b"],"extent_count":8,"metadata_sha256":"c6727c8fb12d45901ceb863bc4f2f8150c920095314f5bfd0174707764e0240c","slot":2,"copy":"primary","offset":143360},{"major_version":10,"minor_version":2,"header_size":256,"header_checksum_verified":true,"table_checksum_verified":true,"tables_size":1232,"header_flags":1,"groups":[{"name":"default","flags":0,"maximum_size_bytes":0},{"name":"qti_dynamic_partitions_a","flags":0,"maximum_size_bytes":11800674304},{"name":"qti_dynamic_partitions_b","flags":0,"maximum_size_bytes":11800674304}],"block_devices":[{"name":"super","first_logical_sector":2048,"alignment_bytes":1048576,"alignment_offset_bytes":0,"declared_size_bytes":11811160064,"flags":0}],"partition_names":["odm_a","odm_b","product_a","product_b","system_a","system_b","system_dlkm_a","system_dlkm_b","system_ext_a","system_ext_b","vendor_a","vendor_b","vendor_dlkm_a","vendor_dlkm_b","mi_ext_a","mi_ext_b"],"extent_count":8,"metadata_sha256":"c6727c8fb12d45901ceb863bc4f2f8150c920095314f5bfd0174707764e0240c","slot":0,"copy":"backup","offset":208896},{"major_version":10,"minor_version":2,"header_size":256,"header_checksum_verified":true,"table_checksum_verified":true,"tables_size":1232,"header_flags":1,"groups":[{"name":"default","flags":0,"maximum_size_bytes":0},{"name":"qti_dynamic_partitions_a","flags":0,"maximum_size_bytes":11800674304},{"name":"qti_dynamic_partitions_b","flags":0,"maximum_size_bytes":11800674304}],"block_devices":[{"name":"super","first_logical_sector":2048,"alignment_bytes":1048576,"alignment_offset_bytes":0,"declared_size_bytes":11811160064,"flags":0}],"partition_names":["odm_a","odm_b","product_a","product_b","system_a","system_b","system_dlkm_a","system_dlkm_b","system_ext_a","system_ext_b","vendor_a","vendor_b","vendor_dlkm_a","vendor_dlkm_b","mi_ext_a","mi_ext_b"],"extent_count":8,"metadata_sha256":"c6727c8fb12d45901ceb863bc4f2f8150c920095314f5bfd0174707764e0240c","slot":1,"copy":"backup","offset":274432},{"major_version":10,"minor_version":2,"header_size":256,"header_checksum_verified":true,"table_checksum_verified":true,"tables_size":1232,"header_flags":1,"groups":[{"name":"default","flags":0,"maximum_size_bytes":0},{"name":"qti_dynamic_partitions_a","flags":0,"maximum_size_bytes":11800674304},{"name":"qti_dynamic_partitions_b","flags":0,"maximum_size_bytes":11800674304}],"block_devices":[{"name":"super","first_logical_sector":2048,"alignment_bytes":1048576,"alignment_offset_bytes":0,"declared_size_bytes":11811160064,"flags":0}],"partition_names":["odm_a","odm_b","product_a","product_b","system_a","system_b","system_dlkm_a","system_dlkm_b","system_ext_a","system_ext_b","vendor_a","vendor_b","vendor_dlkm_a","vendor_dlkm_b","mi_ext_a","mi_ext_b"],"extent_count":8,"metadata_sha256":"c6727c8fb12d45901ceb863bc4f2f8150c920095314f5bfd0174707764e0240c","slot":2,"copy":"backup","offset":339968}],"reference_super_declared_size_bytes":11811160064,"reference_group_budgets":{"qti_dynamic_partitions_a":11800674304,"qti_dynamic_partitions_b":11800674304},"conservative_single_group_image_budget_bytes":11800674304,"budget_excludes_additional_alignment_and_rebuilt_avb_overhead":true,"actual_phone_gpt_capacity_verified":false,"target_android17_group_fit_verified":false,"scope":"Geometry declared by the exact EU package. This is not a measurement of the phone GPT or permission to repartition. Group maxima are limits, not simultaneous allocated usage.","source_rom":"xiaomi.eu OS3.0.314.0.WOACNXM","source_archive_sha256":"9c1eced1591d5ad28998e7731a0555ce824074fdfe2061e7cad43b59da835157","full_archive_sha256_verified":true,"source_member":"images/super.img.0","member_size":743936240,"member_zip_crc32":"7549139a","member_crc_verified_separately":false,"source_authentication":"Entire archive SHA256 verified before reading its bounded member prefix.","phone_accessed":false,"source_modified":false}
+{
+  "sparse": {
+    "major_version": 1,
+    "minor_version": 0,
+    "block_size": 4096,
+    "total_blocks": 2883584,
+    "expanded_image_bytes": 11811160064,
+    "total_chunks": 17,
+    "prefix_chunks_processed": 3,
+    "member_uncompressed_bytes_read": 401476,
+    "sparse_image_checksum_field": 0,
+    "whole_sparse_crc_verified": false
+  },
+  "geometry": {
+    "metadata_max_size": 65536,
+    "metadata_slot_count": 3,
+    "logical_block_size": 4096,
+    "sha256": "bb51bbfa583316a57f8a78459c926727d8d4a007b1b43129613294c4f84e1108",
+    "checksum_verified": true
+  },
+  "metadata_copies": [
+    {
+      "major_version": 10,
+      "minor_version": 2,
+      "header_size": 256,
+      "header_checksum_verified": true,
+      "table_checksum_verified": true,
+      "tables_size": 1232,
+      "header_flags": 1,
+      "groups": [
+        {
+          "name": "default",
+          "flags": 0,
+          "maximum_size_bytes": 0
+        },
+        {
+          "name": "qti_dynamic_partitions_a",
+          "flags": 0,
+          "maximum_size_bytes": 11800674304
+        },
+        {
+          "name": "qti_dynamic_partitions_b",
+          "flags": 0,
+          "maximum_size_bytes": 11800674304
+        }
+      ],
+      "block_devices": [
+        {
+          "name": "super",
+          "first_logical_sector": 2048,
+          "alignment_bytes": 1048576,
+          "alignment_offset_bytes": 0,
+          "declared_size_bytes": 11811160064,
+          "flags": 0
+        }
+      ],
+      "partition_names": [
+        "odm_a",
+        "odm_b",
+        "product_a",
+        "product_b",
+        "system_a",
+        "system_b",
+        "system_dlkm_a",
+        "system_dlkm_b",
+        "system_ext_a",
+        "system_ext_b",
+        "vendor_a",
+        "vendor_b",
+        "vendor_dlkm_a",
+        "vendor_dlkm_b",
+        "mi_ext_a",
+        "mi_ext_b"
+      ],
+      "extent_count": 8,
+      "metadata_sha256": "c6727c8fb12d45901ceb863bc4f2f8150c920095314f5bfd0174707764e0240c",
+      "slot": 0,
+      "copy": "primary",
+      "offset": 12288
+    },
+    {
+      "major_version": 10,
+      "minor_version": 2,
+      "header_size": 256,
+      "header_checksum_verified": true,
+      "table_checksum_verified": true,
+      "tables_size": 1232,
+      "header_flags": 1,
+      "groups": [
+        {
+          "name": "default",
+          "flags": 0,
+          "maximum_size_bytes": 0
+        },
+        {
+          "name": "qti_dynamic_partitions_a",
+          "flags": 0,
+          "maximum_size_bytes": 11800674304
+        },
+        {
+          "name": "qti_dynamic_partitions_b",
+          "flags": 0,
+          "maximum_size_bytes": 11800674304
+        }
+      ],
+      "block_devices": [
+        {
+          "name": "super",
+          "first_logical_sector": 2048,
+          "alignment_bytes": 1048576,
+          "alignment_offset_bytes": 0,
+          "declared_size_bytes": 11811160064,
+          "flags": 0
+        }
+      ],
+      "partition_names": [
+        "odm_a",
+        "odm_b",
+        "product_a",
+        "product_b",
+        "system_a",
+        "system_b",
+        "system_dlkm_a",
+        "system_dlkm_b",
+        "system_ext_a",
+        "system_ext_b",
+        "vendor_a",
+        "vendor_b",
+        "vendor_dlkm_a",
+        "vendor_dlkm_b",
+        "mi_ext_a",
+        "mi_ext_b"
+      ],
+      "extent_count": 8,
+      "metadata_sha256": "c6727c8fb12d45901ceb863bc4f2f8150c920095314f5bfd0174707764e0240c",
+      "slot": 1,
+      "copy": "primary",
+      "offset": 77824
+    },
+    {
+      "major_version": 10,
+      "minor_version": 2,
+      "header_size": 256,
+      "header_checksum_verified": true,
+      "table_checksum_verified": true,
+      "tables_size": 1232,
+      "header_flags": 1,
+      "groups": [
+        {
+          "name": "default",
+          "flags": 0,
+          "maximum_size_bytes": 0
+        },
+        {
+          "name": "qti_dynamic_partitions_a",
+          "flags": 0,
+          "maximum_size_bytes": 11800674304
+        },
+        {
+          "name": "qti_dynamic_partitions_b",
+          "flags": 0,
+          "maximum_size_bytes": 11800674304
+        }
+      ],
+      "block_devices": [
+        {
+          "name": "super",
+          "first_logical_sector": 2048,
+          "alignment_bytes": 1048576,
+          "alignment_offset_bytes": 0,
+          "declared_size_bytes": 11811160064,
+          "flags": 0
+        }
+      ],
+      "partition_names": [
+        "odm_a",
+        "odm_b",
+        "product_a",
+        "product_b",
+        "system_a",
+        "system_b",
+        "system_dlkm_a",
+        "system_dlkm_b",
+        "system_ext_a",
+        "system_ext_b",
+        "vendor_a",
+        "vendor_b",
+        "vendor_dlkm_a",
+        "vendor_dlkm_b",
+        "mi_ext_a",
+        "mi_ext_b"
+      ],
+      "extent_count": 8,
+      "metadata_sha256": "c6727c8fb12d45901ceb863bc4f2f8150c920095314f5bfd0174707764e0240c",
+      "slot": 2,
+      "copy": "primary",
+      "offset": 143360
+    },
+    {
+      "major_version": 10,
+      "minor_version": 2,
+      "header_size": 256,
+      "header_checksum_verified": true,
+      "table_checksum_verified": true,
+      "tables_size": 1232,
+      "header_flags": 1,
+      "groups": [
+        {
+          "name": "default",
+          "flags": 0,
+          "maximum_size_bytes": 0
+        },
+        {
+          "name": "qti_dynamic_partitions_a",
+          "flags": 0,
+          "maximum_size_bytes": 11800674304
+        },
+        {
+          "name": "qti_dynamic_partitions_b",
+          "flags": 0,
+          "maximum_size_bytes": 11800674304
+        }
+      ],
+      "block_devices": [
+        {
+          "name": "super",
+          "first_logical_sector": 2048,
+          "alignment_bytes": 1048576,
+          "alignment_offset_bytes": 0,
+          "declared_size_bytes": 11811160064,
+          "flags": 0
+        }
+      ],
+      "partition_names": [
+        "odm_a",
+        "odm_b",
+        "product_a",
+        "product_b",
+        "system_a",
+        "system_b",
+        "system_dlkm_a",
+        "system_dlkm_b",
+        "system_ext_a",
+        "system_ext_b",
+        "vendor_a",
+        "vendor_b",
+        "vendor_dlkm_a",
+        "vendor_dlkm_b",
+        "mi_ext_a",
+        "mi_ext_b"
+      ],
+      "extent_count": 8,
+      "metadata_sha256": "c6727c8fb12d45901ceb863bc4f2f8150c920095314f5bfd0174707764e0240c",
+      "slot": 0,
+      "copy": "backup",
+      "offset": 208896
+    },
+    {
+      "major_version": 10,
+      "minor_version": 2,
+      "header_size": 256,
+      "header_checksum_verified": true,
+      "table_checksum_verified": true,
+      "tables_size": 1232,
+      "header_flags": 1,
+      "groups": [
+        {
+          "name": "default",
+          "flags": 0,
+          "maximum_size_bytes": 0
+        },
+        {
+          "name": "qti_dynamic_partitions_a",
+          "flags": 0,
+          "maximum_size_bytes": 11800674304
+        },
+        {
+          "name": "qti_dynamic_partitions_b",
+          "flags": 0,
+          "maximum_size_bytes": 11800674304
+        }
+      ],
+      "block_devices": [
+        {
+          "name": "super",
+          "first_logical_sector": 2048,
+          "alignment_bytes": 1048576,
+          "alignment_offset_bytes": 0,
+          "declared_size_bytes": 11811160064,
+          "flags": 0
+        }
+      ],
+      "partition_names": [
+        "odm_a",
+        "odm_b",
+        "product_a",
+        "product_b",
+        "system_a",
+        "system_b",
+        "system_dlkm_a",
+        "system_dlkm_b",
+        "system_ext_a",
+        "system_ext_b",
+        "vendor_a",
+        "vendor_b",
+        "vendor_dlkm_a",
+        "vendor_dlkm_b",
+        "mi_ext_a",
+        "mi_ext_b"
+      ],
+      "extent_count": 8,
+      "metadata_sha256": "c6727c8fb12d45901ceb863bc4f2f8150c920095314f5bfd0174707764e0240c",
+      "slot": 1,
+      "copy": "backup",
+      "offset": 274432
+    },
+    {
+      "major_version": 10,
+      "minor_version": 2,
+      "header_size": 256,
+      "header_checksum_verified": true,
+      "table_checksum_verified": true,
+      "tables_size": 1232,
+      "header_flags": 1,
+      "groups": [
+        {
+          "name": "default",
+          "flags": 0,
+          "maximum_size_bytes": 0
+        },
+        {
+          "name": "qti_dynamic_partitions_a",
+          "flags": 0,
+          "maximum_size_bytes": 11800674304
+        },
+        {
+          "name": "qti_dynamic_partitions_b",
+          "flags": 0,
+          "maximum_size_bytes": 11800674304
+        }
+      ],
+      "block_devices": [
+        {
+          "name": "super",
+          "first_logical_sector": 2048,
+          "alignment_bytes": 1048576,
+          "alignment_offset_bytes": 0,
+          "declared_size_bytes": 11811160064,
+          "flags": 0
+        }
+      ],
+      "partition_names": [
+        "odm_a",
+        "odm_b",
+        "product_a",
+        "product_b",
+        "system_a",
+        "system_b",
+        "system_dlkm_a",
+        "system_dlkm_b",
+        "system_ext_a",
+        "system_ext_b",
+        "vendor_a",
+        "vendor_b",
+        "vendor_dlkm_a",
+        "vendor_dlkm_b",
+        "mi_ext_a",
+        "mi_ext_b"
+      ],
+      "extent_count": 8,
+      "metadata_sha256": "c6727c8fb12d45901ceb863bc4f2f8150c920095314f5bfd0174707764e0240c",
+      "slot": 2,
+      "copy": "backup",
+      "offset": 339968
+    }
+  ],
+  "reference_super_declared_size_bytes": 11811160064,
+  "reference_group_budgets": {
+    "qti_dynamic_partitions_a": 11800674304,
+    "qti_dynamic_partitions_b": 11800674304
+  },
+  "conservative_single_group_image_budget_bytes": 11800674304,
+  "budget_excludes_additional_alignment_and_rebuilt_avb_overhead": true,
+  "actual_phone_gpt_capacity_verified": false,
+  "target_android17_group_fit_verified": false,
+  "scope": "Geometry declared by the exact EU package. This is not a measurement of the phone GPT or permission to repartition. Group maxima are limits, not simultaneous allocated usage.",
+  "source_rom": "xiaomi.eu OS3.0.314.0.WOACNXM",
+  "source_archive_sha256": "9c1eced1591d5ad28998e7731a0555ce824074fdfe2061e7cad43b59da835157",
+  "full_archive_sha256_verified": true,
+  "source_member": "images/super.img.0",
+  "member_size": 743936240,
+  "member_zip_crc32": "7549139a",
+  "member_crc_verified_separately": false,
+  "source_authentication": "Entire archive SHA256 verified before reading its bounded member prefix.",
+  "phone_accessed": false,
+  "source_modified": false
+}

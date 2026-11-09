@@ -72,6 +72,39 @@ class AppDependenciesTests(unittest.TestCase):
         self.assertEqual(len(result['soft_reference_findings']), 2)
         self.assertEqual({r['kind'] for r in result['soft_reference_findings']}, {'uses-library', 'package-query'})
         self.assertEqual(result['provider_authorities'], ['com.mi.health.provider.device'])
+        self.assertEqual(len(result['required_library_findings']), 1)
+        self.assertEqual(len(result['shared_user_id_findings']), 1)
+        self.assertEqual(len(result['requested_permission_findings']), 1)
+
+    def test_all_component_guards_and_provider_path_rules_are_collected(self):
+        text = f'''E: manifest
+  A: package="com.example.guarded"
+  E: instrumentation
+    A: {PREFIX}permission="com.example.INSTRUMENT"
+  E: application
+    A: {PREFIX}permission="com.example.DEFAULT"
+    E: activity
+      A: {PREFIX}permission="com.example.ACTIVITY"
+    E: activity-alias
+      A: {PREFIX}permission="com.example.ALIAS"
+    E: service
+      A: {PREFIX}permission="com.example.SERVICE"
+    E: receiver
+      A: {PREFIX}permission="com.example.RECEIVER"
+    E: provider
+      A: {PREFIX}readPermission="com.example.READ"
+      A: {PREFIX}writePermission="com.example.WRITE"
+      E: path-permission
+        A: {PREFIX}readPermission="com.example.PATH_READ"
+'''
+        result = parse_manifest(text)
+        self.assertEqual(result['manifest_schema'], 2)
+        self.assertIsNone(result['shared_user_id'])
+        self.assertEqual({c['tag'] for c in result['components']},
+                         {'application', 'activity', 'activity-alias', 'service', 'receiver',
+                          'provider', 'instrumentation', 'path-permission'})
+        self.assertEqual(next(c for c in result['components'] if c['tag'] == 'provider')['android:writePermission'],
+                         'com.example.WRITE')
 
     def test_overlay_full_uri_target_name_and_priority_are_preserved(self):
         app = parse_manifest(f'''E: manifest

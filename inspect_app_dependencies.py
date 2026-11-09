@@ -93,6 +93,7 @@ def parse_manifest(text):
     def selected(tags):
         return [dict(n['attrs'], tag=n['tag']) for n in nodes if n['tag'] in tags]
     return {
+        'manifest_schema': 2,
         'package': package, 'shared_user_id': root['attrs'].get('android:sharedUserId'),
         'provided_libraries': selected({'library', 'static-library', 'sdk-library'}),
         'used_libraries': selected({'uses-library', 'uses-static-library', 'uses-sdk-library', 'uses-native-library'}),
@@ -103,6 +104,10 @@ def parse_manifest(text):
         'queries': selected({'package'}),
         'application': selected({'application'}),
         'overlays': selected({'overlay'}),
+        # Preserve component guards as well as requests. path-permission is a
+        # provider subrule and may independently guard reads/writes of a path.
+        'components': selected({'application', 'activity', 'activity-alias', 'service',
+                                'receiver', 'provider', 'instrumentation', 'path-permission'}),
     }
 
 
@@ -149,7 +154,10 @@ def build_reverse_dependencies(apps):
         selected = [a for a in matches if a['path'] == expected_path]
         item = {'expected_path': expected_path, 'exact_candidate_found': len(selected) == 1,
                 'package_paths': [a['path'] for a in matches], 'hard_dependency_findings': [],
-                'soft_reference_findings': [], 'runtime_optional_status_verified': False}
+                'soft_reference_findings': [], 'required_library_findings': [],
+                'shared_user_id_findings': [], 'requested_permission_findings': [],
+                'legacy_hard_findings_include_permission_requests': True,
+                'runtime_optional_status_verified': False}
         if len(selected) != 1:
             result[identity] = item
             continue
@@ -181,6 +189,14 @@ def build_reverse_dependencies(apps):
             if any(q.get('android:name') == identity for q in app['queries']):
                 item['soft_reference_findings'].append({**base, 'kind': 'package-query', 'name': identity})
         result[identity] = item
+        # Keep the old aggregate for report consumers while exposing meaningful
+        # categories: uses-permission alone is not a package-installation gate.
+        item['required_library_findings'] = [f for f in item['hard_dependency_findings']
+            if f['kind'] in {'uses-library', 'uses-static-library', 'uses-sdk-library', 'uses-native-library'}]
+        item['shared_user_id_findings'] = [f for f in item['hard_dependency_findings']
+            if f['kind'] == 'shared-user-id']
+        item['requested_permission_findings'] = [f for f in item['hard_dependency_findings']
+            if f['kind'] == 'permission-defined-by-candidate']
     return result
 
 
@@ -388,13 +404,16 @@ def main():
     with concurrent.futures.ThreadPoolExecutor(max_workers=args.workers) as pool:
         apps = list(pool.map(lambda item: inspect_apk(item, args.aapt2), apks))
     candidates = build_reverse_dependencies(apps)
-    report = {'phone_accessed': False, 'source_files_modified': False, 'apps_removed': False,
+    report = {'dependency_schema': 2,
+              'phone_accessed': False, 'source_files_modified': False, 'apps_removed': False,
               'scope': 'Declared APK/XML dependencies only; reflective calls and runtime optionality are unverified',
               'apps': apps, 'candidates': candidates, 'xml': inspect_xml(roots, candidates),
               'translation_dumps': dump_translation_targets(roots, args.aapt2, work / 'translation-dumps'),
               'media': inspect_media(roots), 'overlay_configuration': inspect_overlay_configuration(roots['product'])}
     errors = [{'path': x['path'], 'error': x['error']} for x in apps if 'error' in x]
     report['manifest_errors'] = errors
+    report['component_permission_inventory_complete'] = not errors and all(
+        app.get('manifest_schema') == 2 and 'components' in app and 'shared_user_id' in app for app in apps)
     report['dependency_scan_complete'] = not errors and not report['xml']['errors']
     report['automatic_removal_approved'] = False
     output = pathlib.Path(args.output)

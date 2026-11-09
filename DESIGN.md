@@ -6,7 +6,7 @@ Target: Xiaomi 15 Ultra, device `xuanyuan`; requested China HyperOS 4 / Android 
 
 Authenticated source; an audited product image preview and offline root candidate have been produced. See [BUILD-STATUS.md](BUILD-STATUS.md) for the current implementation and validation results; the planned scope below is architectural background. No flashable custom ROM or measured performance improvement has been produced. No phone flash, wipe, reboot, root installation, or bootloader change has been performed.
 
-The owner explicitly waived camera runtime testing. This does not constitute a compatibility guarantee. Structural checks of downloaded files and generated images remain required.
+Camera runtime testing is mandatory for a production release and has not been performed. Structural checks of downloaded files and generated images remain required and do not constitute a compatibility guarantee.
 
 ## Base evidence
 
@@ -40,7 +40,7 @@ The owner explicitly waived camera runtime testing. This does not constitute a c
 
 ## Validation
 
-Nineteen unit checks cover identity, wrong device, delta rejection, truncated protobuf, raw/bzip2/xz partition reconstruction, corruption rejection, kernel KMI detection, filesystem preservation and resource overlay policy selection.
+The discovery suite contains 133 unit tests covering identity, wrong device, delta rejection, truncated protobuf, partition reconstruction, corruption rejection, kernel KMI detection, filesystem preservation, resource overlay policy, AVB/super packaging, deterministic radio archives and offline installation-bundle verification. `test-all.yml` runs the complete suite and real Linux packaging smoke tests on every push and pull request.
 
 ## Sources
 

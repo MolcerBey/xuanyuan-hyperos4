@@ -27,20 +27,18 @@ jobs:
           persist-credentials: false
       - name: Test radio selection and integrity enforcement
         run: python3 -m unittest -v test_eu_radio test_rom_radio
-      - name: Integrate the verified EU global pair
+      - name: Integrate and deterministically package the verified EU global pair
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           mkdir -p work
           if gh api repos/MolcerBey/xuanyuan-hyperos4/actions/artifacts/13433824127/zip > work/eu-radio-reference.zip; then
-            python3 integrate_radio.py --artifact work/eu-radio-reference.zip
+            python3 integrate_radio.py --artifact work/eu-radio-reference.zip --archive out/NOT-INSTALLABLE-Molcer-OS-EU-radio.zip
           else
             rm -f work/eu-radio-reference.zip
             python3 prepare_eu_radio.py
-            python3 integrate_radio.py
+            python3 integrate_radio.py --archive out/NOT-INSTALLABLE-Molcer-OS-EU-radio.zip
           fi
-      - name: Package integrated radio preview
-        run: python3 -m zipfile -c out/NOT-INSTALLABLE-Molcer-OS-EU-radio.zip out/rom-radio
       - name: Attach selected radio to the existing owner draft preview
         env:
           GH_TOKEN: ${{ github.token }}

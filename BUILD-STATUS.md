@@ -8,7 +8,7 @@
 
 - Google Play Store 51.8.09-29 from MindTheGapps Android 17 ARM64 replaces the China Play updater stub. The retained Google runtime APEX and Google Services Framework are byte-identical to the selected release; both SHA256 comparisons passed.
 - Official KernelSU Next 3.4.2 manager; a separate patched `init_boot` candidate uses the stock kernel's detected `android15-6.6` KMI.
-- Chrome and its matching Trichrome library. The pinned NikGapps catalog build is 134.0.6998.135; it is **not current Chrome**. A current browser package or verified Play update path is still needed before release.
+- The historical preview contains Chrome 134.0.6998.135 and its matching Trichrome library. The current builder instead pins the separately verified standalone Chrome 157.0.8103.38 ARM64 APK; no product or final candidate has yet been rebuilt with this newer package. Runtime/default-browser verification and a maintained update path remain required.
 - Eleven reviewed optional packages removed; Xiaomi browser replaced. Camera, gallery, editing dependencies, modem, IMS, carrier and thermal configuration are retained.
 - Molcer OS branding, `tr-TR` default locale and Europe/Istanbul timezone. Six resource-only overlays compiled and passed APK signature verification: five Turkish overlays contain 16,163 strings, and one sets the framework's default-browser resource to Chrome. Runtime activation and full Turkish coverage are not established.
 
@@ -38,11 +38,11 @@ The owner identified their working ROM as Xiaomi.eu OS3.0.314.0.WOACNXM and requ
 
 The owner confirmed GLOBAL hardware and a currently working Turk Telekom connection on Xiaomi.eu. This changes the radio integration assumptions: the China base's modem must not be automatically included in a global-device flash plan. [Xiaomi.eu maintainer documentation](https://miuipolska.pl/xiaomi-15-ultra-xiaomi-eu/) records loss of coverage with the China modem on global Xiaomi 15 Ultra hardware, but its linked Android15 modem is not evidence of compatibility with this Android17 beta. `radio-policy.json` records the requirement to preserve the known-working global modem pending identification and compatibility checks. This is a packaging constraint, not a modem modification already applied to the phone. Device-unique NV/calibration partitions remain untouched. Current source modem/MBN and IMS inspection runs separately in `inspect-radio.yml`.
 
-The source archive must pass its pinned SHA256 and Xiaomi whole-file CMS signature checks before extraction. Full-OTA operation hashes and resulting partition hashes are checked. Nineteen unit checks cover identity, extraction, kernel KMI detection, retained filesystem data and overlay policy selection.
+The source archive must pass its pinned SHA256 and Xiaomi whole-file CMS signature checks before extraction. Full-OTA operation hashes and resulting partition hashes are checked. The complete discovery suite currently contains 133 unit tests; `test-all.yml` runs them together with real Linux lpmake/super smoke checks on every push and pull request.
 
-Static inspection found Turkish MCC 286 APNs, including Turkcell, Vodafone, Türk Telekom and Netgsm. Calls, data, SMS, VoLTE and VoWiFi remain untested. Camera runtime tests were waived by the owner; preserved camera files do not prove flawless operation.
+Static inspection found Turkish MCC 286 APNs, including Turkcell, Vodafone, Türk Telekom and Netgsm. Calls, data, SMS, VoLTE and VoWiFi remain untested. Camera runtime testing is required before any production release and has not been performed; preserved camera files do not prove flawless operation.
 
-Turkish overlays only use resources permitted by the target application's overlay policy. They preserve OEM APKs and signatures and skip missing or format-sensitive strings. Preview signing keys are temporary and are not a production update-signing setup.
+Turkish overlays only use resources permitted by the target application's overlay policy. They preserve OEM APKs and signatures and skip missing or format-sensitive strings. Overlay signing uses a separate permanent local identity; this does not establish production AVB or update-signing trust.
 
 Builds use GitHub's standard public-repository Ubuntu runner. Small reports have seven-day artifact retention; large preview images are split into files below 2 GiB and saved in a draft release for owner review. No phone flashing, wiping or rebooting is performed.
 

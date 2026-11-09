@@ -164,6 +164,54 @@ def integrate(policy, config, reference, output, *, source_dir=None, artifact=No
     return manifest
 
 
+def package_archive(output, archive_path):
+    output = pathlib.Path(output)
+    archive_path = pathlib.Path(archive_path)
+    if output.is_symlink() or not output.is_dir():
+        raise ValueError('Radio staging must be a real directory')
+    if archive_path.exists() or archive_path.is_symlink():
+        raise ValueError('Refusing to overwrite an existing radio archive')
+    expected = {'NOT-INSTALLABLE.txt', 'radio-integration.json', 'SHA256SUMS.txt',
+                'images/modem.img', 'images/modemfirmware.img'}
+    paths = {}
+    for path in output.rglob('*'):
+        if path.is_symlink():
+            raise ValueError('Radio archive inputs must not contain symlinks')
+        if path.is_file():
+            relative = path.relative_to(output).as_posix()
+            if relative not in expected:
+                raise ValueError('Unexpected radio archive input: ' + relative)
+            paths[relative] = path
+    if set(paths) != expected:
+        raise ValueError('Radio staging is incomplete')
+    manifest = json.loads(paths['radio-integration.json'].read_text(encoding='utf-8'))
+    for record in manifest['files']:
+        path = paths[record['path']]
+        if path.stat().st_size != record['size']:
+            raise ValueError('Radio staging changed before archive creation')
+        with path.open('rb') as stream:
+            if checked_digest(stream, record['size']) != record['sha256']:
+                raise ValueError('Radio staging changed before archive creation')
+    archive_path.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        with zipfile.ZipFile(archive_path, 'x', compression=zipfile.ZIP_DEFLATED,
+                             compresslevel=9, allowZip64=True) as archive:
+            for relative in sorted(expected):
+                info = zipfile.ZipInfo(relative, date_time=(1980, 1, 1, 0, 0, 0))
+                info.compress_type = zipfile.ZIP_DEFLATED
+                info.create_system = 3
+                info.external_attr = (stat.S_IFREG | 0o644) << 16
+                with paths[relative].open('rb') as source, archive.open(info, 'w') as target:
+                    while data := source.read(8 * 1024**2):
+                        target.write(data)
+    except BaseException:
+        archive_path.unlink(missing_ok=True)
+        raise
+    with archive_path.open('rb') as stream:
+        digest = hashlib.file_digest(stream, 'sha256').hexdigest()
+    return {'size': archive_path.stat().st_size, 'sha256': digest}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     group = parser.add_mutually_exclusive_group()
@@ -171,6 +219,7 @@ def main():
     group.add_argument('--artifact', help='Prepared EU reference artifact ZIP')
     parser.add_argument('--output', default='out/rom-radio')
     parser.add_argument('--report', default='reports/rom-radio-integration.json')
+    parser.add_argument('--archive', help='Create a deterministic preview ZIP after integration')
     args = parser.parse_args()
     source_dir = args.source_dir or ('out/eu-radio-reference' if not args.artifact else None)
     policy = json.loads(pathlib.Path('radio-policy.json').read_text(encoding='utf-8'))
@@ -180,7 +229,10 @@ def main():
     report = pathlib.Path(args.report)
     report.parent.mkdir(parents=True, exist_ok=True)
     report.write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf-8')
-    print(json.dumps({'status': manifest['status'], 'files': manifest['files'], 'ready_to_flash': False}))
+    result = {'status': manifest['status'], 'files': manifest['files'], 'ready_to_flash': False}
+    if args.archive:
+        result['archive'] = package_archive(args.output, args.archive)
+    print(json.dumps(result))
 
 
 if __name__ == '__main__':

@@ -12,6 +12,8 @@
   "region": "TR",
   "language_target": "tr-TR",
   "camera_runtime_tests": false,
+  "camera_runtime_tests_required_for_release": true,
+  "camera_runtime_tests_waived": false,
   "debloat_policy": "Remove reviewed optional apps; retain camera, telephony, IMS, carrier configuration, security and update dependencies",
   "telephony_runtime_verified": false,
   "status": "audited-product-preview-not-a-flashable-ROM",

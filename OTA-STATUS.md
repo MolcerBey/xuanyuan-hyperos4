@@ -2,7 +2,9 @@
 
 The current identity is **0.2.0-experimental.1**, version code **2026110601**, for global `xuanyuan`, Android 17, base `OS4.0.0.18.XOACNXM`. `version.json` is the version source.
 
-This project now has an offline update-index preparation and signature-verification format. **It does not have an Android OTA updater, an automatic installer, or a recovery-installable OTA ZIP.** The intended future distribution is a manually reviewed full package. The existing assembled candidate has no installer and is not approved for installation.
+This project now has an offline update-index preparation and signature-verification format. **It does not have an Android OTA updater, an automatic installer, or a recovery-installable OTA ZIP.** The intended future distribution is a manually reviewed full package. The assembly workflow is implemented, but no completed final assembly manifest is present in the reviewed local or remote `main` snapshot; no installer is approved for installation.
+
+`candidate-build.json` and `assemble-build.json` deliberately default to `build_enabled: false`. Enabling them requires separately reviewed, immutable input records; the disabled defaults do not represent a completed or runnable candidate build.
 
 ## Current index states
 
@@ -22,11 +24,25 @@ Canonical JSON is UTF-8, with sorted object keys, no insignificant separators an
 b"Molcer OS update index v1\0" + canonical_json_bytes
 ```
 
-The request contains the SHA256 of that complete domain-separated input. A separate local signer must first validate the request, then sign its digest using RSA4096 PKCS#1 v1.5 with SHA256. `release_metadata.py` never reads private keys. The response JSON contains `schema`, `algorithm`, `digest_sha256`, `public_key_avb_sha256` and a 512-byte lowercase `signature_hex`.
+The request contains the SHA256 of that complete domain-separated input. `sign_update_index.py` validates the request, signs its digest using RSA4096 PKCS#1 v1.5 with SHA256 and verifies the response using public material. `release_metadata.py` never reads private keys. The response JSON contains `schema`, `algorithm`, `digest_sha256`, `public_key_avb_sha256` and a 512-byte lowercase `signature_hex`.
+
+The local AVB and update signers accept the existing Current-User DPAPI-protected RSA XML identity with its purpose-specific entropy. `sign_oled_overlay.py` separately unwraps the existing DPAPI-protected PKCS#12 overlay identity. Temporary plaintext inputs are confined to fresh temporary directories and removed; private keys are never written to signature outputs or CI. Every produced signature is verified against the pinned public key or certificate before use. These signing steps do not mark a candidate installable or runtime-verified.
 
 These detached metadata signatures are not Xiaomi OTA signatures and do not establish OEM recovery/update-engine trust. They do not prove bootloader acceptance, actual device GPT capacity, camera operation or modem/IMS interoperability.
 
 ## Commands
+
+After the Linux customization workflow produces the unsigned OLED artifact, sign it locally and create its source-bound manifest:
+
+```bash
+python3 sign_oled_overlay.py --unsigned out/unsigned-oled --report reports/oled-overlays.json
+```
+
+After validating an unsigned candidate's complete signing scope and stock AVB images, create its two local AVB signatures:
+
+```bash
+python3 sign_avb_requests.py --requests out/avb-prepared/signing-requests.json --stock-avb work/stock-avb --output inputs/avb-signatures.json
+```
 
 Prepare an empty index, without a candidate:
 
@@ -46,11 +62,25 @@ Validate the exact request before separate local signing:
 python3 release_metadata.py validate-request --index out/update-index.json --request out/update-signing-request.json
 ```
 
+Sign and independently verify the exact validated update request locally:
+
+```bash
+python3 sign_update_index.py --index out/update-index.json --request out/update-signing-request.json --output out/update-signature.json
+```
+
 Verify the detached signature using public material only:
 
 ```bash
 python3 release_metadata.py verify --index out/update-index.json --signature out/update-signature.json --minimum-version-code 2026110601
 ```
+
+After a final assembly, verify an exact local directory containing all 39 physical/super images without accessing a phone:
+
+```bash
+python3 verify_installation_package.py --manifest reports/assembled-candidate-manifest.json --images work/installation-images --output reports/installation-package-verification.json
+```
+
+This verifier rejects missing, additional or changed images. It deliberately does not implement fastboot execution, define an installation order or mark the package as ready to flash.
 
 Outputs are never overwritten. When preparing a later version, supply `--previous-index` and `--previous-signature` together. The prior signature is verified and the new version code must strictly increase. A consumer must retain its highest accepted version code and pass it as `--minimum-version-code`; a signature alone cannot prevent replay of an older valid index.
 

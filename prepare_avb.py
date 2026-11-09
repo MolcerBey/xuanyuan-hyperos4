@@ -44,6 +44,30 @@ def load_tool(path, config='packaging-tools.json'):
     spec = importlib.util.spec_from_file_location('molcer_avbtool', path)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
+    if os.name == 'nt':
+        def verify_vbmeta_signature(header, blob):
+            parsed, _, auth, aux, canonical = parse_blob(module, blob)
+            if header.encode() != canonical[:256]:
+                return False
+            if header.algorithm_type == 0:
+                return True
+            if (header.algorithm_type != 2 or header.hash_size != 32
+                    or header.signature_size != 512 or header.public_key_size != 1032):
+                return False
+            key = aux[header.public_key_offset:header.public_key_offset + header.public_key_size]
+            if struct.unpack_from('>I', key)[0] != 4096:
+                return False
+            modulus = int.from_bytes(key[8:520], 'big')
+            signature = int.from_bytes(auth[header.signature_offset:header.signature_offset + 512], 'big')
+            if modulus.bit_length() != 4096 or not modulus & 1 or signature >= modulus:
+                return False
+            wanted = hashlib.sha256(canonical[:256] + aux).digest()
+            if auth[header.hash_offset:header.hash_offset + 32] != wanted:
+                return False
+            expected = module.ALGORITHMS[ALGORITHM].padding + wanted
+            return pow(signature, 65537, modulus).to_bytes(512, 'big') == expected
+
+        module.verify_vbmeta_signature = verify_vbmeta_signature
     return module
 
 

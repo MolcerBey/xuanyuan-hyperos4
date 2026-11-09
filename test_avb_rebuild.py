@@ -197,6 +197,9 @@ class AVBRebuildTests(unittest.TestCase):
             response['signature_hex'] = (root / 'signature').read_bytes().hex()
             signed = apply_signature(m, request, response, key, public)
             self.assertTrue(m.verify_vbmeta_signature(m.AvbVBMetaHeader(signed[:256]), signed))
+            tampered = bytearray(signed)
+            tampered[256 + parsed.signature_offset] ^= 1
+            self.assertFalse(m.verify_vbmeta_signature(m.AvbVBMetaHeader(tampered[:256]), tampered))
             verify_public_signature(m, signed)
             bad = copy.deepcopy(request); b = bytearray(blob); b[-1] ^= 1; bad['unsigned_blob_hex'] = b.hex()
             with self.assertRaisesRegex(ValueError, 'blob hash'):

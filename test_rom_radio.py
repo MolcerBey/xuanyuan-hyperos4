@@ -40,6 +40,39 @@ class RadioIntegrationTests(unittest.TestCase):
             self.assertFalse(report['ready_to_flash'])
             self.assertFalse(report['installable_rom_produced'])
 
+    def test_deterministic_archive_repeats_exact_bytes(self):
+        from integrate_radio import package_archive
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp); source, policy, config, ref = self.fixture(root)
+            integrate(policy, config, ref, root / 'out', source_dir=source)
+            archive = root / 'radio.zip'
+            first = package_archive(root / 'out', archive)
+            contents = archive.read_bytes()
+            archive.unlink()
+            second = package_archive(root / 'out', archive)
+            self.assertEqual(archive.read_bytes(), contents)
+            self.assertEqual(first, second)
+            with zipfile.ZipFile(archive) as packaged:
+                self.assertEqual(set(packaged.namelist()), {'NOT-INSTALLABLE.txt', 'radio-integration.json',
+                    'SHA256SUMS.txt', 'images/modem.img', 'images/modemfirmware.img'})
+                self.assertTrue(all(item.date_time == (1980, 1, 1, 0, 0, 0) for item in packaged.infolist()))
+
+    def test_archive_rejects_overwrite_and_changed_image(self):
+        from integrate_radio import package_archive
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp); source, policy, config, ref = self.fixture(root)
+            integrate(policy, config, ref, root / 'out', source_dir=source)
+            archive = root / 'radio.zip'
+            package_archive(root / 'out', archive)
+            with self.assertRaisesRegex(ValueError, 'overwrite'):
+                package_archive(root / 'out', archive)
+            archive.unlink()
+            with (root / 'out/images/modem.img').open('ab') as stream:
+                stream.write(b'changed')
+            with self.assertRaisesRegex(ValueError, 'changed'):
+                package_archive(root / 'out', archive)
+            self.assertFalse(archive.exists())
+
     def test_bad_second_image_hash_rejects_before_any_output(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = pathlib.Path(tmp); source, policy, config, ref = self.fixture(root)
