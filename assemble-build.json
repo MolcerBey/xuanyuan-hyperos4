@@ -1,5 +1,19 @@
 {
   "schema": 1,
-  "build_enabled": false,
-  "status": "disabled-until-reviewed-signing-inputs-and-a-candidate-manifest-are-pinned"
+  "build_enabled": true,
+  "status": "enabled-for-hash-bound-offline-assembly",
+  "source_commit": "f6e13aba5442361c0247f28c6d203c368a7433b4",
+  "signing_requests": {
+    "path": "inputs/signing-requests-f6e13ab.json",
+    "sha256": "65808ac09f906fafc14dd9923d1b20517be13cb8bd20d3f16487c9b6c6959458"
+  },
+  "signatures": {
+    "path": "inputs/avb-signatures-f6e13ab.json",
+    "sha256": "8f31c297cc4497ed54ba30bc57f9449e7b8bd632c8e498c2b667a588038b250e"
+  },
+  "candidate_manifest": {
+    "asset_id": 727144393,
+    "size": 4958,
+    "sha256": "9ccadca3363c60739977d3a2271dce0884832747a4ff9bba20ade0911582ad79"
+  }
 }
