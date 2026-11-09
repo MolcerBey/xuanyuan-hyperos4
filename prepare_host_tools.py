@@ -14,6 +14,7 @@ import re
 import subprocess
 import tempfile
 import time
+import urllib.error
 import urllib.request
 
 
@@ -57,29 +58,40 @@ def download(item, commit):
     url = f"{REPOSITORY}/+/{commit}/{item['path']}?format=TEXT"
     # Gitiles returns base64, not raw bytes. Bound both encoding and decoded size.
     limit = 4 * ((item['size'] + 2) // 3) + 1024
-    deadline = time.monotonic() + 120
-    chunks = []
-    total = 0
-    with urllib.request.urlopen(url, timeout=30) as response:
-        if not response.geturl().startswith(REPOSITORY + '/'):
-            raise ValueError('Unexpected host-tool download redirect')
-        length = response.headers.get('Content-Length')
-        if length is not None and int(length) > limit:
-            raise ValueError('Encoded host-tool response exceeds the size limit')
-        while True:
-            if time.monotonic() > deadline:
-                raise TimeoutError('Host-tool download exceeded 120 seconds')
-            chunk = response.read(min(65536, limit + 1 - total))
-            if not chunk:
-                break
-            chunks.append(chunk)
-            total += len(chunk)
-            if total > limit:
-                raise ValueError('Encoded host-tool response exceeds the size limit')
-    encoded = b''.join(chunks)
-    data = base64.b64decode(encoded, validate=True)
-    verify_bytes(data, item)
-    return data, url
+    for attempt in range(4):
+        try:
+            deadline = time.monotonic() + 120
+            chunks = []
+            total = 0
+            with urllib.request.urlopen(url, timeout=30) as response:
+                if not response.geturl().startswith(REPOSITORY + '/'):
+                    raise ValueError('Unexpected host-tool download redirect')
+                length = response.headers.get('Content-Length')
+                if length is not None and int(length) > limit:
+                    raise ValueError('Encoded host-tool response exceeds the size limit')
+                while True:
+                    if time.monotonic() > deadline:
+                        raise TimeoutError('Host-tool download exceeded 120 seconds')
+                    chunk = response.read(min(65536, limit + 1 - total))
+                    if not chunk:
+                        break
+                    chunks.append(chunk)
+                    total += len(chunk)
+                    if total > limit:
+                        raise ValueError('Encoded host-tool response exceeds the size limit')
+            encoded = b''.join(chunks)
+            data = base64.b64decode(encoded, validate=True)
+            verify_bytes(data, item)
+            return data, url
+        except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError) as error:
+            transient = (not isinstance(error, urllib.error.HTTPError)
+                         or error.code in {429, 500, 502, 503, 504})
+            if not transient or attempt == 3:
+                raise
+            delay = 2**attempt
+            print(f'Transient host-tool download failure; retrying in {delay}s: '
+                  f'{item["path"]}', flush=True)
+            time.sleep(delay)
 
 
 def atomic_write(path, data):
