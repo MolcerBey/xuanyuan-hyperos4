@@ -489,6 +489,7 @@ def assemble(config_path):
     names, expected = selected_partitions(inspection, verified)
     extract('work/base.zip', names + ['product'], 'work/images')
     shutil.copyfile('reports/extracted-images.json', 'reports/assembly-source-images.json')
+    os.link('work/images/product.img', 'work/assembly/stock-product.img')
     extract('work/base.zip', ['vbmeta', 'vbmeta_system'], 'work/stock-avb')
     shutil.copyfile('reports/extracted-images.json', 'reports/assembly-stock-avb.json')
     pathlib.Path('work/base.zip').unlink()
@@ -497,6 +498,8 @@ def assemble(config_path):
     pathlib.Path('work/candidate-images').mkdir()
     restore_images(images, 'work/candidate-images')
     os.link('work/candidate-images/init_boot.img', 'work/images/init_boot.img')
+    pathlib.Path('work/images/product.img').unlink()
+    os.link('work/candidate-images/product.img', 'work/images/product.img')
     radio = prepare_radio()
     run_script('prepare_avb.py', 'apply', '--requests', requests, '--signatures', signatures,
                '--images', 'work/images', '--output', 'out/avb-signed')
@@ -507,6 +510,8 @@ def assemble(config_path):
         raise ValueError('Complete AVB verification is mandatory before super construction')
     for name in ('vbmeta', 'vbmeta_system'):
         os.link(pathlib.Path('out/avb-signed', name + '.img'), pathlib.Path('work/images', name + '.img'))
+    pathlib.Path('work/images/product.img').unlink()
+    os.link('work/assembly/stock-product.img', 'work/images/product.img')
     run_script('build_super.py', '--images', 'work/images', '--product', 'work/candidate-images/product.img',
                '--product-record', requests, '--output', 'out/super/super.img', '--report', 'reports/super-build.json')
     super_report = read_json('reports/super-build.json')
