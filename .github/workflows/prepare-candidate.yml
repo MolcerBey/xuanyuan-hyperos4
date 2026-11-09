@@ -77,28 +77,28 @@ jobs:
         run: |
           if gh api repos/MolcerBey/xuanyuan-hyperos4/actions/artifacts/13452379210/zip > work/chrome-reference.zip; then
             python3 - <<'PY'
-            import hashlib, json, pathlib, zipfile
-            config = json.loads(pathlib.Path('chrome-candidate.json').read_text())
-            source = pathlib.Path('work/chrome-reference.zip')
-            if source.stat().st_size > config['size'] + 8 * 1024**2:
-                raise ValueError('Chrome reference archive exceeds its bounded size')
-            member = 'out/chrome-candidate/Chrome.apk'
-            output = pathlib.Path('work/verifiedChrome.apk')
-            measured = hashlib.sha256()
-            length = 0
-            with zipfile.ZipFile(source) as archive:
-                entries = [item for item in archive.infolist() if item.filename == member]
-                if len(entries) != 1 or entries[0].file_size != config['size'] or entries[0].flag_bits & 1:
-                    raise ValueError('Expected exactly the pinned Chrome APK member')
-                with archive.open(entries[0]) as stream, output.open('xb') as target:
-                    while data := stream.read(8 * 1024**2):
-                        length += len(data)
-                        if length > config['size']:
-                            raise ValueError('Chrome ZIP member exceeds its pinned size')
-                        measured.update(data)
-                        target.write(data)
-            if length != config['size'] or measured.hexdigest() != config['sha256']:
-                raise ValueError('Chrome artifact does not match the pinned APK bytes')
+          import hashlib, json, pathlib, zipfile
+          config = json.loads(pathlib.Path('chrome-candidate.json').read_text())
+          source = pathlib.Path('work/chrome-reference.zip')
+          if source.stat().st_size > config['size'] + 8 * 1024**2:
+              raise ValueError('Chrome reference archive exceeds its bounded size')
+          member = 'out/chrome-candidate/Chrome.apk'
+          output = pathlib.Path('work/verifiedChrome.apk')
+          measured = hashlib.sha256()
+          length = 0
+          with zipfile.ZipFile(source) as archive:
+              entries = [item for item in archive.infolist() if item.filename == member]
+              if len(entries) != 1 or entries[0].file_size != config['size'] or entries[0].flag_bits & 1:
+                  raise ValueError('Expected exactly the pinned Chrome APK member')
+              with archive.open(entries[0]) as stream, output.open('xb') as target:
+                  while data := stream.read(8 * 1024**2):
+                      length += len(data)
+                      if length > config['size']:
+                          raise ValueError('Chrome ZIP member exceeds its pinned size')
+                      measured.update(data)
+                      target.write(data)
+          if length != config['size'] or measured.hexdigest() != config['sha256']:
+              raise ValueError('Chrome artifact does not match the pinned APK bytes')
           PY
           python3 fetch_chrome_candidate.py --input work/verifiedChrome.apk
           else
