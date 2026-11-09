@@ -84,6 +84,16 @@ def pinned_input(record):
     return actual
 
 
+def asset_download_timeout():
+    try:
+        timeout = int(os.environ.get('MOLCER_ASSET_DOWNLOAD_TIMEOUT', '1200'))
+    except ValueError as error:
+        raise ValueError('Asset download timeout must be an integer') from error
+    if not 60 <= timeout <= 7200:
+        raise ValueError('Asset download timeout must be between 60 and 7200 seconds')
+    return timeout
+
+
 def download_asset(asset_id, expected_size, expected_hash, output):
     """Stream a bounded authenticated GitHub asset without buffering a full chunk."""
     if (type(asset_id) is not int or asset_id <= 0
@@ -95,7 +105,7 @@ def download_asset(asset_id, expected_size, expected_hash, output):
     process = subprocess.Popen(['gh', 'api', f'repos/{REPOSITORY}/releases/assets/{asset_id}',
                                 '-H', 'Accept: application/octet-stream'],
                                stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
-    timer = threading.Timer(1200, process.kill)
+    timer = threading.Timer(asset_download_timeout(), process.kill)
     timer.daemon = True
     timer.start()
     try:
