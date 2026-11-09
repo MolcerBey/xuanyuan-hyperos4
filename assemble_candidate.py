@@ -23,7 +23,7 @@ from inspect_eu_geometry import inspect_window, read_sparse_window
 from extract_partition import extract
 from integrate_radio import integrate
 from prepare_avb import file_digest, read_json
-from publish_candidate import (BUFFER_BYTES, CHUNK_BYTES, REPOSITORY, gh,
+from publish_candidate import (BUFFER_BYTES, CHUNK_BYTES, REPOSITORY, draft_release, gh,
                                save_json, stream_chunks, upload_asset)
 from validate_signing_requests import validate_bundle
 
@@ -410,7 +410,7 @@ def publish_bundle(manifest, files, reports):
     try:
         gh('release', 'create', tag, '--repo', REPOSITORY, '--draft', '--target', commit,
            '--title', 'Molcer OS assembled offline candidate - NOT INSTALLABLE', '--notes-file', note)
-        release = gh('api', f'repos/{REPOSITORY}/releases/tags/{tag}', parse_json=True)
+        release = draft_release(tag)
         if release.get('draft') is not True:
             raise ValueError('Expected a draft assembled candidate release')
         manifest.update({'release_id': release['id'], 'release_url': release['html_url']})

@@ -69,10 +69,19 @@ def stream_chunks(source, directory, prefix, chunk_size=CHUNK_BYTES):
     return {'size': offset, 'sha256': total_hash.hexdigest()}
 
 
+def draft_release(tag):
+    releases = gh('api', f'repos/{REPOSITORY}/releases?per_page=100', parse_json=True)
+    matches = [release for release in releases
+               if release.get('draft') is True and release.get('tag_name') == tag]
+    if len(matches) != 1:
+        raise ValueError('Expected exactly one draft release with the candidate tag')
+    return matches[0]
+
+
 def upload_asset(tag, path, expected_hash, expected_size):
     # A fresh tag and no --clobber prevent silently replacing prior evidence.
     gh('release', 'upload', tag, path, '--repo', REPOSITORY)
-    release = gh('api', f'repos/{REPOSITORY}/releases/tags/{tag}', parse_json=True)
+    release = draft_release(tag)
     if release.get('draft') is not True:
         raise ValueError('Candidate release unexpectedly became public')
     matches = [a for a in release['assets'] if a['name'] == path.name]
@@ -139,7 +148,7 @@ def publish(args):
         gh('release', 'create', tag, '--repo', REPOSITORY, '--draft',
            '--target', commit, '--title', 'Molcer OS unsigned candidate - NOT INSTALLABLE',
            '--notes-file', note)
-        release = gh('api', f'repos/{REPOSITORY}/releases/tags/{tag}', parse_json=True)
+        release = draft_release(tag)
         if release.get('draft') is not True:
             raise ValueError('Expected a draft candidate release')
         manifest.update({'release_id': release['id'], 'release_url': release['html_url']})
