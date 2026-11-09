@@ -12,6 +12,7 @@ import re
 import shutil
 import subprocess
 import tempfile
+import time
 
 from prepare_avb import file_digest, read_json
 from validate_signing_requests import validate_bundle
@@ -69,24 +70,37 @@ def stream_chunks(source, directory, prefix, chunk_size=CHUNK_BYTES):
     return {'size': offset, 'sha256': total_hash.hexdigest()}
 
 
-def draft_release(tag):
-    releases = gh('api', f'repos/{REPOSITORY}/releases?per_page=100', parse_json=True)
-    matches = [release for release in releases
-               if release.get('draft') is True and release.get('tag_name') == tag]
-    if len(matches) != 1:
-        raise ValueError('Expected exactly one draft release with the candidate tag')
-    return matches[0]
+def draft_release(tag, timeout=60):
+    deadline = time.monotonic() + timeout
+    while True:
+        releases = gh('api', f'repos/{REPOSITORY}/releases?per_page=100', parse_json=True)
+        matches = [release for release in releases
+                   if release.get('draft') is True and release.get('tag_name') == tag]
+        if len(matches) == 1:
+            return matches[0]
+        if len(matches) > 1 or time.monotonic() >= deadline:
+            raise ValueError('Expected exactly one draft release with the candidate tag')
+        time.sleep(1)
 
 
 def upload_asset(tag, path, expected_hash, expected_size):
     # A fresh tag and no --clobber prevent silently replacing prior evidence.
     gh('release', 'upload', tag, path, '--repo', REPOSITORY)
-    release = draft_release(tag)
-    if release.get('draft') is not True:
-        raise ValueError('Candidate release unexpectedly became public')
-    matches = [a for a in release['assets'] if a['name'] == path.name]
-    if len(matches) != 1 or matches[0]['size'] != expected_size:
-        raise ValueError('Uploaded release asset length/identity mismatch')
+    deadline = time.monotonic() + 60
+    while True:
+        release = draft_release(tag)
+        if release.get('draft') is not True:
+            raise ValueError('Candidate release unexpectedly became public')
+        matches = [a for a in release['assets'] if a['name'] == path.name]
+        if len(matches) > 1:
+            raise ValueError('Uploaded release asset length/identity mismatch')
+        if len(matches) == 1:
+            if matches[0]['size'] != expected_size:
+                raise ValueError('Uploaded release asset length/identity mismatch')
+            break
+        if time.monotonic() >= deadline:
+            raise ValueError('Uploaded release asset length/identity mismatch')
+        time.sleep(1)
     asset = matches[0]
     remote_digest = asset.get('digest')
     if remote_digest is not None and remote_digest != 'sha256:' + expected_hash:
