@@ -454,8 +454,9 @@ def assemble(config_path):
     policy = read_json('radio-policy.json')
     if policy.get('phone_access_allowed') is not False or policy.get('installation_allowed') is not False:
         raise ValueError('No-phone/no-installation policy is required')
-    for directory in ('work/images', 'work/stock-avb', 'work/assembly', 'out/avb-signed',
-                      'out/metadata-precheck', 'out/super', 'out/assembled-candidate', 'out/rom-radio'):
+    for directory in ('work/images', 'work/stock-avb', 'work/assembly', 'work/candidate-images',
+                      'out/avb-signed', 'out/metadata-precheck', 'out/super',
+                      'out/assembled-candidate', 'out/rom-radio'):
         if pathlib.Path(directory).exists():
             raise ValueError('Assembly requires a fresh output directory: ' + directory)
     pathlib.Path('work/assembly').mkdir(parents=True)
@@ -486,14 +487,16 @@ def assemble(config_path):
         raise ValueError('Fresh source authentication did not pass')
     inspection = read_json('reports/packaging-inspection.json')
     names, expected = selected_partitions(inspection, verified)
-    extract('work/base.zip', names, 'work/images')
+    extract('work/base.zip', names + ['product'], 'work/images')
     shutil.copyfile('reports/extracted-images.json', 'reports/assembly-source-images.json')
     extract('work/base.zip', ['vbmeta', 'vbmeta_system'], 'work/stock-avb')
     shutil.copyfile('reports/extracted-images.json', 'reports/assembly-stock-avb.json')
     pathlib.Path('work/base.zip').unlink()
     validation = validate_bundle(requests, stock_dir='work/stock-avb')
     save_json(pathlib.Path('reports/assembly-signing-scope.json'), validation)
-    restore_images(images, 'work/images')
+    pathlib.Path('work/candidate-images').mkdir()
+    restore_images(images, 'work/candidate-images')
+    os.link('work/candidate-images/init_boot.img', 'work/images/init_boot.img')
     radio = prepare_radio()
     run_script('prepare_avb.py', 'apply', '--requests', requests, '--signatures', signatures,
                '--images', 'work/images', '--output', 'out/avb-signed')
@@ -504,11 +507,13 @@ def assemble(config_path):
         raise ValueError('Complete AVB verification is mandatory before super construction')
     for name in ('vbmeta', 'vbmeta_system'):
         os.link(pathlib.Path('out/avb-signed', name + '.img'), pathlib.Path('work/images', name + '.img'))
-    run_script('build_super.py', '--images', 'work/images', '--product', 'work/images/product.img',
+    run_script('build_super.py', '--images', 'work/images', '--product', 'work/candidate-images/product.img',
                '--product-record', requests, '--output', 'out/super/super.img', '--report', 'reports/super-build.json')
     super_report = read_json('reports/super-build.json')
     if super_report.get('status') != 'offline-sparse-super-candidate-verified':
         raise ValueError('Super image verification did not complete')
+    pathlib.Path('work/images/product.img').unlink()
+    os.link('work/candidate-images/product.img', 'work/images/product.img')
     wanted = set(names) | CUSTOM | {'modem', 'modemfirmware'}
     found = {p.stem for p in pathlib.Path('work/images').glob('*.img')}
     if found != wanted or any(protected_partition(n) or n == 'countrycode' for n in found):
