@@ -363,22 +363,15 @@ def payload_smoke_test():
 
 def prepare_radio():
     archive = pathlib.Path('work/eu-radio-reference.zip')
-    # This existing small artifact is a cache only: integration checks both exact
-    # EU image hashes. Expiry falls back to the authenticated full EU archive.
+    cache = read_json('radio-cache.json')
+    if cache.get('schema') != 1:
+        raise ValueError('Expected the pinned durable EU radio cache')
     with archive.open('xb') as output:
-        attempt = subprocess.run(['gh', 'api', f'repos/{REPOSITORY}/actions/artifacts/13433824127/zip'],
-                                 stdout=output, stderr=subprocess.DEVNULL, timeout=900)
-    if attempt.returncode == 0:
+        download_asset(cache['asset_id'], cache['size'], cache['sha256'], output)
+    try:
         run_script('integrate_radio.py', '--artifact', archive)
+    finally:
         archive.unlink()
-    else:
-        archive.unlink()
-        run_script('prepare_eu_radio.py')
-        run_script('integrate_radio.py')
-        name = read_json('eu-radio-source.json')['archive']
-        if pathlib.PurePosixPath(name).name != name or '\\' in name:
-            raise ValueError('Unexpected EU cache archive path')
-        pathlib.Path('work', name).unlink()
     report = read_json('reports/rom-radio-integration.json')
     if (report.get('phone_accessed') is not False or report.get('installers_executed') is not False
             or len(report['files']) != 2

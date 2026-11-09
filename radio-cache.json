@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "purpose": "authenticated-eu-radio-reference-cache",
+  "repository": "MolcerBey/xuanyuan-hyperos4",
+  "release_id": 435155024,
+  "asset_id": 727282463,
+  "asset_name": "EU-3.0.314-global-radio-reference.zip",
+  "size": 181771983,
+  "sha256": "173f0f241a3c082a454b9d1fcfee63a423e978761fb3409bc2bdd44bcb81bf2e",
+  "source_archive_sha256": "9c1eced1591d5ad28998e7731a0555ce824074fdfe2061e7cad43b59da835157"
+}
