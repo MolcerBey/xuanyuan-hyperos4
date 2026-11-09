@@ -2,9 +2,9 @@
 
 The current identity is **0.2.0-experimental.1**, version code **2026110601**, for global `xuanyuan`, Android 17, base `OS4.0.0.18.XOACNXM`. `version.json` is the version source.
 
-This project now has an offline update-index preparation and signature-verification format. **It does not have an Android OTA updater, an automatic installer, or a recovery-installable OTA ZIP.** The intended future distribution is a manually reviewed full package. The assembly workflow is implemented, but no completed final assembly manifest is present in the reviewed local or remote `main` snapshot; no installer is approved for installation.
+This project now has an offline update-index preparation and signature-verification format. **It does not have an Android OTA updater, an automatic installer, or a recovery-installable OTA ZIP.** Distribution is a manually reviewed full package. The completed final assembly manifest is `reports/assembled-candidate-manifest.json`; the signed candidate index is `updates/experimental-0.2.0.json`. A separate owner-invoked `install_candidate.py` implements the manual fastboot plan, but real-device execution and runtime behavior remain unverified.
 
-`candidate-build.json` and `assemble-build.json` deliberately default to `build_enabled: false`. Enabling them requires separately reviewed, immutable input records; the disabled defaults do not represent a completed or runnable candidate build.
+`candidate-build.json` and `assemble-build.json` are enabled only for separately reviewed, immutable hash-bound inputs. These switches do not represent production approval, public availability or device validation.
 
 ## Current index states
 
@@ -80,7 +80,7 @@ After a final assembly, verify an exact local directory containing all 39 physic
 python3 verify_installation_package.py --manifest reports/assembled-candidate-manifest.json --images work/installation-images --output reports/installation-package-verification.json
 ```
 
-This verifier rejects missing, additional or changed images. It deliberately does not implement fastboot execution, define an installation order or mark the package as ready to flash.
+This verifier rejects missing, additional or changed images. It deliberately only verifies package bytes and keeps `ready_to_flash=false`. The separate `install_candidate.py` defines the reviewed 39-image order and optional owner-confirmed fastboot execution; only mock/offline tests have run, and no actual device installation has been performed.
 
 Outputs are never overwritten. When preparing a later version, supply `--previous-index` and `--previous-signature` together. The prior signature is verified and the new version code must strictly increase. A consumer must retain its highest accepted version code and pass it as `--minimum-version-code`; a signature alone cannot prevent replay of an older valid index.
 

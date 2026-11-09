@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "metadata_signatures_verified": true,
+  "full_partition_chain_verified": true,
+  "verified_avb_nodes": [
+    "boot",
+    "recovery",
+    "vbmeta",
+    "vbmeta_system"
+  ],
+  "requests_sha256": "65808ac09f906fafc14dd9923d1b20517be13cb8bd20d3f16487c9b6c6959458",
+  "public_key_avb_sha256": "e0f219527efe07dee4c06fa84551f1aa63f153f7df1f2c73c30aea65cd63a868",
+  "images": {
+    "vbmeta_system": {
+      "sha256": "445a6f57f0758a57ecbb43c1556051990f4ef84b6daa9c0ee3443f4c47ca23b1",
+      "size": 4096
+    },
+    "vbmeta": {
+      "sha256": "0f0ce6d72f36b660fa40c4ccb446e1629abccd167d6ac0cd12d1e8bc53559a7c",
+      "size": 12288
+    }
+  },
+  "avb_flags": 0,
+  "phone_accessed": false,
+  "private_key_accessed": false,
+  "runtime_verified": false,
+  "installable_rom_produced": false
+}

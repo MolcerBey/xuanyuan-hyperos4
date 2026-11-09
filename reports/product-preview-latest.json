@@ -2,9 +2,9 @@
   "name": "Molcer OS",
   "stage": "product image preview only",
   "ready_to_flash": false,
-  "product_sha256": "d0acdf531ecb428823c52c782704f39d180cb29ce79b0be5758f62ec8d83c0c1",
-  "image_size": 4521066496,
-  "retained_entries_verified": 2277,
+  "product_sha256": "ecc351f8309e4e35c74af9d9406b3e01fa9c0fb97eca9f8eb6b4a391c29edb81",
+  "image_size": 4306001920,
+  "retained_entries_verified": 2270,
   "removed_packages": {
     "app/AnalyticsCore": "com.miui.analytics",
     "app/MSA": "com.miui.systemAdSolution",
@@ -17,19 +17,25 @@
     "data-app/MIUIYoupin": "com.xiaomi.youpin",
     "data-app/MiShop": "com.xiaomi.shop",
     "data-app/wps-lite": "cn.wps.moffice_eng.xiaomi.lite",
+    "data-app/Health": "com.mi.health",
+    "data-app/MIpay": "com.mipay.wallet",
+    "data-app/SmartHome": "com.xiaomi.smarthome",
     "priv-app/MIUIBrowser": "com.android.browser",
     "priv-app/GooglePlayServicesUpdater": "com.android.vending"
   },
   "added_files": [
     "app/Chrome/Chrome.apk",
     "app/KernelSUNext/KernelSUNext.apk",
-    "app/TrichromeLibrary/TrichromeLibrary.apk",
+    "etc/molcer-oled-credits.txt",
     "etc/molcer-translation-credits.txt",
+    "etc/molcer-version.json",
     "etc/permissions/molcer-google-play.xml",
+    "media/wallpaper/molcer-black.png",
     "overlay/MolcerTurkish/com.molcer.os.tr.androiddefaults.g0.apk",
     "overlay/MolcerTurkish/com.molcer.os.tr.framework_res.g0.apk",
     "overlay/MolcerTurkish/com.molcer.os.tr.miuihome.g0.apk",
     "overlay/MolcerTurkish/com.molcer.os.tr.miuisystemui.g0.apk",
+    "overlay/MolcerTurkish/com.molcer.os.tr.oleddefaults.g0.apk",
     "overlay/MolcerTurkish/com.molcer.os.tr.provision.g0.apk",
     "overlay/MolcerTurkish/com.molcer.os.tr.settings.g0.apk",
     "priv-app/Phonesky/Phonesky.apk"
@@ -59,5 +65,29 @@
       "identical": true
     }
   ],
+  "chrome": {
+    "signature_verified_for_sdk37": true,
+    "signer_certificate_sha256": "f0fd6c5b410f25cb25c3b53346c8972fae30f8ee7411df910480ad6b2d60db83",
+    "package": "com.android.chrome",
+    "version_code": "810303804",
+    "version": "157.0.8103.38",
+    "minimum_sdk": 29,
+    "requires_static_library_or_split": false,
+    "arm64_native_libraries": [
+      "lib/arm64-v8a/libarcore_sdk_c.so",
+      "lib/arm64-v8a/libchrome.so",
+      "lib/arm64-v8a/libchromium_android_linker.so",
+      "lib/arm64-v8a/libcrashpad_handler_trampoline.so",
+      "lib/arm64-v8a/libelements.so",
+      "lib/arm64-v8a/liboptimization_guide_internal.so"
+    ],
+    "turkish_pak_paths": [
+      "assets/locales#lang_tr/tr.pak"
+    ],
+    "turkish_locale_in_badging": true,
+    "signature_verification_output": "Verifies\nVerified using v1 scheme (JAR signing): false\nVerified using v2 scheme (APK Signature Scheme v2): false\nVerified using v3 scheme (APK Signature Scheme v3): true\nVerified using v3.1 scheme (APK Signature Scheme v3.1): false\nVerified using v3.2 scheme (APK Signature Scheme v3.2): false\nVerified using v4 scheme (APK Signature Scheme v4): false\nVerified for SourceStamp: true\nNumber of signers: 1\nV3.0 Signer: certificate DN: CN=Android, OU=Android, O=Google Inc., L=Mountain View, ST=California, C=US\nV3.0 Signer: certificate SHA-256 digest: f0fd6c5b410f25cb25c3b53346c8972fae30f8ee7411df910480ad6b2d60db83\nV3.0 Signer: certificate SHA-1 digest: 38918a453d07199354f8b19af05ec6562ced5788\nV3.0 Signer: certificate MD5 digest: cde9f6208d672b54b1dacc0b7029f5eb\nV3.0 Signer: key algorithm: RSA\nV3.0 Signer: key size (bits): 2048\nV3.0 Signer: public key SHA-256 digest: 2b06490d2d24305c6a90dbf74cc42f50183d207d572f8079e5d92fb2c2a0cda1\nV3.0 Signer: public key SHA-1 digest: b2da9ef7ec0f4474117fb0cba4dca3b795c0eab7\nV3.0 Signer: public key MD5 digest: a90ce510a96aa09bee6bf8d9da9b258b\nSource Stamp Signer: certificate DN: CN=Android, OU=Android, O=Google Inc., L=Mountain View, ST=California, C=US\nSource Stamp Signer: certificate SHA-256 digest: 3257d599a49d2c961a471ca9843f59d341a405884583fc087df4237b733bbd6d\nSource Stamp Signer: certificate SHA-1 digest: b1af3a0bf998aeede1a8716a539e5a59da1d86d6\nSource Stamp Signer: certificate MD5 digest: 577b8a9fbc7e308321aec6411169d2fb\nSource Stamp Signer: key algorithm: RSA\nSource Stamp Signer: key size (bits): 4096\nSource Stamp Signer: public key SHA-256 digest: 4c53c1d28f2ecceadcb1351603f0b702615b3454b6e30070de759359f241b802\nSource Stamp Signer: public key SHA-1 digest: 188b067a9ee881bde55dabe0f8f7ecb320b1a091\nSource Stamp Signer: public key MD5 digest: 965afac83f033aa037a54482eb6922d5\nSource Stamp Timestamp: 1793743219\n",
+    "manifest_runtime_compatibility_proven": false
+  },
+  "chrome_sha256": "dcc9fb8a49b8991ffef9fa8a29b6231c2c7667056cc0a6c342234e0b1af19d16",
   "google_core_matches_selected_release": true
 }

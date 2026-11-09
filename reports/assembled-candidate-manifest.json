@@ -1,0 +1,1114 @@
+{
+  "schema": 1,
+  "status": "offline-assembled-candidate-awaiting-device-and-installer-validation",
+  "repository": "MolcerBey/xuanyuan-hyperos4",
+  "device": "xuanyuan",
+  "hardware_variant": "global",
+  "rom_name": "Molcer OS",
+  "source_commit": "f6e13aba5442361c0247f28c6d203c368a7433b4",
+  "candidate_manifest_sha256": "9ccadca3363c60739977d3a2271dce0884832747a4ff9bba20ade0911582ad79",
+  "requests_sha256": "65808ac09f906fafc14dd9923d1b20517be13cb8bd20d3f16487c9b6c6959458",
+  "signatures_sha256": "8f31c297cc4497ed54ba30bc57f9449e7b8bd632c8e498c2b667a588038b250e",
+  "base_archive_sha256": "bd19c93fa7c1cb90ed194c5cc2ebfe786f55f1382b172e344522ca805c63f1ea",
+  "all_partition_images": [
+    {
+      "name": "abl",
+      "size": 335872,
+      "sha256": "311dcbd518137c3acf79b892392903168e2103762dad58c209cf295921f9b85e"
+    },
+    {
+      "name": "aop",
+      "size": 372736,
+      "sha256": "33d12b434bdb9db1266020f4f6b35e0b53b166340bdf55ac86a4065188b7dfc1"
+    },
+    {
+      "name": "aop_config",
+      "size": 32768,
+      "sha256": "0a8231f7afe146ec2ff7706fe55f607e671f876f7596d4b08bb5efad307fa06e"
+    },
+    {
+      "name": "bluetooth",
+      "size": 3993600,
+      "sha256": "b5ca23e4da5218a3823708287fb6b337ca432202e6bfbfad75c231cc8e964c76"
+    },
+    {
+      "name": "boot",
+      "size": 100663296,
+      "sha256": "62158b7ba6a2af1cb5ba515c35061c512c5bbef78b2fed7ecd931dd9e3d41b2f"
+    },
+    {
+      "name": "cpucp",
+      "size": 319488,
+      "sha256": "5b7cc1fdfb98ac0f9d892b291858f36fa70eb828810bbfee6696cbcd322ff871"
+    },
+    {
+      "name": "cpucp_dtb",
+      "size": 16384,
+      "sha256": "71cf5cc265f5c4c0a2fc1d487f08666ec2f1d5761561c567116180808d91e9e9"
+    },
+    {
+      "name": "devcfg",
+      "size": 61440,
+      "sha256": "8f1791e14d6f7fd04d4eac231dda92e41b7cad8a8e180444f09d42ccc9cb90c1"
+    },
+    {
+      "name": "dsp",
+      "size": 67108864,
+      "sha256": "58b96ba7a1042b8489490cb5fddf962c4cf72c0ad982f84016791898e60326a1"
+    },
+    {
+      "name": "dtbo",
+      "size": 18874368,
+      "sha256": "01e661764e76011315a16ce6827750f087f5f2a8cec2e5e250d4c30add790ca0"
+    },
+    {
+      "name": "featenabler",
+      "size": 106496,
+      "sha256": "881b3ae6f9e98851ddb4e827d24d582a228a87c89ec42b12d38879516b72408c"
+    },
+    {
+      "name": "hyp",
+      "size": 1613824,
+      "sha256": "d4a9c5843bc39576ccaf5ba5490b7c8789b1225d1dd0fe63391dad5a5bec98d8"
+    },
+    {
+      "name": "idmanager",
+      "size": 69632,
+      "sha256": "c8bf4c837a4c3fe1a7e5ba3034a93886ddd3f02db89d81e7319fe16ec2dfc1f8"
+    },
+    {
+      "name": "imagefv",
+      "size": 6299648,
+      "sha256": "85faea477042e5522c718c899fb02b3e91950d0edfd05b84ef77f03795a5eec0"
+    },
+    {
+      "name": "init_boot",
+      "size": 8388608,
+      "sha256": "2fc66cc4166c4775184f6d56353227825adafc1fa137aad58f1931470ee39188"
+    },
+    {
+      "name": "keymaster",
+      "size": 454656,
+      "sha256": "755ec0ceff183aa2df94943c4a493304b2f066c5bf647b261818ee39a2854233"
+    },
+    {
+      "name": "mi_ext",
+      "size": 170823680,
+      "sha256": "1a71d12713d2ed49f2c2033b3199da38d01333e3fb36574d42d20d1959edf0c3"
+    },
+    {
+      "name": "mi_product",
+      "size": 348160,
+      "sha256": "1e39142053f90b2f295e841af4bb13e85f02f08b28f83ea7c4a24b40e4009bf7"
+    },
+    {
+      "name": "modem",
+      "size": 172568576,
+      "sha256": "abdb08bc80e2b9c837b40f54df5c34c1ea929b5d1c14e7cfebfc0b433b9a6d69"
+    },
+    {
+      "name": "modemfirmware",
+      "size": 140234752,
+      "sha256": "bfab29aac6a9337cb168bbc76455fda068c59be899b917b0038af2c88a7a1fe6"
+    },
+    {
+      "name": "multiimgqti",
+      "size": 12288,
+      "sha256": "bd619dd9ef992af0ee627fbb15cac9082df167d8f47da9b1ae814bc1f6c8db77"
+    },
+    {
+      "name": "odm",
+      "size": 4563124224,
+      "sha256": "658a8760c98009a3236b43fadbf19091a38d0d8b44376d9fac7a67c13ece08f1"
+    },
+    {
+      "name": "pdp",
+      "size": 212992,
+      "sha256": "de74a568fbe06505e714c2905455007a15bd221effcf0cae16464238cf82c978"
+    },
+    {
+      "name": "pdp_cdb",
+      "size": 16384,
+      "sha256": "b29c46356ae307ef4a96d796f0e91ba2c85f352bed476cfefac483c061c8b8f9"
+    },
+    {
+      "name": "product",
+      "size": 4374233088,
+      "sha256": "a68b03f20928e00ea6f93af43605e79bf7976127abd29001667b3d01d7f93c81"
+    },
+    {
+      "name": "pvmfw",
+      "size": 1048576,
+      "sha256": "573c9e20ffb3fe94cad4a87badae4d0cabb2132a8de03bcc7be61ac75e07d0d9"
+    },
+    {
+      "name": "qupfw",
+      "size": 65536,
+      "sha256": "be680da9f4442366cd06c62b7cc7b477c62f88e3f4ba18dbffd8e87ae728e3ae"
+    },
+    {
+      "name": "recovery",
+      "size": 104857600,
+      "sha256": "29128f33b29242bc947d23ae0e883c3030ad07666bd714f693d906553b93d0ba"
+    },
+    {
+      "name": "shrm",
+      "size": 151552,
+      "sha256": "4ec677ec379990ddc5af5c7cfb1f090882f166f3b983193d55cfbb449f15a559"
+    },
+    {
+      "name": "soccp_dcd",
+      "size": 20480,
+      "sha256": "02db185c440c3c75f7009f8f1dcc8870dc4e131d078ad8e7fd3bb6f58a8aa7c8"
+    },
+    {
+      "name": "soccp_debug",
+      "size": 147456,
+      "sha256": "337c948582ec42f90201d49001c5dc034324223f4f161568eaaac47c62ff3ad6"
+    },
+    {
+      "name": "spuservice",
+      "size": 94208,
+      "sha256": "e1880735d21567cd4cf143344d8e2bfd59c06d610066dd482dac7b189767df37"
+    },
+    {
+      "name": "system",
+      "size": 976494592,
+      "sha256": "7ccdc50eab14594ad4c84713ab2faef9a07b5d4c6ee3df65376f3d14782d5502"
+    },
+    {
+      "name": "system_dlkm",
+      "size": 15294464,
+      "sha256": "dbaab21e67746b7192f15bf48f4931f7354c08506e883c252564f6ccd0effbdd"
+    },
+    {
+      "name": "system_ext",
+      "size": 821374976,
+      "sha256": "c25e1f83891f4af839b7fa5ea764eb9b89a05982946c725a6e52f40d81d8a7e1"
+    },
+    {
+      "name": "tz",
+      "size": 4173824,
+      "sha256": "9d29809719fd2a069abc5650ef835ed51af519d8acdc3358ab9d6f3c0b16bac9"
+    },
+    {
+      "name": "uefi",
+      "size": 2842624,
+      "sha256": "cd06b4e1e7d747003d29dcfe5bf6f3b7ef7581b18afce2e9583efcf7a22f3440"
+    },
+    {
+      "name": "uefisecapp",
+      "size": 204800,
+      "sha256": "5cd90c8e4426b3fa737f690d66dfd509c9c1ecee959afa6e55b0ef51c121e7c5"
+    },
+    {
+      "name": "vbmeta",
+      "size": 12288,
+      "sha256": "0f0ce6d72f36b660fa40c4ccb446e1629abccd167d6ac0cd12d1e8bc53559a7c"
+    },
+    {
+      "name": "vbmeta_system",
+      "size": 4096,
+      "sha256": "445a6f57f0758a57ecbb43c1556051990f4ef84b6daa9c0ee3443f4c47ca23b1"
+    },
+    {
+      "name": "vendor",
+      "size": 742662144,
+      "sha256": "6b8499fa897cbaec3514a44080d3f3e3bf228bae90303f1309c3cadb897f91c3"
+    },
+    {
+      "name": "vendor_boot",
+      "size": 100663296,
+      "sha256": "23e9d7b8a796793733ed3392aa9ff928c02ceb399ba27994025299080be89340"
+    },
+    {
+      "name": "vendor_dlkm",
+      "size": 87285760,
+      "sha256": "9a616069d82bbf188b86d0df1dedbde99d4561e1335ece0d8a04086191d2931d"
+    },
+    {
+      "name": "vm-bootsys",
+      "size": 20971520,
+      "sha256": "9f09b49decd93492f0e0d69f934d6777a760524b898d09485f66fa8214a0a738"
+    },
+    {
+      "name": "xbl",
+      "size": 1191936,
+      "sha256": "4256eb1185e1276220d3958a4cd5fb3a470358da47c0bf7eb213602fead0b836"
+    },
+    {
+      "name": "xbl_config",
+      "size": 348160,
+      "sha256": "0b86822dc5c7b363bfdaa01158f545a1de2515719667d164e1e966667f2196f5"
+    },
+    {
+      "name": "xbl_ramdump",
+      "size": 946176,
+      "sha256": "7cdcf0dce299c552b41d986ed8299f3710a1478e3d481548da65ce1822a098b6"
+    }
+  ],
+  "super": {
+    "name": "super",
+    "size": 11728374388,
+    "sha256": "6f722e24977850a31fb792ea50ac97e4ad2722764290e5c27e14eda63d6dcce7"
+  },
+  "full_partition_chain_verified": true,
+  "offline_validation": {
+    "avb": true,
+    "super": true,
+    "hashes": true
+  },
+  "validation_report_sha256": {
+    "avb-signature-verification.json": "732b0dbc8e871decf9fc39b3ac9b1928e7dd33a115cf31463154d99eccbf0691",
+    "super-build.json": "f032b37df44365d1a9deb979dc676b78906d26d1530e98f43a244bf2aa2e3ecc",
+    "super-payload-verification.json": "c55fae059980b6f303c39754bcf551702ec64c350252073b2fc77b03a63e03ab",
+    "rom-radio-integration.json": "68bdd6c2be52398150def2e6c6d6e83f4404ac1a5b73dde7b9f59591e7ccaa53"
+  },
+  "excluded_china_base_partitions": [
+    "countrycode",
+    "modem",
+    "modemfirmware"
+  ],
+  "preserved_device_partition_exclusions": [],
+  "eu_radio_source_archive_sha256": "9c1eced1591d5ad28998e7731a0555ce824074fdfe2061e7cad43b59da835157",
+  "chunk_size_limit": 1992294400,
+  "avb_flags": 0,
+  "phone_accessed": false,
+  "private_key_accessed": false,
+  "installer_included": false,
+  "installation_allowed": false,
+  "installable_rom_produced": false,
+  "runtime_verified": false,
+  "device_gpt_capacity_verified": false,
+  "assembly_commit": "8573d0d58843b008b2a94c79bc18346d1c436d16",
+  "run_id": "42615835833",
+  "run_attempt": "1",
+  "release_tag": "molcer-assembled-8573d0d58843-42615835833-1",
+  "release_draft": true,
+  "uploaded_images": [
+    {
+      "name": "abl",
+      "size": 335872,
+      "sha256": "311dcbd518137c3acf79b892392903168e2103762dad58c209cf295921f9b85e",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 335872,
+          "sha256": "311dcbd518137c3acf79b892392903168e2103762dad58c209cf295921f9b85e",
+          "asset_name": "NOT-INSTALLABLE-abl.img.part-00000",
+          "asset_id": 727429315,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727429315",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-abl.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "aop",
+      "size": 372736,
+      "sha256": "33d12b434bdb9db1266020f4f6b35e0b53b166340bdf55ac86a4065188b7dfc1",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 372736,
+          "sha256": "33d12b434bdb9db1266020f4f6b35e0b53b166340bdf55ac86a4065188b7dfc1",
+          "asset_name": "NOT-INSTALLABLE-aop.img.part-00000",
+          "asset_id": 727429373,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727429373",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-aop.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "aop_config",
+      "size": 32768,
+      "sha256": "0a8231f7afe146ec2ff7706fe55f607e671f876f7596d4b08bb5efad307fa06e",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 32768,
+          "sha256": "0a8231f7afe146ec2ff7706fe55f607e671f876f7596d4b08bb5efad307fa06e",
+          "asset_name": "NOT-INSTALLABLE-aop_config.img.part-00000",
+          "asset_id": 727429459,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727429459",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-aop_config.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "bluetooth",
+      "size": 3993600,
+      "sha256": "b5ca23e4da5218a3823708287fb6b337ca432202e6bfbfad75c231cc8e964c76",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 3993600,
+          "sha256": "b5ca23e4da5218a3823708287fb6b337ca432202e6bfbfad75c231cc8e964c76",
+          "asset_name": "NOT-INSTALLABLE-bluetooth.img.part-00000",
+          "asset_id": 727429520,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727429520",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-bluetooth.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "boot",
+      "size": 100663296,
+      "sha256": "62158b7ba6a2af1cb5ba515c35061c512c5bbef78b2fed7ecd931dd9e3d41b2f",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 100663296,
+          "sha256": "62158b7ba6a2af1cb5ba515c35061c512c5bbef78b2fed7ecd931dd9e3d41b2f",
+          "asset_name": "NOT-INSTALLABLE-boot.img.part-00000",
+          "asset_id": 727429628,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727429628",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-boot.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "cpucp",
+      "size": 319488,
+      "sha256": "5b7cc1fdfb98ac0f9d892b291858f36fa70eb828810bbfee6696cbcd322ff871",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 319488,
+          "sha256": "5b7cc1fdfb98ac0f9d892b291858f36fa70eb828810bbfee6696cbcd322ff871",
+          "asset_name": "NOT-INSTALLABLE-cpucp.img.part-00000",
+          "asset_id": 727429843,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727429843",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-cpucp.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "cpucp_dtb",
+      "size": 16384,
+      "sha256": "71cf5cc265f5c4c0a2fc1d487f08666ec2f1d5761561c567116180808d91e9e9",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 16384,
+          "sha256": "71cf5cc265f5c4c0a2fc1d487f08666ec2f1d5761561c567116180808d91e9e9",
+          "asset_name": "NOT-INSTALLABLE-cpucp_dtb.img.part-00000",
+          "asset_id": 727429909,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727429909",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-cpucp_dtb.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "devcfg",
+      "size": 61440,
+      "sha256": "8f1791e14d6f7fd04d4eac231dda92e41b7cad8a8e180444f09d42ccc9cb90c1",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 61440,
+          "sha256": "8f1791e14d6f7fd04d4eac231dda92e41b7cad8a8e180444f09d42ccc9cb90c1",
+          "asset_name": "NOT-INSTALLABLE-devcfg.img.part-00000",
+          "asset_id": 727429994,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727429994",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-devcfg.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "dsp",
+      "size": 67108864,
+      "sha256": "58b96ba7a1042b8489490cb5fddf962c4cf72c0ad982f84016791898e60326a1",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 67108864,
+          "sha256": "58b96ba7a1042b8489490cb5fddf962c4cf72c0ad982f84016791898e60326a1",
+          "asset_name": "NOT-INSTALLABLE-dsp.img.part-00000",
+          "asset_id": 727430098,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727430098",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-dsp.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "dtbo",
+      "size": 18874368,
+      "sha256": "01e661764e76011315a16ce6827750f087f5f2a8cec2e5e250d4c30add790ca0",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 18874368,
+          "sha256": "01e661764e76011315a16ce6827750f087f5f2a8cec2e5e250d4c30add790ca0",
+          "asset_name": "NOT-INSTALLABLE-dtbo.img.part-00000",
+          "asset_id": 727430277,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727430277",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-dtbo.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "featenabler",
+      "size": 106496,
+      "sha256": "881b3ae6f9e98851ddb4e827d24d582a228a87c89ec42b12d38879516b72408c",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 106496,
+          "sha256": "881b3ae6f9e98851ddb4e827d24d582a228a87c89ec42b12d38879516b72408c",
+          "asset_name": "NOT-INSTALLABLE-featenabler.img.part-00000",
+          "asset_id": 727430382,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727430382",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-featenabler.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "hyp",
+      "size": 1613824,
+      "sha256": "d4a9c5843bc39576ccaf5ba5490b7c8789b1225d1dd0fe63391dad5a5bec98d8",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 1613824,
+          "sha256": "d4a9c5843bc39576ccaf5ba5490b7c8789b1225d1dd0fe63391dad5a5bec98d8",
+          "asset_name": "NOT-INSTALLABLE-hyp.img.part-00000",
+          "asset_id": 727430520,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727430520",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-hyp.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "idmanager",
+      "size": 69632,
+      "sha256": "c8bf4c837a4c3fe1a7e5ba3034a93886ddd3f02db89d81e7319fe16ec2dfc1f8",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 69632,
+          "sha256": "c8bf4c837a4c3fe1a7e5ba3034a93886ddd3f02db89d81e7319fe16ec2dfc1f8",
+          "asset_name": "NOT-INSTALLABLE-idmanager.img.part-00000",
+          "asset_id": 727430594,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727430594",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-idmanager.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "imagefv",
+      "size": 6299648,
+      "sha256": "85faea477042e5522c718c899fb02b3e91950d0edfd05b84ef77f03795a5eec0",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 6299648,
+          "sha256": "85faea477042e5522c718c899fb02b3e91950d0edfd05b84ef77f03795a5eec0",
+          "asset_name": "NOT-INSTALLABLE-imagefv.img.part-00000",
+          "asset_id": 727430672,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727430672",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-imagefv.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "init_boot",
+      "size": 8388608,
+      "sha256": "2fc66cc4166c4775184f6d56353227825adafc1fa137aad58f1931470ee39188",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 8388608,
+          "sha256": "2fc66cc4166c4775184f6d56353227825adafc1fa137aad58f1931470ee39188",
+          "asset_name": "NOT-INSTALLABLE-init_boot.img.part-00000",
+          "asset_id": 727430736,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727430736",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-init_boot.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "keymaster",
+      "size": 454656,
+      "sha256": "755ec0ceff183aa2df94943c4a493304b2f066c5bf647b261818ee39a2854233",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 454656,
+          "sha256": "755ec0ceff183aa2df94943c4a493304b2f066c5bf647b261818ee39a2854233",
+          "asset_name": "NOT-INSTALLABLE-keymaster.img.part-00000",
+          "asset_id": 727430807,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727430807",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-keymaster.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "modem",
+      "size": 172568576,
+      "sha256": "abdb08bc80e2b9c837b40f54df5c34c1ea929b5d1c14e7cfebfc0b433b9a6d69",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 172568576,
+          "sha256": "abdb08bc80e2b9c837b40f54df5c34c1ea929b5d1c14e7cfebfc0b433b9a6d69",
+          "asset_name": "NOT-INSTALLABLE-modem.img.part-00000",
+          "asset_id": 727430970,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727430970",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-modem.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "modemfirmware",
+      "size": 140234752,
+      "sha256": "bfab29aac6a9337cb168bbc76455fda068c59be899b917b0038af2c88a7a1fe6",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 140234752,
+          "sha256": "bfab29aac6a9337cb168bbc76455fda068c59be899b917b0038af2c88a7a1fe6",
+          "asset_name": "NOT-INSTALLABLE-modemfirmware.img.part-00000",
+          "asset_id": 727431358,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727431358",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-modemfirmware.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "multiimgqti",
+      "size": 12288,
+      "sha256": "bd619dd9ef992af0ee627fbb15cac9082df167d8f47da9b1ae814bc1f6c8db77",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 12288,
+          "sha256": "bd619dd9ef992af0ee627fbb15cac9082df167d8f47da9b1ae814bc1f6c8db77",
+          "asset_name": "NOT-INSTALLABLE-multiimgqti.img.part-00000",
+          "asset_id": 727431641,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727431641",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-multiimgqti.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "pdp",
+      "size": 212992,
+      "sha256": "de74a568fbe06505e714c2905455007a15bd221effcf0cae16464238cf82c978",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 212992,
+          "sha256": "de74a568fbe06505e714c2905455007a15bd221effcf0cae16464238cf82c978",
+          "asset_name": "NOT-INSTALLABLE-pdp.img.part-00000",
+          "asset_id": 727431719,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727431719",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-pdp.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "pdp_cdb",
+      "size": 16384,
+      "sha256": "b29c46356ae307ef4a96d796f0e91ba2c85f352bed476cfefac483c061c8b8f9",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 16384,
+          "sha256": "b29c46356ae307ef4a96d796f0e91ba2c85f352bed476cfefac483c061c8b8f9",
+          "asset_name": "NOT-INSTALLABLE-pdp_cdb.img.part-00000",
+          "asset_id": 727431844,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727431844",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-pdp_cdb.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "pvmfw",
+      "size": 1048576,
+      "sha256": "573c9e20ffb3fe94cad4a87badae4d0cabb2132a8de03bcc7be61ac75e07d0d9",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 1048576,
+          "sha256": "573c9e20ffb3fe94cad4a87badae4d0cabb2132a8de03bcc7be61ac75e07d0d9",
+          "asset_name": "NOT-INSTALLABLE-pvmfw.img.part-00000",
+          "asset_id": 727431933,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727431933",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-pvmfw.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "qupfw",
+      "size": 65536,
+      "sha256": "be680da9f4442366cd06c62b7cc7b477c62f88e3f4ba18dbffd8e87ae728e3ae",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 65536,
+          "sha256": "be680da9f4442366cd06c62b7cc7b477c62f88e3f4ba18dbffd8e87ae728e3ae",
+          "asset_name": "NOT-INSTALLABLE-qupfw.img.part-00000",
+          "asset_id": 727432002,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727432002",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-qupfw.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "recovery",
+      "size": 104857600,
+      "sha256": "29128f33b29242bc947d23ae0e883c3030ad07666bd714f693d906553b93d0ba",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 104857600,
+          "sha256": "29128f33b29242bc947d23ae0e883c3030ad07666bd714f693d906553b93d0ba",
+          "asset_name": "NOT-INSTALLABLE-recovery.img.part-00000",
+          "asset_id": 727432142,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727432142",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-recovery.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "shrm",
+      "size": 151552,
+      "sha256": "4ec677ec379990ddc5af5c7cfb1f090882f166f3b983193d55cfbb449f15a559",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 151552,
+          "sha256": "4ec677ec379990ddc5af5c7cfb1f090882f166f3b983193d55cfbb449f15a559",
+          "asset_name": "NOT-INSTALLABLE-shrm.img.part-00000",
+          "asset_id": 727432367,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727432367",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-shrm.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "soccp_dcd",
+      "size": 20480,
+      "sha256": "02db185c440c3c75f7009f8f1dcc8870dc4e131d078ad8e7fd3bb6f58a8aa7c8",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 20480,
+          "sha256": "02db185c440c3c75f7009f8f1dcc8870dc4e131d078ad8e7fd3bb6f58a8aa7c8",
+          "asset_name": "NOT-INSTALLABLE-soccp_dcd.img.part-00000",
+          "asset_id": 727432466,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727432466",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-soccp_dcd.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "soccp_debug",
+      "size": 147456,
+      "sha256": "337c948582ec42f90201d49001c5dc034324223f4f161568eaaac47c62ff3ad6",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 147456,
+          "sha256": "337c948582ec42f90201d49001c5dc034324223f4f161568eaaac47c62ff3ad6",
+          "asset_name": "NOT-INSTALLABLE-soccp_debug.img.part-00000",
+          "asset_id": 727432553,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727432553",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-soccp_debug.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "spuservice",
+      "size": 94208,
+      "sha256": "e1880735d21567cd4cf143344d8e2bfd59c06d610066dd482dac7b189767df37",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 94208,
+          "sha256": "e1880735d21567cd4cf143344d8e2bfd59c06d610066dd482dac7b189767df37",
+          "asset_name": "NOT-INSTALLABLE-spuservice.img.part-00000",
+          "asset_id": 727432631,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727432631",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-spuservice.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "tz",
+      "size": 4173824,
+      "sha256": "9d29809719fd2a069abc5650ef835ed51af519d8acdc3358ab9d6f3c0b16bac9",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 4173824,
+          "sha256": "9d29809719fd2a069abc5650ef835ed51af519d8acdc3358ab9d6f3c0b16bac9",
+          "asset_name": "NOT-INSTALLABLE-tz.img.part-00000",
+          "asset_id": 727432803,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727432803",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-tz.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "uefi",
+      "size": 2842624,
+      "sha256": "cd06b4e1e7d747003d29dcfe5bf6f3b7ef7581b18afce2e9583efcf7a22f3440",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 2842624,
+          "sha256": "cd06b4e1e7d747003d29dcfe5bf6f3b7ef7581b18afce2e9583efcf7a22f3440",
+          "asset_name": "NOT-INSTALLABLE-uefi.img.part-00000",
+          "asset_id": 727432891,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727432891",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-uefi.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "uefisecapp",
+      "size": 204800,
+      "sha256": "5cd90c8e4426b3fa737f690d66dfd509c9c1ecee959afa6e55b0ef51c121e7c5",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 204800,
+          "sha256": "5cd90c8e4426b3fa737f690d66dfd509c9c1ecee959afa6e55b0ef51c121e7c5",
+          "asset_name": "NOT-INSTALLABLE-uefisecapp.img.part-00000",
+          "asset_id": 727432956,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727432956",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-uefisecapp.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "vbmeta",
+      "size": 12288,
+      "sha256": "0f0ce6d72f36b660fa40c4ccb446e1629abccd167d6ac0cd12d1e8bc53559a7c",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 12288,
+          "sha256": "0f0ce6d72f36b660fa40c4ccb446e1629abccd167d6ac0cd12d1e8bc53559a7c",
+          "asset_name": "NOT-INSTALLABLE-vbmeta.img.part-00000",
+          "asset_id": 727433021,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727433021",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-vbmeta.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "vbmeta_system",
+      "size": 4096,
+      "sha256": "445a6f57f0758a57ecbb43c1556051990f4ef84b6daa9c0ee3443f4c47ca23b1",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 4096,
+          "sha256": "445a6f57f0758a57ecbb43c1556051990f4ef84b6daa9c0ee3443f4c47ca23b1",
+          "asset_name": "NOT-INSTALLABLE-vbmeta_system.img.part-00000",
+          "asset_id": 727433097,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727433097",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-vbmeta_system.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "vendor_boot",
+      "size": 100663296,
+      "sha256": "23e9d7b8a796793733ed3392aa9ff928c02ceb399ba27994025299080be89340",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 100663296,
+          "sha256": "23e9d7b8a796793733ed3392aa9ff928c02ceb399ba27994025299080be89340",
+          "asset_name": "NOT-INSTALLABLE-vendor_boot.img.part-00000",
+          "asset_id": 727433229,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727433229",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-vendor_boot.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "vm-bootsys",
+      "size": 20971520,
+      "sha256": "9f09b49decd93492f0e0d69f934d6777a760524b898d09485f66fa8214a0a738",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 20971520,
+          "sha256": "9f09b49decd93492f0e0d69f934d6777a760524b898d09485f66fa8214a0a738",
+          "asset_name": "NOT-INSTALLABLE-vm-bootsys.img.part-00000",
+          "asset_id": 727433464,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727433464",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-vm-bootsys.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "xbl",
+      "size": 1191936,
+      "sha256": "4256eb1185e1276220d3958a4cd5fb3a470358da47c0bf7eb213602fead0b836",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 1191936,
+          "sha256": "4256eb1185e1276220d3958a4cd5fb3a470358da47c0bf7eb213602fead0b836",
+          "asset_name": "NOT-INSTALLABLE-xbl.img.part-00000",
+          "asset_id": 727433558,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727433558",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-xbl.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "xbl_config",
+      "size": 348160,
+      "sha256": "0b86822dc5c7b363bfdaa01158f545a1de2515719667d164e1e966667f2196f5",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 348160,
+          "sha256": "0b86822dc5c7b363bfdaa01158f545a1de2515719667d164e1e966667f2196f5",
+          "asset_name": "NOT-INSTALLABLE-xbl_config.img.part-00000",
+          "asset_id": 727433604,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727433604",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-xbl_config.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "xbl_ramdump",
+      "size": 946176,
+      "sha256": "7cdcf0dce299c552b41d986ed8299f3710a1478e3d481548da65ce1822a098b6",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 946176,
+          "sha256": "7cdcf0dce299c552b41d986ed8299f3710a1478e3d481548da65ce1822a098b6",
+          "asset_name": "NOT-INSTALLABLE-xbl_ramdump.img.part-00000",
+          "asset_id": 727433664,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727433664",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-xbl_ramdump.img.part-00000",
+          "remote_sha256_verified": true
+        }
+      ]
+    },
+    {
+      "name": "super",
+      "size": 11728374388,
+      "sha256": "6f722e24977850a31fb792ea50ac97e4ad2722764290e5c27e14eda63d6dcce7",
+      "chunks": [
+        {
+          "index": 0,
+          "offset": 0,
+          "size": 1992294400,
+          "sha256": "3c050d78211e0897c3ecc4468065e38b3e92ab840f02c000256c0adfcc3d9942",
+          "asset_name": "NOT-INSTALLABLE-super.img.part-00000",
+          "asset_id": 727434390,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727434390",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-super.img.part-00000",
+          "remote_sha256_verified": true
+        },
+        {
+          "index": 1,
+          "offset": 1992294400,
+          "size": 1992294400,
+          "sha256": "8c376752cd5b20c4370f56e4b6eb72532b17721815486aa7f1f26e3489d656a1",
+          "asset_name": "NOT-INSTALLABLE-super.img.part-00001",
+          "asset_id": 727437569,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727437569",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-super.img.part-00001",
+          "remote_sha256_verified": true
+        },
+        {
+          "index": 2,
+          "offset": 3984588800,
+          "size": 1992294400,
+          "sha256": "1c28174edb77f2b0ddeddd89371b155ee03e42cef040fae4178927bd8b217192",
+          "asset_name": "NOT-INSTALLABLE-super.img.part-00002",
+          "asset_id": 727440406,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727440406",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-super.img.part-00002",
+          "remote_sha256_verified": true
+        },
+        {
+          "index": 3,
+          "offset": 5976883200,
+          "size": 1992294400,
+          "sha256": "7e706857753a05a07b4bd05b1bf47a6372ef07ff21c72a16ad9407881c971a0c",
+          "asset_name": "NOT-INSTALLABLE-super.img.part-00003",
+          "asset_id": 727444026,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727444026",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-super.img.part-00003",
+          "remote_sha256_verified": true
+        },
+        {
+          "index": 4,
+          "offset": 7969177600,
+          "size": 1992294400,
+          "sha256": "aa7e2273cd75e7f250dcdf0abf184abbf3a52f34ff1173a583cc031484a3a6b9",
+          "asset_name": "NOT-INSTALLABLE-super.img.part-00004",
+          "asset_id": 727447507,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727447507",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-super.img.part-00004",
+          "remote_sha256_verified": true
+        },
+        {
+          "index": 5,
+          "offset": 9961472000,
+          "size": 1766902388,
+          "sha256": "224bd9ab4766554f1c7a3e11a615903e97f8928bfc14042376339f7e9e536f12",
+          "asset_name": "NOT-INSTALLABLE-super.img.part-00005",
+          "asset_id": 727451458,
+          "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727451458",
+          "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE-super.img.part-00005",
+          "remote_sha256_verified": true
+        }
+      ]
+    }
+  ],
+  "small_assets": [
+    {
+      "asset_name": "NOT-INSTALLABLE.txt",
+      "size": 332,
+      "sha256": "58ec12f7fd7254e7d628eb00296fd6b10185d89be4f9daaee2f32426e93749a1",
+      "asset_id": 727453900,
+      "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727453900",
+      "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/NOT-INSTALLABLE.txt",
+      "remote_sha256_verified": true
+    },
+    {
+      "asset_name": "signing-requests.json",
+      "size": 35355,
+      "sha256": "65808ac09f906fafc14dd9923d1b20517be13cb8bd20d3f16487c9b6c6959458",
+      "asset_id": 727453956,
+      "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727453956",
+      "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/signing-requests.json",
+      "remote_sha256_verified": true
+    },
+    {
+      "asset_name": "signatures.json",
+      "size": 2826,
+      "sha256": "8f31c297cc4497ed54ba30bc57f9449e7b8bd632c8e498c2b667a588038b250e",
+      "asset_id": 727454006,
+      "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727454006",
+      "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/signatures.json",
+      "remote_sha256_verified": true
+    },
+    {
+      "asset_name": "avb-signature-verification.json",
+      "size": 798,
+      "sha256": "732b0dbc8e871decf9fc39b3ac9b1928e7dd33a115cf31463154d99eccbf0691",
+      "asset_id": 727454087,
+      "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727454087",
+      "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/avb-signature-verification.json",
+      "remote_sha256_verified": true
+    },
+    {
+      "asset_name": "super-build.json",
+      "size": 10531,
+      "sha256": "f032b37df44365d1a9deb979dc676b78906d26d1530e98f43a244bf2aa2e3ecc",
+      "asset_id": 727454170,
+      "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727454170",
+      "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/super-build.json",
+      "remote_sha256_verified": true
+    },
+    {
+      "asset_name": "super-payload-verification.json",
+      "size": 1722,
+      "sha256": "c55fae059980b6f303c39754bcf551702ec64c350252073b2fc77b03a63e03ab",
+      "asset_id": 727454229,
+      "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727454229",
+      "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/super-payload-verification.json",
+      "remote_sha256_verified": true
+    },
+    {
+      "asset_name": "rom-radio-integration.json",
+      "size": 1585,
+      "sha256": "68bdd6c2be52398150def2e6c6d6e83f4404ac1a5b73dde7b9f59591e7ccaa53",
+      "asset_id": 727454329,
+      "api_url": "https://api.github.com/repos/MolcerBey/xuanyuan-hyperos4/releases/assets/727454329",
+      "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/untagged-ca6979db12e810066a32/rom-radio-integration.json",
+      "remote_sha256_verified": true
+    }
+  ],
+  "release_id": 439113927,
+  "release_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/tag/untagged-ca6979db12e810066a32"
+}

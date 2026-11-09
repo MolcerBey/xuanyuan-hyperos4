@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "all_nine_logical_image_hashes_verified": true,
+  "image_padding_and_avb_tails_included": true,
+  "allocated_dont_care_rejected": true,
+  "unallocated_sparse_gaps_not_assumed_zero": true,
+  "images": [
+    {
+      "name": "odm",
+      "size": 4563124224,
+      "sha256": "658a8760c98009a3236b43fadbf19091a38d0d8b44376d9fac7a67c13ece08f1"
+    },
+    {
+      "name": "product",
+      "size": 4374233088,
+      "sha256": "a68b03f20928e00ea6f93af43605e79bf7976127abd29001667b3d01d7f93c81"
+    },
+    {
+      "name": "system",
+      "size": 976494592,
+      "sha256": "7ccdc50eab14594ad4c84713ab2faef9a07b5d4c6ee3df65376f3d14782d5502"
+    },
+    {
+      "name": "system_dlkm",
+      "size": 15294464,
+      "sha256": "dbaab21e67746b7192f15bf48f4931f7354c08506e883c252564f6ccd0effbdd"
+    },
+    {
+      "name": "system_ext",
+      "size": 821374976,
+      "sha256": "c25e1f83891f4af839b7fa5ea764eb9b89a05982946c725a6e52f40d81d8a7e1"
+    },
+    {
+      "name": "vendor",
+      "size": 742662144,
+      "sha256": "6b8499fa897cbaec3514a44080d3f3e3bf228bae90303f1309c3cadb897f91c3"
+    },
+    {
+      "name": "vendor_dlkm",
+      "size": 87285760,
+      "sha256": "9a616069d82bbf188b86d0df1dedbde99d4561e1335ece0d8a04086191d2931d"
+    },
+    {
+      "name": "mi_product",
+      "size": 348160,
+      "sha256": "1e39142053f90b2f295e841af4bb13e85f02f08b28f83ea7c4a24b40e4009bf7"
+    },
+    {
+      "name": "mi_ext",
+      "size": 170823680,
+      "sha256": "1a71d12713d2ed49f2c2033b3199da38d01333e3fb36574d42d20d1959edf0c3"
+    }
+  ],
+  "sparse_size_bytes": 11728374388,
+  "super_sha256": "6f722e24977850a31fb792ea50ac97e4ad2722764290e5c27e14eda63d6dcce7",
+  "phone_accessed": false,
+  "runtime_verified": false
+}

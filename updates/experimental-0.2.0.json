@@ -1,0 +1,673 @@
+{
+  "schema": 1,
+  "product": "Molcer OS",
+  "device": "xuanyuan",
+  "hardware_variant": "global",
+  "channel": "experimental",
+  "base": "OS4.0.0.18.XOACNXM",
+  "android": 17,
+  "version": {
+    "version_name": "0.2.0-experimental.1",
+    "version_code": 2026110601
+  },
+  "update_mechanism": "manual-full-package",
+  "automatic_installation": false,
+  "android_ota_updater_implemented": false,
+  "public_release_available": false,
+  "signing": {
+    "algorithm": "RSA4096-SHA256-PKCS1-v1_5",
+    "public_key_avb_sha256": "e0f219527efe07dee4c06fa84551f1aa63f153f7df1f2c73c30aea65cd63a868"
+  },
+  "updates": [
+    {
+      "version_name": "0.2.0-experimental.1",
+      "version_code": 2026110601,
+      "kind": "offline-assembled-experimental-candidate",
+      "release_tag": "molcer-assembled-8573d0d58843-42615835833-1",
+      "release_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/tag/molcer-assembled-8573d0d58843-42615835833-1",
+      "public_release_available": false,
+      "installation_allowed": false,
+      "installer_included": false,
+      "runtime_verified": false,
+      "source_manifest_sha256": "e9192ab0c7642fa59707ea4b5503c6824f07f65529d53ffa58eb22455d11b92a",
+      "offline_validation": {
+        "avb": true,
+        "super": true,
+        "hashes": true
+      },
+      "validation_report_sha256": {
+        "avb-signature-verification.json": "732b0dbc8e871decf9fc39b3ac9b1928e7dd33a115cf31463154d99eccbf0691",
+        "super-build.json": "f032b37df44365d1a9deb979dc676b78906d26d1530e98f43a244bf2aa2e3ecc",
+        "super-payload-verification.json": "c55fae059980b6f303c39754bcf551702ec64c350252073b2fc77b03a63e03ab",
+        "rom-radio-integration.json": "68bdd6c2be52398150def2e6c6d6e83f4404ac1a5b73dde7b9f59591e7ccaa53"
+      },
+      "images": [
+        {
+          "name": "abl",
+          "size": 335872,
+          "sha256": "311dcbd518137c3acf79b892392903168e2103762dad58c209cf295921f9b85e",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 335872,
+              "sha256": "311dcbd518137c3acf79b892392903168e2103762dad58c209cf295921f9b85e",
+              "asset_name": "NOT-INSTALLABLE-abl.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-abl.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "aop",
+          "size": 372736,
+          "sha256": "33d12b434bdb9db1266020f4f6b35e0b53b166340bdf55ac86a4065188b7dfc1",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 372736,
+              "sha256": "33d12b434bdb9db1266020f4f6b35e0b53b166340bdf55ac86a4065188b7dfc1",
+              "asset_name": "NOT-INSTALLABLE-aop.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-aop.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "aop_config",
+          "size": 32768,
+          "sha256": "0a8231f7afe146ec2ff7706fe55f607e671f876f7596d4b08bb5efad307fa06e",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 32768,
+              "sha256": "0a8231f7afe146ec2ff7706fe55f607e671f876f7596d4b08bb5efad307fa06e",
+              "asset_name": "NOT-INSTALLABLE-aop_config.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-aop_config.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "bluetooth",
+          "size": 3993600,
+          "sha256": "b5ca23e4da5218a3823708287fb6b337ca432202e6bfbfad75c231cc8e964c76",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 3993600,
+              "sha256": "b5ca23e4da5218a3823708287fb6b337ca432202e6bfbfad75c231cc8e964c76",
+              "asset_name": "NOT-INSTALLABLE-bluetooth.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-bluetooth.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "boot",
+          "size": 100663296,
+          "sha256": "62158b7ba6a2af1cb5ba515c35061c512c5bbef78b2fed7ecd931dd9e3d41b2f",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 100663296,
+              "sha256": "62158b7ba6a2af1cb5ba515c35061c512c5bbef78b2fed7ecd931dd9e3d41b2f",
+              "asset_name": "NOT-INSTALLABLE-boot.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-boot.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "cpucp",
+          "size": 319488,
+          "sha256": "5b7cc1fdfb98ac0f9d892b291858f36fa70eb828810bbfee6696cbcd322ff871",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 319488,
+              "sha256": "5b7cc1fdfb98ac0f9d892b291858f36fa70eb828810bbfee6696cbcd322ff871",
+              "asset_name": "NOT-INSTALLABLE-cpucp.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-cpucp.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "cpucp_dtb",
+          "size": 16384,
+          "sha256": "71cf5cc265f5c4c0a2fc1d487f08666ec2f1d5761561c567116180808d91e9e9",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 16384,
+              "sha256": "71cf5cc265f5c4c0a2fc1d487f08666ec2f1d5761561c567116180808d91e9e9",
+              "asset_name": "NOT-INSTALLABLE-cpucp_dtb.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-cpucp_dtb.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "devcfg",
+          "size": 61440,
+          "sha256": "8f1791e14d6f7fd04d4eac231dda92e41b7cad8a8e180444f09d42ccc9cb90c1",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 61440,
+              "sha256": "8f1791e14d6f7fd04d4eac231dda92e41b7cad8a8e180444f09d42ccc9cb90c1",
+              "asset_name": "NOT-INSTALLABLE-devcfg.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-devcfg.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "dsp",
+          "size": 67108864,
+          "sha256": "58b96ba7a1042b8489490cb5fddf962c4cf72c0ad982f84016791898e60326a1",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 67108864,
+              "sha256": "58b96ba7a1042b8489490cb5fddf962c4cf72c0ad982f84016791898e60326a1",
+              "asset_name": "NOT-INSTALLABLE-dsp.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-dsp.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "dtbo",
+          "size": 18874368,
+          "sha256": "01e661764e76011315a16ce6827750f087f5f2a8cec2e5e250d4c30add790ca0",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 18874368,
+              "sha256": "01e661764e76011315a16ce6827750f087f5f2a8cec2e5e250d4c30add790ca0",
+              "asset_name": "NOT-INSTALLABLE-dtbo.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-dtbo.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "featenabler",
+          "size": 106496,
+          "sha256": "881b3ae6f9e98851ddb4e827d24d582a228a87c89ec42b12d38879516b72408c",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 106496,
+              "sha256": "881b3ae6f9e98851ddb4e827d24d582a228a87c89ec42b12d38879516b72408c",
+              "asset_name": "NOT-INSTALLABLE-featenabler.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-featenabler.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "hyp",
+          "size": 1613824,
+          "sha256": "d4a9c5843bc39576ccaf5ba5490b7c8789b1225d1dd0fe63391dad5a5bec98d8",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 1613824,
+              "sha256": "d4a9c5843bc39576ccaf5ba5490b7c8789b1225d1dd0fe63391dad5a5bec98d8",
+              "asset_name": "NOT-INSTALLABLE-hyp.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-hyp.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "idmanager",
+          "size": 69632,
+          "sha256": "c8bf4c837a4c3fe1a7e5ba3034a93886ddd3f02db89d81e7319fe16ec2dfc1f8",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 69632,
+              "sha256": "c8bf4c837a4c3fe1a7e5ba3034a93886ddd3f02db89d81e7319fe16ec2dfc1f8",
+              "asset_name": "NOT-INSTALLABLE-idmanager.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-idmanager.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "imagefv",
+          "size": 6299648,
+          "sha256": "85faea477042e5522c718c899fb02b3e91950d0edfd05b84ef77f03795a5eec0",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 6299648,
+              "sha256": "85faea477042e5522c718c899fb02b3e91950d0edfd05b84ef77f03795a5eec0",
+              "asset_name": "NOT-INSTALLABLE-imagefv.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-imagefv.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "init_boot",
+          "size": 8388608,
+          "sha256": "2fc66cc4166c4775184f6d56353227825adafc1fa137aad58f1931470ee39188",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 8388608,
+              "sha256": "2fc66cc4166c4775184f6d56353227825adafc1fa137aad58f1931470ee39188",
+              "asset_name": "NOT-INSTALLABLE-init_boot.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-init_boot.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "keymaster",
+          "size": 454656,
+          "sha256": "755ec0ceff183aa2df94943c4a493304b2f066c5bf647b261818ee39a2854233",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 454656,
+              "sha256": "755ec0ceff183aa2df94943c4a493304b2f066c5bf647b261818ee39a2854233",
+              "asset_name": "NOT-INSTALLABLE-keymaster.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-keymaster.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "modem",
+          "size": 172568576,
+          "sha256": "abdb08bc80e2b9c837b40f54df5c34c1ea929b5d1c14e7cfebfc0b433b9a6d69",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 172568576,
+              "sha256": "abdb08bc80e2b9c837b40f54df5c34c1ea929b5d1c14e7cfebfc0b433b9a6d69",
+              "asset_name": "NOT-INSTALLABLE-modem.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-modem.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "modemfirmware",
+          "size": 140234752,
+          "sha256": "bfab29aac6a9337cb168bbc76455fda068c59be899b917b0038af2c88a7a1fe6",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 140234752,
+              "sha256": "bfab29aac6a9337cb168bbc76455fda068c59be899b917b0038af2c88a7a1fe6",
+              "asset_name": "NOT-INSTALLABLE-modemfirmware.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-modemfirmware.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "multiimgqti",
+          "size": 12288,
+          "sha256": "bd619dd9ef992af0ee627fbb15cac9082df167d8f47da9b1ae814bc1f6c8db77",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 12288,
+              "sha256": "bd619dd9ef992af0ee627fbb15cac9082df167d8f47da9b1ae814bc1f6c8db77",
+              "asset_name": "NOT-INSTALLABLE-multiimgqti.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-multiimgqti.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "pdp",
+          "size": 212992,
+          "sha256": "de74a568fbe06505e714c2905455007a15bd221effcf0cae16464238cf82c978",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 212992,
+              "sha256": "de74a568fbe06505e714c2905455007a15bd221effcf0cae16464238cf82c978",
+              "asset_name": "NOT-INSTALLABLE-pdp.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-pdp.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "pdp_cdb",
+          "size": 16384,
+          "sha256": "b29c46356ae307ef4a96d796f0e91ba2c85f352bed476cfefac483c061c8b8f9",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 16384,
+              "sha256": "b29c46356ae307ef4a96d796f0e91ba2c85f352bed476cfefac483c061c8b8f9",
+              "asset_name": "NOT-INSTALLABLE-pdp_cdb.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-pdp_cdb.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "pvmfw",
+          "size": 1048576,
+          "sha256": "573c9e20ffb3fe94cad4a87badae4d0cabb2132a8de03bcc7be61ac75e07d0d9",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 1048576,
+              "sha256": "573c9e20ffb3fe94cad4a87badae4d0cabb2132a8de03bcc7be61ac75e07d0d9",
+              "asset_name": "NOT-INSTALLABLE-pvmfw.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-pvmfw.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "qupfw",
+          "size": 65536,
+          "sha256": "be680da9f4442366cd06c62b7cc7b477c62f88e3f4ba18dbffd8e87ae728e3ae",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 65536,
+              "sha256": "be680da9f4442366cd06c62b7cc7b477c62f88e3f4ba18dbffd8e87ae728e3ae",
+              "asset_name": "NOT-INSTALLABLE-qupfw.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-qupfw.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "recovery",
+          "size": 104857600,
+          "sha256": "29128f33b29242bc947d23ae0e883c3030ad07666bd714f693d906553b93d0ba",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 104857600,
+              "sha256": "29128f33b29242bc947d23ae0e883c3030ad07666bd714f693d906553b93d0ba",
+              "asset_name": "NOT-INSTALLABLE-recovery.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-recovery.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "shrm",
+          "size": 151552,
+          "sha256": "4ec677ec379990ddc5af5c7cfb1f090882f166f3b983193d55cfbb449f15a559",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 151552,
+              "sha256": "4ec677ec379990ddc5af5c7cfb1f090882f166f3b983193d55cfbb449f15a559",
+              "asset_name": "NOT-INSTALLABLE-shrm.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-shrm.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "soccp_dcd",
+          "size": 20480,
+          "sha256": "02db185c440c3c75f7009f8f1dcc8870dc4e131d078ad8e7fd3bb6f58a8aa7c8",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 20480,
+              "sha256": "02db185c440c3c75f7009f8f1dcc8870dc4e131d078ad8e7fd3bb6f58a8aa7c8",
+              "asset_name": "NOT-INSTALLABLE-soccp_dcd.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-soccp_dcd.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "soccp_debug",
+          "size": 147456,
+          "sha256": "337c948582ec42f90201d49001c5dc034324223f4f161568eaaac47c62ff3ad6",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 147456,
+              "sha256": "337c948582ec42f90201d49001c5dc034324223f4f161568eaaac47c62ff3ad6",
+              "asset_name": "NOT-INSTALLABLE-soccp_debug.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-soccp_debug.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "spuservice",
+          "size": 94208,
+          "sha256": "e1880735d21567cd4cf143344d8e2bfd59c06d610066dd482dac7b189767df37",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 94208,
+              "sha256": "e1880735d21567cd4cf143344d8e2bfd59c06d610066dd482dac7b189767df37",
+              "asset_name": "NOT-INSTALLABLE-spuservice.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-spuservice.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "tz",
+          "size": 4173824,
+          "sha256": "9d29809719fd2a069abc5650ef835ed51af519d8acdc3358ab9d6f3c0b16bac9",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 4173824,
+              "sha256": "9d29809719fd2a069abc5650ef835ed51af519d8acdc3358ab9d6f3c0b16bac9",
+              "asset_name": "NOT-INSTALLABLE-tz.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-tz.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "uefi",
+          "size": 2842624,
+          "sha256": "cd06b4e1e7d747003d29dcfe5bf6f3b7ef7581b18afce2e9583efcf7a22f3440",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 2842624,
+              "sha256": "cd06b4e1e7d747003d29dcfe5bf6f3b7ef7581b18afce2e9583efcf7a22f3440",
+              "asset_name": "NOT-INSTALLABLE-uefi.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-uefi.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "uefisecapp",
+          "size": 204800,
+          "sha256": "5cd90c8e4426b3fa737f690d66dfd509c9c1ecee959afa6e55b0ef51c121e7c5",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 204800,
+              "sha256": "5cd90c8e4426b3fa737f690d66dfd509c9c1ecee959afa6e55b0ef51c121e7c5",
+              "asset_name": "NOT-INSTALLABLE-uefisecapp.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-uefisecapp.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "vbmeta",
+          "size": 12288,
+          "sha256": "0f0ce6d72f36b660fa40c4ccb446e1629abccd167d6ac0cd12d1e8bc53559a7c",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 12288,
+              "sha256": "0f0ce6d72f36b660fa40c4ccb446e1629abccd167d6ac0cd12d1e8bc53559a7c",
+              "asset_name": "NOT-INSTALLABLE-vbmeta.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-vbmeta.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "vbmeta_system",
+          "size": 4096,
+          "sha256": "445a6f57f0758a57ecbb43c1556051990f4ef84b6daa9c0ee3443f4c47ca23b1",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 4096,
+              "sha256": "445a6f57f0758a57ecbb43c1556051990f4ef84b6daa9c0ee3443f4c47ca23b1",
+              "asset_name": "NOT-INSTALLABLE-vbmeta_system.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-vbmeta_system.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "vendor_boot",
+          "size": 100663296,
+          "sha256": "23e9d7b8a796793733ed3392aa9ff928c02ceb399ba27994025299080be89340",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 100663296,
+              "sha256": "23e9d7b8a796793733ed3392aa9ff928c02ceb399ba27994025299080be89340",
+              "asset_name": "NOT-INSTALLABLE-vendor_boot.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-vendor_boot.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "vm-bootsys",
+          "size": 20971520,
+          "sha256": "9f09b49decd93492f0e0d69f934d6777a760524b898d09485f66fa8214a0a738",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 20971520,
+              "sha256": "9f09b49decd93492f0e0d69f934d6777a760524b898d09485f66fa8214a0a738",
+              "asset_name": "NOT-INSTALLABLE-vm-bootsys.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-vm-bootsys.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "xbl",
+          "size": 1191936,
+          "sha256": "4256eb1185e1276220d3958a4cd5fb3a470358da47c0bf7eb213602fead0b836",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 1191936,
+              "sha256": "4256eb1185e1276220d3958a4cd5fb3a470358da47c0bf7eb213602fead0b836",
+              "asset_name": "NOT-INSTALLABLE-xbl.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-xbl.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "xbl_config",
+          "size": 348160,
+          "sha256": "0b86822dc5c7b363bfdaa01158f545a1de2515719667d164e1e966667f2196f5",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 348160,
+              "sha256": "0b86822dc5c7b363bfdaa01158f545a1de2515719667d164e1e966667f2196f5",
+              "asset_name": "NOT-INSTALLABLE-xbl_config.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-xbl_config.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "xbl_ramdump",
+          "size": 946176,
+          "sha256": "7cdcf0dce299c552b41d986ed8299f3710a1478e3d481548da65ce1822a098b6",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 946176,
+              "sha256": "7cdcf0dce299c552b41d986ed8299f3710a1478e3d481548da65ce1822a098b6",
+              "asset_name": "NOT-INSTALLABLE-xbl_ramdump.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-xbl_ramdump.img.part-00000"
+            }
+          ]
+        },
+        {
+          "name": "super",
+          "size": 11728374388,
+          "sha256": "6f722e24977850a31fb792ea50ac97e4ad2722764290e5c27e14eda63d6dcce7",
+          "chunks": [
+            {
+              "index": 0,
+              "offset": 0,
+              "size": 1992294400,
+              "sha256": "3c050d78211e0897c3ecc4468065e38b3e92ab840f02c000256c0adfcc3d9942",
+              "asset_name": "NOT-INSTALLABLE-super.img.part-00000",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-super.img.part-00000"
+            },
+            {
+              "index": 1,
+              "offset": 1992294400,
+              "size": 1992294400,
+              "sha256": "8c376752cd5b20c4370f56e4b6eb72532b17721815486aa7f1f26e3489d656a1",
+              "asset_name": "NOT-INSTALLABLE-super.img.part-00001",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-super.img.part-00001"
+            },
+            {
+              "index": 2,
+              "offset": 3984588800,
+              "size": 1992294400,
+              "sha256": "1c28174edb77f2b0ddeddd89371b155ee03e42cef040fae4178927bd8b217192",
+              "asset_name": "NOT-INSTALLABLE-super.img.part-00002",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-super.img.part-00002"
+            },
+            {
+              "index": 3,
+              "offset": 5976883200,
+              "size": 1992294400,
+              "sha256": "7e706857753a05a07b4bd05b1bf47a6372ef07ff21c72a16ad9407881c971a0c",
+              "asset_name": "NOT-INSTALLABLE-super.img.part-00003",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-super.img.part-00003"
+            },
+            {
+              "index": 4,
+              "offset": 7969177600,
+              "size": 1992294400,
+              "sha256": "aa7e2273cd75e7f250dcdf0abf184abbf3a52f34ff1173a583cc031484a3a6b9",
+              "asset_name": "NOT-INSTALLABLE-super.img.part-00004",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-super.img.part-00004"
+            },
+            {
+              "index": 5,
+              "offset": 9961472000,
+              "size": 1766902388,
+              "sha256": "224bd9ab4766554f1c7a3e11a615903e97f8928bfc14042376339f7e9e536f12",
+              "asset_name": "NOT-INSTALLABLE-super.img.part-00005",
+              "download_url": "https://github.com/MolcerBey/xuanyuan-hyperos4/releases/download/molcer-assembled-8573d0d58843-42615835833-1/NOT-INSTALLABLE-super.img.part-00005"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

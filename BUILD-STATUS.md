@@ -1,49 +1,56 @@
 # Molcer OS build status
 
-**An audited product image preview has been produced, not an installable ROM.** Complete installation packaging, AVB integration and boot validation remain unfinished. Draft assets are explicitly named `NOT-INSTALLABLE`; do not flash them independently.
+**Current state: a complete offline-assembled experimental candidate, awaiting owner-controlled device and installer validation.** It is not a production release. Individual draft assets retain their `NOT-INSTALLABLE` names and must never be flashed independently; the only installation path is the complete verified 39-image local package plus `install_candidate.py`.
 
-## Latest successful preview
+## Latest verified assembly
 
-[Build 42022961429](https://github.com/MolcerBey/xuanyuan-hyperos4/actions/runs/42022961429) succeeded for commit `4591cf49c0c9c88b50bbb7b5fc2b1f8c83758214`. The original ten product/root assets are uploaded in the [owner-visible draft release](https://github.com/MolcerBey/xuanyuan-hyperos4/releases/tag/untagged-ec2b439672af0ec463e9). APK package inspection also passed in [run 42024352099](https://github.com/MolcerBey/xuanyuan-hyperos4/actions/runs/42024352099).
+[Assembly run 42615835833](https://github.com/MolcerBey/xuanyuan-hyperos4/actions/runs/42615835833) completed successfully on 2026-11-09. Assembly tooling commit: `8573d0d58843b008b2a94c79bc18346d1c436d16`. Customized product/init_boot source commit: `f6e13aba5442361c0247f28c6d203c368a7433b4`.
 
-- Google Play Store 51.8.09-29 from MindTheGapps Android 17 ARM64 replaces the China Play updater stub. The retained Google runtime APEX and Google Services Framework are byte-identical to the selected release; both SHA256 comparisons passed.
-- Official KernelSU Next 3.4.2 manager; a separate patched `init_boot` candidate uses the stock kernel's detected `android15-6.6` KMI.
-- The historical preview contains Chrome 134.0.6998.135 and its matching Trichrome library. The current builder instead pins the separately verified standalone Chrome 157.0.8103.38 ARM64 APK; no product or final candidate has yet been rebuilt with this newer package. Runtime/default-browser verification and a maintained update path remain required.
-- Eleven reviewed optional packages removed; Xiaomi browser replaced. Camera, gallery, editing dependencies, modem, IMS, carrier and thermal configuration are retained.
-- Molcer OS branding, `tr-TR` default locale and Europe/Istanbul timezone. Six resource-only overlays compiled and passed APK signature verification: five Turkish overlays contain 16,163 strings, and one sets the framework's default-browser resource to Chrome. Runtime activation and full Turkish coverage are not established.
+- Candidate: `0.2.0-experimental.1`, version code `2026110601`.
+- Base: authenticated China HyperOS 4 / Android 17 `OS4.0.0.18.XOACNXM` for `xuanyuan`; target hardware variant is global.
+- Owner-visible draft tag: `molcer-assembled-8573d0d58843-42615835833-1`.
+- Persistent manifest: `reports/assembled-candidate-manifest.json`.
+- Signed manual-package metadata: `updates/experimental-0.2.0.json` and `updates/experimental-0.2.0.signature.json`; public RSA verification passed. This is not an Android OTA or public release.
 
-The latest product image is 4,521,066,496 bytes, compared with the stock image's 5,208,166,400 bytes. SHA256: `d0acdf531ecb428823c52c782704f39d180cb29ce79b0be5758f62ec8d83c0c1`. The build checked 2,277 retained filesystem entries, then remounted the generated EROFS image and compared its content, ownership, permissions, extended attributes and symlinks with the staged tree. This is a size measurement, not a performance or battery-life benchmark.
+| Component | Bytes | SHA256 |
+| --- | ---: | --- |
+| Final AVB-footered product | 4,374,233,088 | `a68b03f20928e00ea6f93af43605e79bf7976127abd29001667b3d01d7f93c81` |
+| KernelSU Next init_boot | 8,388,608 | `2fc66cc4166c4775184f6d56353227825adafc1fa137aad58f1931470ee39188` |
+| Sparse super | 11,728,374,388 | `6f722e24977850a31fb792ea50ac97e4ad2722764290e5c27e14eda63d6dcce7` |
+| vbmeta | 12,288 | `0f0ce6d72f36b660fa40c4ccb446e1629abccd167d6ac0cd12d1e8bc53559a7c` |
+| vbmeta_system | 4,096 | `445a6f57f0758a57ecbb43c1556051990f4ef84b6daa9c0ee3443f4c47ca23b1` |
+| EU modem | 172,568,576 | `abdb08bc80e2b9c837b40f54df5c34c1ea929b5d1c14e7cfebfc0b433b9a6d69` |
+| EU global modemfirmware | 140,234,752 | `bfab29aac6a9337cb168bbc76455fda068c59be899b917b0038af2c88a7a1fe6` |
 
-| Turkish resource target | Compiled strings |
-| --- | ---: |
-| Android framework | 2,106 |
-| Setup | 795 |
-| Launcher | 88 |
-| System UI | 1,958 |
-| Settings | 11,216 |
+The complete local upload set totals 12,487,875,188 bytes. Every chunk and reconstructed image is checked against its pinned size and SHA256. The manifest covers 47 authenticated source partition records, the final super and 39 uploaded physical/super images.
 
-See `reports/translations.json` for skipped strings and `reports/product-preview-latest.json` for exact Google core hashes. The draft's generic NOT-INSTALLABLE note still lists Google runtime assessment; the accompanying build report resolves that item through byte-for-byte equality. The installation and runtime limitations remain.
+## Completed offline gates
 
-## Google package source
+- The exact base archive passed its pinned SHA256 and Xiaomi whole-file CMS signature checks. The original download index's incorrect MD5 is not used.
+- The two AVB metadata signatures were created with the local DPAPI-protected RSA4096 identity and verified with public material. `avb_flags=0`; the boot/recovery/vbmeta/vbmeta_system descriptor chain passed with OEM child keys preserved.
+- The signed product and init_boot bindings were checked before AVB application and again in the final image inventory.
+- Real pinned Linux `lpmake` produced a virtual-A/B sparse super. Geometry, all six metadata copies, group limits, sparse bounds and source hashes passed. Nine logical image payloads, including padding and AVB tails, were independently rehashed from super and matched exactly.
+- The selected EU radio pair replaced the China base radio in the package. `countrycode`, userdata and device-unique NV/calibration partitions are excluded.
+- The local suite passes 147 tests on Windows, with only the pinned-Linux FEC test skipped. [Linux run 42670599492](https://github.com/MolcerBey/xuanyuan-hyperos4/actions/runs/42670599492) passed all 147 tests, including real FEC/lpmake/super checks.
 
-No application is extracted from the phone. As checked on 2026-11-05, the latest published stable [MindTheGapps Android 17 ARM64 release](https://github.com/MindTheGapps/17.0.0-arm64/releases/tag/MindTheGapps-17.0.0-arm64-20261022_132445) is dated 2026-10-22. `gapps-assets.json` pins its URL, size and SHA256. APK/APEX signatures were inspected with Android SDK Build Tools 37.0.0.
+Offline verification does not establish bootloader trust-root acceptance, real GPT capacity, successful fastboot execution or runtime behavior.
 
-Integration is selective: the Play Store and its privileged permission entry are installed, while existing core services are preserved because they match exactly. The entire GApps installer is not run against HyperOS. The unrequested Exchange component fails signature verification and is excluded. Android version and architecture matching do not establish runtime compatibility or Play certification.
+## Integrated customization
 
-## Validation and remaining work
+- Google Play Store 51.8.09-29 from the pinned MindTheGapps Android 17 ARM64 package replaces the China updater stub. Existing Google runtime APEX and Google Services Framework match the selected release byte-for-byte. The full GApps installer is not run.
+- Official KernelSU Next 3.4.2 manager and a patched init_boot using the stock kernel's detected `android15-6.6` KMI. The stock kernel is preserved.
+- Standalone Chrome 157.0.8103.38 ARM64, with its APK v3 signature and Turkish locale verified. No Trichrome dependency is required by this standalone package. Default-browser role activation still requires runtime testing.
+- Five Turkish overlays contain 16,163 reviewed strings; a separate signed OLED-defaults overlay and black wallpaper are included. Default locale is `tr-TR`, timezone Europe/Istanbul, and Molcer OS version/branding metadata is included. Overlay runtime activation and complete Turkish coverage are not established.
+- Sixteen reviewed optional packages were removed, including the Xiaomi browser and China Play updater. Stock camera, gallery, media editing, modem/IMS/carrier configuration and thermal controls are retained. The product build verified 2,270 retained entries and 285 protected camera/media paths; these static checks do not prove camera or IMS operation.
 
-The selected EU radio pair is now physically staged under `out/rom-radio/images/`, with both output hashes recorded in [reports/rom-radio-integration.json](reports/rom-radio-integration.json). `build-preview.yml` includes the pair in future full previews. `integrate-radio.yml` packages and attaches it to the existing owner draft independently of the unchanged product image. Nine extraction/integration tests passed locally and in [cloud run 42076078828](https://github.com/MolcerBey/xuanyuan-hyperos4/actions/runs/42076078828), including rejection of incorrect hashes, China substitutions and invalid archive entries. The cloud job also uploaded the integrated radio ZIP and manifest to the same draft release, bringing it to twelve assets. This is preview integration; it does not produce an installable ROM.
+See `reports/product-preview-latest.json`, `reports/translations.json`, `reports/signed-overlays.json` and `reports/camera-preservation.json` for build-scope evidence. The product-stage report's `ready_to_flash=false` applies to the isolated product image, not to the later assembled package.
 
-The owner identified their working ROM as Xiaomi.eu OS3.0.314.0.WOACNXM and requested its radio files. The selected source is now that exact release's common `modem.img` plus global `modemfirmware_ww.img`, verified through `prepare_eu_radio.py`. The previously prepared Android17 global donor remains an alternative, not the selected source. The completed offline comparison found the EU Turk Telekom profile present and indexed, readable file inventories, matching inspected ELF header fields and matching FAT logical volume lengths. Full Android16-to-Android17 interoperability remains unproven; the radio pair is not integrated into an installable package. See [RADIO-STATUS.md](RADIO-STATUS.md) and the [assessment](reports/eu-radio-compatibility-assessment.json). All phone access is prohibited.
+## Installation package and remaining device work
 
-The owner confirmed GLOBAL hardware and a currently working Turk Telekom connection on Xiaomi.eu. This changes the radio integration assumptions: the China base's modem must not be automatically included in a global-device flash plan. [Xiaomi.eu maintainer documentation](https://miuipolska.pl/xiaomi-15-ultra-xiaomi-eu/) records loss of coverage with the China modem on global Xiaomi 15 Ultra hardware, but its linked Android15 modem is not evidence of compatibility with this Android17 beta. `radio-policy.json` records the requirement to preserve the known-working global modem pending identification and compatibility checks. This is a packaging constraint, not a modem modification already applied to the phone. Device-unique NV/calibration partitions remain untouched. Current source modem/MBN and IMS inspection runs separately in `inspect-radio.yml`.
+The local package is `work/final-package/images/`; the persistent manifest is `reports/assembled-candidate-manifest.json`. `verify_installation_package.py` verifies all bytes without phone access. Its conservative report intentionally keeps `ready_to_flash=false` and does not claim to implement installation.
 
-The source archive must pass its pinned SHA256 and Xiaomi whole-file CMS signature checks before extraction. Full-OTA operation hashes and resulting partition hashes are checked. The complete discovery suite currently contains 133 unit tests; `test-all.yml` runs them together with real Linux lpmake/super smoke checks on every push and pull request.
+`install_candidate.py` separately defines the reviewed 39-image order and an owner-invoked fastboot path. It checks model, unlocked bootloader, current slot and every target's real capacity before writes, requests `XUANYUAN-INSTALL`, flashes A/B physical partitions and sparse super, then selects slot A. It never erases userdata and excludes `countrycode`, `metadata`, `persist`, `modemst1/2`, `fsg`, `fsc`, `frp`, `logfs`, `storsec`, `toolsfv`, `misc` and `rescue`. Only mock/offline installer tests have run; no actual phone has been accessed.
 
-Static inspection found Turkish MCC 286 APNs, including Turkcell, Vodafone, Türk Telekom and Netgsm. Calls, data, SMS, VoLTE and VoWiFi remain untested. Camera runtime testing is required before any production release and has not been performed; preserved camera files do not prove flawless operation.
+Before any production claim, the owner must verify: successful flash and boot, slot state, AVB acceptance, KernelSU Next, Play Store sign-in and Play certification, Chrome default role, Turkish overlays and OLED defaults, all camera modes, SIM/data/SMS/calls, Turk Telekom VoLTE/VoWiFi, Wi-Fi, Bluetooth, NFC, GPS, fingerprint/face unlock, audio, charging and reboot stability. Preserve a full backup and a known-good recovery path.
 
-Turkish overlays only use resources permitted by the target application's overlay policy. They preserve OEM APKs and signatures and skip missing or format-sensitive strings. Overlay signing uses a separate permanent local identity; this does not establish production AVB or update-signing trust.
-
-Builds use GitHub's standard public-repository Ubuntu runner. Small reports have seven-day artifact retention; large preview images are split into files below 2 GiB and saved in a draft release for owner review. No phone flashing, wiping or rebooting is performed.
-
-See [Actions](https://github.com/MolcerBey/xuanyuan-hyperos4/actions) and [draft releases](https://github.com/MolcerBey/xuanyuan-hyperos4/releases) for observed build results.
+Small reports are retained as Actions artifacts; large image chunks remain in an owner-visible private draft. The release is not public, and no automatic update or phone operation is enabled by project policy.

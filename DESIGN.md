@@ -4,7 +4,7 @@ Target: Xiaomi 15 Ultra, device `xuanyuan`; requested China HyperOS 4 / Android 
 
 ## Current stage
 
-Authenticated source; an audited product image preview and offline root candidate have been produced. See [BUILD-STATUS.md](BUILD-STATUS.md) for the current implementation and validation results; the planned scope below is architectural background. No flashable custom ROM or measured performance improvement has been produced. No phone flash, wipe, reboot, root installation, or bootloader change has been performed.
+Authenticated source and a complete offline-assembled experimental candidate have been produced. See [BUILD-STATUS.md](BUILD-STATUS.md) for current implementation and validation results; the scope below is architectural background. No production-ready or device-verified ROM and no measured performance improvement have been produced. No phone flash, wipe, reboot, root installation, or bootloader change has been performed by project automation.
 
 Camera runtime testing is mandatory for a production release and has not been performed. Structural checks of downloaded files and generated images remain required and do not constitute a compatibility guarantee.
 
@@ -30,7 +30,7 @@ Camera runtime testing is mandatory for a production release and has not been pe
 4. Keep stock thermal limits, CPU/GPU policies, encryption and SELinux. No speculative build.prop performance flags or forced refresh-rate settings.
 5. Preserve filesystem owners, modes, capabilities, SELinux labels and symlinks during repacking; compare retained file contents and metadata before accepting an output.
 6. Verify partition sizes and AVB/installation requirements before producing installation artifacts. Do not call an inspection report, module or stock ZIP a custom ROM.
-7. Owner requested Turkish UI, Google Play, Chrome, KernelSU Next and Molcer OS branding. Verify actual locale and Google dependencies before claiming support. Root uses the stock kernel KMI and an official pinned KernelSU Next release. Stock modem/IMS/carrier files are preserved, but Turkish network runtime compatibility remains unverified.
+7. Owner requested Turkish UI, Google Play, Chrome, KernelSU Next, OLED defaults and Molcer OS branding. Verify actual locale and Google dependencies before claiming support. Root uses the stock kernel KMI and an official pinned KernelSU Next release. Stock IMS/carrier configuration is preserved; the owner-selected EU global radio pair replaces the China radio, but Turkish network runtime compatibility remains unverified.
 
 ## Workflows
 
@@ -40,7 +40,7 @@ Camera runtime testing is mandatory for a production release and has not been pe
 
 ## Validation
 
-The discovery suite contains 133 unit tests covering identity, wrong device, delta rejection, truncated protobuf, partition reconstruction, corruption rejection, kernel KMI detection, filesystem preservation, resource overlay policy, AVB/super packaging, deterministic radio archives and offline installation-bundle verification. `test-all.yml` runs the complete suite and real Linux packaging smoke tests on every push and pull request.
+The discovery suite contains 147 unit tests covering identity, wrong device, delta rejection, truncated protobuf, partition reconstruction, corruption rejection, kernel KMI detection, filesystem preservation, resource overlay policy, AVB/super packaging, deterministic radio archives, bounded asset-download timeouts and offline installation-bundle verification. `test-all.yml` runs the complete suite and real Linux packaging smoke tests on every push and pull request.
 
 ## Sources
 

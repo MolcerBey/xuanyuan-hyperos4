@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "purpose": "molcer-os-update-index",
+  "algorithm": "RSA4096-SHA256-PKCS1-v1_5",
+  "domain_hex": "4d6f6c636572204f532075706461746520696e64657820763100",
+  "canonical_index_sha256": "9d5c5813cb507e78f969860c7a765fbdb227d503c01ff7bc59140ce9d387af18",
+  "digest_sha256": "31576a2831f1a4f8ec243d14573e36121fed02034ee7a1c5d7c7270ae8b54e04",
+  "public_key_avb_sha256": "e0f219527efe07dee4c06fa84551f1aa63f153f7df1f2c73c30aea65cd63a868",
+  "version_code": 2026110601,
+  "candidate_count": 1
+}

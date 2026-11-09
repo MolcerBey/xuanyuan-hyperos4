@@ -7,7 +7,7 @@
   "target_android": "17",
   "source_archive_sha256": "9c1eced1591d5ad28998e7731a0555ce824074fdfe2061e7cad43b59da835157",
   "verification_reference": "reports/eu-radio-reference.json",
-  "source_mode": "directory",
+  "source_mode": "artifact-zip",
   "radio_pair_included_in_build_staging": true,
   "files": [
     {
