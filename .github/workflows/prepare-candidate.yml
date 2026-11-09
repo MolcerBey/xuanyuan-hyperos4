@@ -99,8 +99,8 @@ jobs:
                         target.write(data)
             if length != config['size'] or measured.hexdigest() != config['sha256']:
                 raise ValueError('Chrome artifact does not match the pinned APK bytes')
-            PY
-            python3 fetch_chrome_candidate.py --input work/verifiedChrome.apk
+          PY
+          python3 fetch_chrome_candidate.py --input work/verifiedChrome.apk
           else
             rm -f work/chrome-reference.zip
             python3 fetch_chrome_candidate.py
