@@ -125,6 +125,7 @@ jobs:
             sudo python3 inventory_product.py "$part" "$ANDROID_HOME/build-tools/37.0.0/aapt2"
           done
           sudo python3 inspect_telephony.py
+          sudo env ANDROID_HOME="$ANDROID_HOME" python3 inspect_app_dependencies.py
       - name: Prepare KernelSU Next with the unchanged stock kernel
         run: python3 prepare_root.py
       - name: Build and remount-audit the customized product
