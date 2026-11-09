@@ -1,0 +1,216 @@
+{
+  "schema": 1,
+  "status": "offline-package-bytes-verified; device-installation-not-implemented",
+  "device": "xuanyuan",
+  "hardware_variant": "global",
+  "release_tag": "molcer-assembled-8573d0d58843-42615835833-1",
+  "source_manifest_sha256": "e9192ab0c7642fa59707ea4b5503c6824f07f65529d53ffa58eb22455d11b92a",
+  "images": [
+    {
+      "name": "abl",
+      "size": 335872,
+      "sha256": "311dcbd518137c3acf79b892392903168e2103762dad58c209cf295921f9b85e"
+    },
+    {
+      "name": "aop",
+      "size": 372736,
+      "sha256": "33d12b434bdb9db1266020f4f6b35e0b53b166340bdf55ac86a4065188b7dfc1"
+    },
+    {
+      "name": "aop_config",
+      "size": 32768,
+      "sha256": "0a8231f7afe146ec2ff7706fe55f607e671f876f7596d4b08bb5efad307fa06e"
+    },
+    {
+      "name": "bluetooth",
+      "size": 3993600,
+      "sha256": "b5ca23e4da5218a3823708287fb6b337ca432202e6bfbfad75c231cc8e964c76"
+    },
+    {
+      "name": "boot",
+      "size": 100663296,
+      "sha256": "62158b7ba6a2af1cb5ba515c35061c512c5bbef78b2fed7ecd931dd9e3d41b2f"
+    },
+    {
+      "name": "cpucp",
+      "size": 319488,
+      "sha256": "5b7cc1fdfb98ac0f9d892b291858f36fa70eb828810bbfee6696cbcd322ff871"
+    },
+    {
+      "name": "cpucp_dtb",
+      "size": 16384,
+      "sha256": "71cf5cc265f5c4c0a2fc1d487f08666ec2f1d5761561c567116180808d91e9e9"
+    },
+    {
+      "name": "devcfg",
+      "size": 61440,
+      "sha256": "8f1791e14d6f7fd04d4eac231dda92e41b7cad8a8e180444f09d42ccc9cb90c1"
+    },
+    {
+      "name": "dsp",
+      "size": 67108864,
+      "sha256": "58b96ba7a1042b8489490cb5fddf962c4cf72c0ad982f84016791898e60326a1"
+    },
+    {
+      "name": "dtbo",
+      "size": 18874368,
+      "sha256": "01e661764e76011315a16ce6827750f087f5f2a8cec2e5e250d4c30add790ca0"
+    },
+    {
+      "name": "featenabler",
+      "size": 106496,
+      "sha256": "881b3ae6f9e98851ddb4e827d24d582a228a87c89ec42b12d38879516b72408c"
+    },
+    {
+      "name": "hyp",
+      "size": 1613824,
+      "sha256": "d4a9c5843bc39576ccaf5ba5490b7c8789b1225d1dd0fe63391dad5a5bec98d8"
+    },
+    {
+      "name": "idmanager",
+      "size": 69632,
+      "sha256": "c8bf4c837a4c3fe1a7e5ba3034a93886ddd3f02db89d81e7319fe16ec2dfc1f8"
+    },
+    {
+      "name": "imagefv",
+      "size": 6299648,
+      "sha256": "85faea477042e5522c718c899fb02b3e91950d0edfd05b84ef77f03795a5eec0"
+    },
+    {
+      "name": "init_boot",
+      "size": 8388608,
+      "sha256": "2fc66cc4166c4775184f6d56353227825adafc1fa137aad58f1931470ee39188"
+    },
+    {
+      "name": "keymaster",
+      "size": 454656,
+      "sha256": "755ec0ceff183aa2df94943c4a493304b2f066c5bf647b261818ee39a2854233"
+    },
+    {
+      "name": "modem",
+      "size": 172568576,
+      "sha256": "abdb08bc80e2b9c837b40f54df5c34c1ea929b5d1c14e7cfebfc0b433b9a6d69"
+    },
+    {
+      "name": "modemfirmware",
+      "size": 140234752,
+      "sha256": "bfab29aac6a9337cb168bbc76455fda068c59be899b917b0038af2c88a7a1fe6"
+    },
+    {
+      "name": "multiimgqti",
+      "size": 12288,
+      "sha256": "bd619dd9ef992af0ee627fbb15cac9082df167d8f47da9b1ae814bc1f6c8db77"
+    },
+    {
+      "name": "pdp",
+      "size": 212992,
+      "sha256": "de74a568fbe06505e714c2905455007a15bd221effcf0cae16464238cf82c978"
+    },
+    {
+      "name": "pdp_cdb",
+      "size": 16384,
+      "sha256": "b29c46356ae307ef4a96d796f0e91ba2c85f352bed476cfefac483c061c8b8f9"
+    },
+    {
+      "name": "pvmfw",
+      "size": 1048576,
+      "sha256": "573c9e20ffb3fe94cad4a87badae4d0cabb2132a8de03bcc7be61ac75e07d0d9"
+    },
+    {
+      "name": "qupfw",
+      "size": 65536,
+      "sha256": "be680da9f4442366cd06c62b7cc7b477c62f88e3f4ba18dbffd8e87ae728e3ae"
+    },
+    {
+      "name": "recovery",
+      "size": 104857600,
+      "sha256": "29128f33b29242bc947d23ae0e883c3030ad07666bd714f693d906553b93d0ba"
+    },
+    {
+      "name": "shrm",
+      "size": 151552,
+      "sha256": "4ec677ec379990ddc5af5c7cfb1f090882f166f3b983193d55cfbb449f15a559"
+    },
+    {
+      "name": "soccp_dcd",
+      "size": 20480,
+      "sha256": "02db185c440c3c75f7009f8f1dcc8870dc4e131d078ad8e7fd3bb6f58a8aa7c8"
+    },
+    {
+      "name": "soccp_debug",
+      "size": 147456,
+      "sha256": "337c948582ec42f90201d49001c5dc034324223f4f161568eaaac47c62ff3ad6"
+    },
+    {
+      "name": "spuservice",
+      "size": 94208,
+      "sha256": "e1880735d21567cd4cf143344d8e2bfd59c06d610066dd482dac7b189767df37"
+    },
+    {
+      "name": "super",
+      "size": 11728374388,
+      "sha256": "6f722e24977850a31fb792ea50ac97e4ad2722764290e5c27e14eda63d6dcce7"
+    },
+    {
+      "name": "tz",
+      "size": 4173824,
+      "sha256": "9d29809719fd2a069abc5650ef835ed51af519d8acdc3358ab9d6f3c0b16bac9"
+    },
+    {
+      "name": "uefi",
+      "size": 2842624,
+      "sha256": "cd06b4e1e7d747003d29dcfe5bf6f3b7ef7581b18afce2e9583efcf7a22f3440"
+    },
+    {
+      "name": "uefisecapp",
+      "size": 204800,
+      "sha256": "5cd90c8e4426b3fa737f690d66dfd509c9c1ecee959afa6e55b0ef51c121e7c5"
+    },
+    {
+      "name": "vbmeta",
+      "size": 12288,
+      "sha256": "0f0ce6d72f36b660fa40c4ccb446e1629abccd167d6ac0cd12d1e8bc53559a7c"
+    },
+    {
+      "name": "vbmeta_system",
+      "size": 4096,
+      "sha256": "445a6f57f0758a57ecbb43c1556051990f4ef84b6daa9c0ee3443f4c47ca23b1"
+    },
+    {
+      "name": "vendor_boot",
+      "size": 100663296,
+      "sha256": "23e9d7b8a796793733ed3392aa9ff928c02ceb399ba27994025299080be89340"
+    },
+    {
+      "name": "vm-bootsys",
+      "size": 20971520,
+      "sha256": "9f09b49decd93492f0e0d69f934d6777a760524b898d09485f66fa8214a0a738"
+    },
+    {
+      "name": "xbl",
+      "size": 1191936,
+      "sha256": "4256eb1185e1276220d3958a4cd5fb3a470358da47c0bf7eb213602fead0b836"
+    },
+    {
+      "name": "xbl_config",
+      "size": 348160,
+      "sha256": "0b86822dc5c7b363bfdaa01158f545a1de2515719667d164e1e966667f2196f5"
+    },
+    {
+      "name": "xbl_ramdump",
+      "size": 946176,
+      "sha256": "7cdcf0dce299c552b41d986ed8299f3710a1478e3d481548da65ce1822a098b6"
+    }
+  ],
+  "image_count": 39,
+  "all_image_bytes_verified": true,
+  "device_gpt_capacity_verified": false,
+  "bootloader_trust_root_verified": false,
+  "installation_order_defined": false,
+  "fastboot_execution_implemented": false,
+  "installer_included": false,
+  "installation_allowed": false,
+  "ready_to_flash": false,
+  "phone_accessed": false,
+  "runtime_verified": false
+}
