@@ -1,5 +1,6 @@
 import copy
 import hashlib
+import json
 import unittest
 
 from camera_guard import (prepare_product_guard, verify_product_guard, REQUIRED_CAMERA_PACKAGES,
@@ -82,7 +83,19 @@ class CameraGuardTests(unittest.TestCase):
             'hard_dependency_findings': [{'consumer': 'com.android.systemui'}]}}}
         with self.assertRaisesRegex(ValueError, 'Unresolved declared dependency'):
             prepare_product_guard(before, config, inventory, deps)
-        deps['candidates']['com.mi.health']['hard_dependency_findings'] = []
+        finding = {'consumer': 'com.android.systemui', 'kind': 'permission-defined-by-candidate',
+                   'name': 'com.mi.health.permission.DEFAULT_READ_DATA'}
+        candidate = deps['candidates']['com.mi.health']
+        candidate['hard_dependency_findings'] = [finding]
+        digest = hashlib.sha256(json.dumps([finding], sort_keys=True, separators=(',', ':'),
+                                           ensure_ascii=False).encode('utf-8')).hexdigest()
+        config['dependency_reviews'] = {'com.mi.health': {'hard_findings_sha256': digest}}
+        plan = prepare_product_guard(before, config, inventory, deps)
+        self.assertEqual(plan['new_optional_dependencies_checked'], ['com.mi.health'])
+        finding['name'] = 'changed.permission'
+        with self.assertRaisesRegex(ValueError, 'Unresolved declared dependency'):
+            prepare_product_guard(before, config, inventory, deps)
+        candidate['hard_dependency_findings'] = []
         plan = prepare_product_guard(before, config, inventory, deps)
         self.assertEqual(plan['new_optional_dependencies_checked'], ['com.mi.health'])
 

@@ -12,11 +12,28 @@
     "data-app/MIUIVideo": "com.miui.video",
     "data-app/MIUIYoupin": "com.xiaomi.youpin",
     "data-app/MiShop": "com.xiaomi.shop",
-    "data-app/wps-lite": "cn.wps.moffice_eng.xiaomi.lite"
+    "data-app/wps-lite": "cn.wps.moffice_eng.xiaomi.lite",
+    "data-app/Health": "com.mi.health",
+    "data-app/MIpay": "com.mipay.wallet",
+    "data-app/SmartHome": "com.xiaomi.smarthome"
   },
   "replace": {
     "priv-app/MIUIBrowser": "com.android.browser",
     "priv-app/GooglePlayServicesUpdater": "com.android.vending"
+  },
+  "dependency_reviews": {
+    "com.mi.health": {
+      "hard_findings_sha256": "e4401086cf1e7cdc013ab2df78ec6660471b05c716519909f7e1cbd43dcdad48",
+      "accepted_consequence": "Xiaomi Health integration and its declared permissions are absent"
+    },
+    "com.mipay.wallet": {
+      "hard_findings_sha256": "8a54ce53807ebb48e701758e197573b1c65846720ded17d6b701231f27e34998",
+      "accepted_consequence": "Mi Pay integration and its declared permissions are absent"
+    },
+    "com.xiaomi.smarthome": {
+      "hard_findings_sha256": "38e35eced118f22611a3faa0cd14e5771604988a40a6182f3f6f51e079b7fd56",
+      "accepted_consequence": "Smart Home integration and its declared permissions are absent"
+    }
   },
   "preserve": [
     "camera and all gallery/editor dependencies", "telephony and IMS",

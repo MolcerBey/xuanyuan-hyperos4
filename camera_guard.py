@@ -105,10 +105,20 @@ def validate_debloat_policy(config, inventory, dependency_report=None):
                 if not dependency_report or not dependency_report.get('dependency_scan_complete'):
                     raise ValueError('Complete dependency inspection required for ' + identity)
                 candidate = dependency_report.get('candidates', {}).get(identity, {})
+                findings = candidate.get('hard_dependency_findings')
                 if (not candidate.get('exact_candidate_found')
                         or candidate.get('expected_path') not in ['product/' + path for path in matching]
-                        or candidate.get('hard_dependency_findings')):
+                        or not isinstance(findings, list)
+                        or candidate.get('required_library_findings')
+                        or candidate.get('shared_user_id_findings')):
                     raise ValueError('Unresolved declared dependency or candidate mismatch: ' + identity)
+                if findings:
+                    review = config.get('dependency_reviews', {}).get(identity, {})
+                    canonical = json.dumps(findings, sort_keys=True, separators=(',', ':'),
+                                           ensure_ascii=False).encode('utf-8')
+                    if (not all(item.get('kind') == 'permission-defined-by-candidate' for item in findings)
+                            or review.get('hard_findings_sha256') != hashlib.sha256(canonical).hexdigest()):
+                        raise ValueError('Unresolved declared dependency or candidate mismatch: ' + identity)
                 reviewed.append(identity)
             selected[directory] = identity
     return observed, selected, reviewed
